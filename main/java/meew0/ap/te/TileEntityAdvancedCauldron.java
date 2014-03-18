@@ -7,6 +7,20 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAdvancedCauldron extends TileEntity {
+	public int waterLevel;
+	
+	@Override public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		
+		nbt.setInteger("waterLevel", waterLevel);
+	}
+	
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		
+		waterLevel = nbt.getInteger("waterLevel");
+	}
+	
 	@Override public Packet getDescriptionPacket() {
 		NBTTagCompound tag = new NBTTagCompound();
 		writeToNBT(tag);

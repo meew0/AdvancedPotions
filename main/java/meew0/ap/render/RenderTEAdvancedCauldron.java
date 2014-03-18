@@ -2,6 +2,7 @@ package meew0.ap.render;
 
 import org.lwjgl.opengl.GL11;
 
+import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -19,13 +20,15 @@ import net.minecraftforge.client.model.IModelCustom;
 // :P
 
 public class RenderTEAdvancedCauldron extends TileEntitySpecialRenderer {
-//	private IModelCustom	modelStand, modelCauldron;
+	// private IModelCustom modelStand, modelCauldron;
 	
-	public static int		renderId;
+	public static int	renderId;
 	
 	public RenderTEAdvancedCauldron() {
-//		modelStand = AdvancedModelLoader.loadModel(new ResourceLocation("advancedpotions:cauldron_stand.obj"));
-//		modelCauldron = AdvancedModelLoader.loadModel(new ResourceLocation("advancedpotions:cauldron.obj"));
+		// modelStand = AdvancedModelLoader.loadModel(new
+		// ResourceLocation("advancedpotions:cauldron_stand.obj"));
+		// modelCauldron = AdvancedModelLoader.loadModel(new
+		// ResourceLocation("advancedpotions:cauldron.obj"));
 		
 	}
 	
@@ -36,33 +39,34 @@ public class RenderTEAdvancedCauldron extends TileEntitySpecialRenderer {
 		// world
 		
 		// the +1 is to fix a weird issue
-		GL11.glTranslatef((float) x, (float) y, (float) z + 1);
+		GL11.glTranslatef((float) x, (float) y, (float) z/* + 1*/);
 		TileEntityAdvancedCauldron te2 = (TileEntityAdvancedCauldron) te;
 		/*
 		 * Note that true tile entity coordinates (tileEntity.xCoord, etc) do
 		 * not match to render coordinates (d, etc) that are calculated as [true
 		 * coordinates] - [player coordinates (camera coordinates)]
 		 */
-//		if (te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord, te.zCoord) == 0) {
-//			// (new
-//			// RenderBlocks(te.getWorldObj())).renderStandardBlock(te.blockType,
-//			// te.xCoord, te.yCoord, te.zCoord);
-//			renderCauldron(te2, te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, te.blockType);
-//		}
+		// if (te.getWorldObj().getBlockMetadata(te.xCoord, te.yCoord,
+		// te.zCoord) == 0) {
+		// // (new
+		// // RenderBlocks(te.getWorldObj())).renderStandardBlock(te.blockType,
+		// // te.xCoord, te.yCoord, te.zCoord);
+		renderCauldron(te2, te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, te.blockType);
+		// }
 		
 		GL11.glPopMatrix();
 	}
 	
 	// And this method actually renders your tile entity
 	public void renderCauldron(TileEntityAdvancedCauldron te, World world, int x, int y, int z, Block block) {
-		Tessellator tessellator = Tessellator.instance;
+		Tessellator tess = Tessellator.instance;
 		// This will make your block brightness dependent from surroundings
 		// lighting.
 		float f = block.getLightValue(world, x, y, z);
 		int l = world.getLightBrightnessForSkyBlocks(x, y, z, 0);
 		int l1 = l % 65536;
 		int l2 = l / 65536;
-		tessellator.setColorOpaque_F(f, f, f);
+		tess.setColorOpaque_F(f, f, f);
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
 		
 		/*
@@ -81,16 +85,29 @@ public class RenderTEAdvancedCauldron extends TileEntitySpecialRenderer {
 		// This line actually rotates the renderer.
 		GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);
 		GL11.glTranslatef(-0.5F, 0, -0.5F);
-		bindTexture(new ResourceLocation("advancedpotions:cauldron"));
+		// bindTexture(new ResourceLocation("advancedpotions:cauldron"));
 		/*
 		 * Place your rendering code here.
 		 */
 		
 		// using objs because I'm LAZY
-//		modelStand.renderAll();
-//		modelCauldron.renderAll();
+		// modelStand.renderAll();
+		// modelCauldron.renderAll();
 		
 		// in the future, render the liquid here
+		
+		// Tessellator tessellator = Tessellator.instance;
+		bindTexture(new ResourceLocation("advancedpotions:textures/blocks/potion_base.png"));
+		
+		double dy = BlockAdvancedCauldron.getRenderLiquidLevel(te.waterLevel);
+
+		tess.startDrawingQuads();
+		tess.setNormal(0, -1, 0);
+		tess.addVertex(0, dy, 0);
+		tess.addVertex(0, dy, 1);
+		tess.addVertex(1, dy, 1);
+		tess.addVertex(1, dy, 0);
+		tess.draw();
 		
 		GL11.glPopMatrix();
 	}
