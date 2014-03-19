@@ -102,6 +102,9 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 	@Override public void func_150024_a(World world, int x, int y, int z, int meta) {
 		// world.setBlockMetadataWithNotify(x, y, z, MathHelper.clamp_int(meta,
 		// 0, 3), 2);
+
+        AdvancedPotions.debug("150024: " + meta);
+
 		TileEntityAdvancedCauldron te = (TileEntityAdvancedCauldron) world.getTileEntity(x, y, z);
 		te.waterLevel = MathHelper.clamp_int(meta, 0, 3);
 		

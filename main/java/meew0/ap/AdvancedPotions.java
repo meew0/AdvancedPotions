@@ -13,19 +13,28 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = AdvancedPotions.MODID, name = AdvancedPotions.NAME, version = AdvancedPotions.VERSION)
 public class AdvancedPotions {
 	public static final String	MODID	= "advancedpotions";
 	public static final String	NAME	= "Advanced Potions";
 	public static final String	VERSION	= "0.01";
-	
-	public static Block advancedCauldron;
-	
-	@EventHandler public void preInit(FMLPreInitializationEvent event) {
+
+    public static Logger advpLogger;
+
+    public static Block advancedCauldron;
+
+    public static void debug(String d) {
+        advpLogger.info(d); //TODO this going to debug sometime
+    }
+
+    @EventHandler public void preInit(FMLPreInitializationEvent event) {
 		// all the stuff goes here
-		
-		advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f).setCreativeTab(CreativeTabs.tabBrewing);
+
+        advpLogger = event.getModLog();
+
+        advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f).setCreativeTab(CreativeTabs.tabBrewing);
 		GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
 		GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
 		
