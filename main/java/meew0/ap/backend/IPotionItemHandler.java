@@ -10,5 +10,7 @@ public interface IPotionItemHandler {
 
     public int getBalMod(int oldBalMod);
 
+    public IPotionEffectContainer[] getNewEffects();
+
     public void getModifiedColor(Color oldColor);
 }

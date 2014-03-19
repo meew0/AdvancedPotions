@@ -16,7 +16,7 @@ public interface IPotionEffectContainer {
 
     public boolean displayDuration();
 
-    public boolean displayColor();
+    public boolean displayAmplifier();
 
     public String effectPrefix();
 
