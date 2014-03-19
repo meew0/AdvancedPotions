@@ -109,7 +109,7 @@ public class RenderTEAdvancedCauldron extends TileEntitySpecialRenderer {
         if (c == null) c = new Color(Color.BLUE);
 
         tess.startDrawingQuads();
-        tess.setNormal(0, -1, 0);
+        tess.setNormal(0, 1, 0);
         tess.setColorRGBA(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
         tess.addVertex(0, dy, 0);
         tess.addVertex(0, dy, 1);

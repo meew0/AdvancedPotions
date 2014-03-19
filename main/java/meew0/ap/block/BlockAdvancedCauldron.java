@@ -2,6 +2,7 @@ package meew0.ap.block;
 
 import java.util.List;
 
+import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 import meew0.ap.AdvancedPotions;
 import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
@@ -107,8 +108,10 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 
 		TileEntityAdvancedCauldron te = (TileEntityAdvancedCauldron) world.getTileEntity(x, y, z);
 		te.waterLevel = MathHelper.clamp_int(meta, 0, 3);
-		
-		world.func_147453_f(x, y, z, this);
+
+        world.markBlockForUpdate(x, y, z);
+
+        world.func_147453_f(x, y, z, this);
 	}
 	// @Override public boolean renderAsNormalBlock() {
 	// return false;
