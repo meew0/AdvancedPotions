@@ -1,6 +1,7 @@
 package meew0.ap;
 
 import meew0.ap.block.BlockAdvancedCauldron;
+import meew0.ap.item.ItemTestItem;
 import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
@@ -13,6 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = AdvancedPotions.MODID, name = AdvancedPotions.NAME, version = AdvancedPotions.VERSION)
@@ -24,6 +26,8 @@ public class AdvancedPotions {
     public static Logger advpLogger;
 
     public static Block advancedCauldron;
+
+    public static Item testItem; // !!!
 
     public static void debug(String d) {
         advpLogger.info(d); //TODO this going to debug sometime
@@ -40,6 +44,14 @@ public class AdvancedPotions {
 		
 		RenderTEAdvancedCauldron.renderId = RenderingRegistry.getNextAvailableRenderId();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
+
+        // !!!
+
+        testItem = new ItemTestItem().setUnlocalizedName("testItem").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabAllSearch);
+        GameRegistry.registerItem(testItem, "testItem");
+
+        // !!!
+
 	}
 	
 	@EventHandler public void init(FMLInitializationEvent event) {

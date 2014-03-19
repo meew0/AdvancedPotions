@@ -54,7 +54,7 @@ public class TileEntityAdvancedCauldron extends TileEntity {
     }
 
     public void handleAddedItem(ItemStack stack) {
-        //TODO actually handle the items instead of just changing the color
+        //TODO actually handle the item instead of just changing the color
     }
 
     @Override
