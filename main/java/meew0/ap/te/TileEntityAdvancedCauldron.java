@@ -137,7 +137,14 @@ public class TileEntityAdvancedCauldron extends TileEntity {
                     ((EntityLivingBase) obj).attackEntityFrom(DamageSource.inFire, 0.5f);
                 else if (obj instanceof EntityItem) {
                     EntityItem item = ((EntityItem) obj);
-                    handleAddedItem(item.getEntityItem());
+                    ItemStack stack = item.getEntityItem();
+
+                    ItemStack handledStack = stack.copy();
+                    handledStack.stackSize = 1;
+                    for (int i = 0; i < stack.stackSize; i++) {
+                        handleAddedItem(handledStack);
+                    }
+
                     item.setDead();
                 }
             }
