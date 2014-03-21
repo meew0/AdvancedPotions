@@ -2,6 +2,8 @@ package meew0.ap.backend;
 
 import meew0.ap.PotionException;
 import meew0.ap.effects.EffectNull;
+import meew0.ap.effects.ItemHandlerNull;
+import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
 
 import java.util.ArrayList;
@@ -14,9 +16,12 @@ public class PotionRegistry {
     public static ArrayList<IPotionIDHandler> handlers;
     public static ArrayList<Integer> idList;
 
+    public static ArrayList<IPotionItemHandler> itemHandlers;
+
     public static void init() {
         handlers = new ArrayList<IPotionIDHandler>();
         idList = new ArrayList<Integer>();
+        itemHandlers = new ArrayList<IPotionItemHandler>();
     }
 
     public static IPotionEffectContainer getEffect(int id, int duration, int amplifier) {
@@ -28,12 +33,23 @@ public class PotionRegistry {
         return new EffectNull();
     }
 
+    public static IPotionItemHandler getItemHandler(Item item) {
+        for (IPotionItemHandler itemHandler : itemHandlers) {
+            if (itemHandler.canHandleItem(item)) return itemHandler;
+        }
+        return new ItemHandlerNull();
+    }
+
     public static void registerHandler(IPotionIDHandler handler) {
         for (int i : handler.getHandledIDs()) {
             if (idList.contains(i)) throw new PotionException("Potion ID conflict!");
             idList.add(i);
         }
         handlers.add(handler);
+    }
+
+    public static void registerItemHandler(IPotionItemHandler handler) {
+        itemHandlers.add(handler);
     }
 
     public static String getRomanNumeral(int num) {

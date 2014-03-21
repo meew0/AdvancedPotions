@@ -1,5 +1,6 @@
 package meew0.ap.backend;
 
+import net.minecraft.item.Item;
 import org.lwjgl.util.Color;
 
 /**
@@ -12,5 +13,7 @@ public interface IPotionItemHandler {
 
     public IPotionEffectContainer[] getNewEffects();
 
-    public void getModifiedColor(Color oldColor);
+    public Color getModifiedColor(Color oldColor);
+
+    public boolean canHandleItem(Item item);
 }
