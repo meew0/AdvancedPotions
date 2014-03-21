@@ -7,11 +7,11 @@ import org.lwjgl.util.Color;
  * Created by meew0 on 19.03.14.
  */
 public interface IPotionItemHandler {
-    public int getBalance(int oldBalance);
+    public float getBalance(float oldBalance);
 
-    public int getBalMod(int oldBalMod);
+    public float getBalMod(float oldBalMod);
 
-    public IPotionEffectContainer[] getNewEffects();
+    public int[] getNewEffects();
 
     public Color getModifiedColor(Color oldColor);
 

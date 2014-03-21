@@ -10,18 +10,18 @@ import org.lwjgl.util.Color;
  */
 public class ItemHandlerSugar implements IPotionItemHandler {
     @Override
-    public int getBalance(int oldBalance) {
+    public float getBalance(float oldBalance) {
         return oldBalance + 1;
     }
 
     @Override
-    public int getBalMod(int oldBalMod) {
+    public float getBalMod(float oldBalMod) {
         return oldBalMod;
     }
 
     @Override
-    public IPotionEffectContainer[] getNewEffects() {
-        return new IPotionEffectContainer[]{};
+    public int[] getNewEffects() {
+        return new int[]{};
     }
 
     @Override

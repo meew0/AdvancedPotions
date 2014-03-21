@@ -11,18 +11,18 @@ import org.lwjgl.util.Color;
  */
 public class ItemHandlerNull implements IPotionItemHandler {
     @Override
-    public int getBalance(int oldBalance) {
+    public float getBalance(float oldBalance) {
         return oldBalance;
     }
 
     @Override
-    public int getBalMod(int oldBalMod) {
+    public float getBalMod(float oldBalMod) {
         return oldBalMod;
     }
 
     @Override
-    public IPotionEffectContainer[] getNewEffects() {
-        return new IPotionEffectContainer[0];
+    public int[] getNewEffects() {
+        return new int[0];
     }
 
     @Override

@@ -24,7 +24,7 @@ import net.minecraft.util.DamageSource;
 public class TileEntityAdvancedCauldron extends TileEntity {
 	public int waterLevel;
 
-    public int balance, balMod;
+    public float balance, balMod;
     public ArrayList<EffectWrapper> effects;
 
 
@@ -46,8 +46,8 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         nbt.setInteger("green", color.getGreen());
         nbt.setInteger("blue", color.getBlue());
 
-        nbt.setInteger("bal", balance);
-        nbt.setInteger("balmod", balMod);
+        nbt.setFloat("bal", balance);
+        nbt.setFloat("balmod", balMod);
 
         NBTTagList tagList = new NBTTagList();
         for (EffectWrapper effect : effects) {
@@ -65,8 +65,8 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 
         color.set(nbt.getInteger("red"), nbt.getInteger("green"), nbt.getInteger("blue"));
 
-        balance = nbt.getInteger("bal");
-        balMod = nbt.getInteger("balmod");
+        balance = nbt.getFloat("bal");
+        balMod = nbt.getFloat("balmod");
 
         effects = new ArrayList<EffectWrapper>();
 
