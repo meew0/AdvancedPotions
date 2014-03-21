@@ -17,6 +17,10 @@ public interface IPotionEffectContainer {
 
     public boolean displayAmplifier();
 
+    public int getDurationForDisplay();
+
+    public int getAmplifierForDisplay();
+
     public String effectPrefix();
 
     public String effectName();
