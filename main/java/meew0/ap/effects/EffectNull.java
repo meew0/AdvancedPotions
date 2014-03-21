@@ -24,6 +24,16 @@ public class EffectNull implements IPotionEffectContainer {
     }
 
     @Override
+    public int getDurationForDisplay() {
+        return 0;
+    }
+
+    @Override
+    public int getAmplifierForDisplay() {
+        return 1;
+    }
+
+    @Override
     public String effectPrefix() {
         return EnumChatFormatting.GRAY.toString();
     }
