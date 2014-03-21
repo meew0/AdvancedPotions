@@ -1,5 +1,6 @@
 package meew0.ap.effects;
 
+import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionEffectContainer;
 import meew0.ap.backend.IPotionIDHandler;
 import meew0.ap.backend.IPotionItemHandler;
@@ -21,8 +22,8 @@ public class ItemHandlerNull implements IPotionItemHandler {
     }
 
     @Override
-    public int[] getNewEffects() {
-        return new int[0];
+    public EffectWrapper[] getNewEffects() {
+        return new EffectWrapper[0];
     }
 
     @Override

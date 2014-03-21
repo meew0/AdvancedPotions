@@ -11,7 +11,7 @@ public interface IPotionItemHandler {
 
     public float getBalMod(float oldBalMod);
 
-    public int[] getNewEffects();
+    public EffectWrapper[] getNewEffects();
 
     public Color getModifiedColor(Color oldColor);
 

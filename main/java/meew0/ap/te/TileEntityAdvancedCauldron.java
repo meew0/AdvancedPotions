@@ -5,7 +5,11 @@ import java.util.List;
 
 import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionEffectContainer;
+import meew0.ap.backend.IPotionItemHandler;
+import meew0.ap.backend.PotionRegistry;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.MathHelper;
 import org.lwjgl.util.Color;
 
 import net.minecraft.entity.Entity;
@@ -77,6 +81,7 @@ public class TileEntityAdvancedCauldron extends TileEntity {
             ew.fromNBT(c);
             effects.add(ew);
         }
+
     }
 
     public void mixColor(Color newColor) {
@@ -88,7 +93,30 @@ public class TileEntityAdvancedCauldron extends TileEntity {
     }
 
     public void handleAddedItem(ItemStack stack) {
-        //TODO actually handle the item instead of just changing the color
+        IPotionItemHandler itemHandler = PotionRegistry.getItemHandler(stack.getItem());
+
+        // sneaky way to determine whether an item handler sets the balance or just changes it slightly
+        boolean set = (itemHandler.getBalance(balance) == itemHandler.getBalance(itemHandler.getBalance(balance)));
+
+        balMod = itemHandler.getBalMod(balMod);
+
+        if (set) balance = itemHandler.getBalance(balance);
+        else {
+            float diff = itemHandler.getBalance(balance) - balance;
+            balance += (diff * balMod);
+        }
+
+        EffectWrapper[] newEffects = itemHandler.getNewEffects();
+
+        for (EffectWrapper newEffect : newEffects) {
+            for (EffectWrapper effect : effects) {
+                if (effect.id == newEffect.id) {
+                    newEffect.amplifier = Math.max(effect.amplifier, newEffect.amplifier);
+                    newEffect.duration = MathHelper.floor_double(((double) (effect.duration + newEffect.duration)) / 3.0);
+                }
+            }
+            effects.add(newEffect);
+        }
     }
 
     @Override

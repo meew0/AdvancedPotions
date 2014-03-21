@@ -1,6 +1,10 @@
 package meew0.ap;
 
+import meew0.ap.backend.PotionRegistry;
 import meew0.ap.block.BlockAdvancedCauldron;
+import meew0.ap.effects.AdvancedPotionsIDHandler;
+import meew0.ap.effects.ItemHandlerSugar;
+import meew0.ap.effects.VanillaIDHandler;
 import meew0.ap.item.ItemPotionAnalyzer;
 import meew0.ap.item.ItemTestItem;
 import meew0.ap.render.RenderTEAdvancedCauldron;
@@ -41,6 +45,7 @@ public class AdvancedPotions {
 
         advpLogger = event.getModLog();
 
+
         advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f).setCreativeTab(CreativeTabs.tabBrewing);
         GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
@@ -57,6 +62,13 @@ public class AdvancedPotions {
 
         potionAnalyzer = new ItemPotionAnalyzer().setUnlocalizedName("potionAnalyzer").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_analyzer");
         GameRegistry.registerItem(potionAnalyzer, "potionAnalyzer");
+
+        PotionRegistry.init();
+
+        PotionRegistry.registerHandler(new AdvancedPotionsIDHandler());
+        PotionRegistry.registerHandler(new VanillaIDHandler());
+
+        PotionRegistry.registerItemHandler(new ItemHandlerSugar());
 
     }
 

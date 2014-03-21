@@ -1,7 +1,9 @@
 package meew0.ap.effects;
 
+import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionEffectContainer;
 import meew0.ap.backend.IPotionItemHandler;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import org.lwjgl.util.Color;
 
@@ -20,17 +22,17 @@ public class ItemHandlerSugar implements IPotionItemHandler {
     }
 
     @Override
-    public int[] getNewEffects() {
-        return new int[]{};
+    public EffectWrapper[] getNewEffects() {
+        return new EffectWrapper[]{new EffectWrapper(1, 9600, 1)};
     }
 
     @Override
     public Color getModifiedColor(Color oldColor) {
-        return null;
+        return oldColor;
     }
 
     @Override
     public boolean canHandleItem(Item item) {
-        return false;
+        return item == Items.sugar;
     }
 }

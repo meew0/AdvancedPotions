@@ -35,4 +35,5 @@ public class ItemPotionAnalyzer extends Item {
         }
         return false;
     }
+
 }
