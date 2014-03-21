@@ -1,6 +1,7 @@
 package meew0.ap;
 
 import meew0.ap.block.BlockAdvancedCauldron;
+import meew0.ap.item.ItemPotionAnalyzer;
 import meew0.ap.item.ItemTestItem;
 import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
@@ -28,6 +29,7 @@ public class AdvancedPotions {
     public static Block advancedCauldron;
 
     public static Item testItem; // !!!
+    public static Item potionAnalyzer;
 
     public static void debug(String d) {
         advpLogger.info(d); //TODO this going to debug sometime
@@ -52,6 +54,9 @@ public class AdvancedPotions {
         GameRegistry.registerItem(testItem, "testItem");
 
         // !!!
+
+        potionAnalyzer = new ItemPotionAnalyzer().setUnlocalizedName("potionAnalyzer").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_analyzer");
+        GameRegistry.registerItem(potionAnalyzer, "potionAnalyzer");
 
     }
 

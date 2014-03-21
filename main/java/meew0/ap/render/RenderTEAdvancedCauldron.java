@@ -103,7 +103,7 @@ public class RenderTEAdvancedCauldron extends TileEntitySpecialRenderer {
 
         double dy = BlockAdvancedCauldron.getRenderLiquidLevel(te.waterLevel);
 
-        AdvancedPotions.debug(String.valueOf(dy));
+        //AdvancedPotions.debug(String.valueOf(dy));
 
         Color c = te.color;
         if (c == null) c = new Color(Color.BLUE);
