@@ -37,6 +37,9 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 
     public TileEntityAdvancedCauldron() {
         effects = new ArrayList<EffectWrapper>();
+
+        balance = 0.0f;
+        balMod = 1.0f;
     }
 
     @Override public void writeToNBT(NBTTagCompound nbt) {
@@ -109,13 +112,18 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         EffectWrapper[] newEffects = itemHandler.getNewEffects();
 
         for (EffectWrapper newEffect : newEffects) {
+            boolean addEffect = true;
+            int i = 0;
             for (EffectWrapper effect : effects) {
                 if (effect.id == newEffect.id) {
-                    newEffect.amplifier = Math.max(effect.amplifier, newEffect.amplifier);
+                    newEffect.amplifier = Math.max(Math.max(effect.amplifier, newEffect.amplifier), effect.amplifier + newEffect.amplifier);
                     newEffect.duration = MathHelper.floor_double(((double) (effect.duration + newEffect.duration)) / 3.0);
+                    effects.set(i, newEffect);
+                    addEffect = false;
                 }
+                i++;
             }
-            effects.add(newEffect);
+            if (addEffect) effects.add(newEffect);
         }
     }
 

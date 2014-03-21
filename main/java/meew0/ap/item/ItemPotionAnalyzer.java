@@ -11,6 +11,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 /**
@@ -27,9 +28,9 @@ public class ItemPotionAnalyzer extends Item {
             player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.GRAY.toString() + "Effects: "));
             for (EffectWrapper effect : te2.effects) {
                 IPotionEffectContainer e = effect.getEffect();
-                player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.BLUE + e.effectPrefix() + e.effectName() +
-                        ((e.displayAmplifier()) ? (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") + "(" +
-                        ((e.displayDuration()) ? (" " + PotionRegistry.getReadableDuration(e.getDurationForDisplay())) : "") + ")"));
+                player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.BLUE + e.effectPrefix() + StatCollector.translateToLocal(e.effectName()) +
+                        ((e.displayAmplifier()) ? (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") + " (" +
+                        ((e.displayDuration()) ? ("" + PotionRegistry.getReadableDuration(e.getDurationForDisplay())) : "") + ")"));
             }
             return true;
         }
