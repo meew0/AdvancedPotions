@@ -7,4 +7,6 @@ public interface IPotionIDHandler {
     public IPotionEffectContainer getEffectContainer(int id, int duration, int amplifier);
 
     public boolean canHandleEffect(int id);
+
+    public int[] getHandledIDs();
 }

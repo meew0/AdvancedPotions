@@ -1,7 +1,6 @@
 package meew0.ap.backend;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumChatFormatting;
 
 /**
  * Created by meew0 on 19.03.14.

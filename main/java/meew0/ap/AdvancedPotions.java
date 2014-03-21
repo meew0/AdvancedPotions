@@ -19,9 +19,9 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(modid = AdvancedPotions.MODID, name = AdvancedPotions.NAME, version = AdvancedPotions.VERSION)
 public class AdvancedPotions {
-	public static final String	MODID	= "advancedpotions";
-	public static final String	NAME	= "Advanced Potions";
-	public static final String	VERSION	= "0.01";
+    public static final String MODID = "advancedpotions";
+    public static final String NAME = "Advanced Potions";
+    public static final String VERSION = "0.01";
 
     public static Logger advpLogger;
 
@@ -33,30 +33,33 @@ public class AdvancedPotions {
         advpLogger.info(d); //TODO this going to debug sometime
     }
 
-    @EventHandler public void preInit(FMLPreInitializationEvent event) {
-		// all the stuff goes here
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        // all the stuff goes here
 
         advpLogger = event.getModLog();
 
         advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f).setCreativeTab(CreativeTabs.tabBrewing);
-		GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
-		GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
-		
-		RenderTEAdvancedCauldron.renderId = RenderingRegistry.getNextAvailableRenderId();
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
+        GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
+        GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
+
+        RenderTEAdvancedCauldron.renderId = RenderingRegistry.getNextAvailableRenderId();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
 
         // !!!
 
-        testItem = new ItemTestItem().setUnlocalizedName("testItem").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabAllSearch);
+        testItem = new ItemTestItem().setUnlocalizedName("testItem").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabAllSearch).setMaxDamage(601);
         GameRegistry.registerItem(testItem, "testItem");
 
         // !!!
 
-	}
-	
-	@EventHandler public void init(FMLInitializationEvent event) {
-	}
-	
-	@EventHandler public void postInit(FMLPostInitializationEvent event) {
-	}
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 }
