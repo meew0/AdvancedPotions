@@ -3,6 +3,7 @@ package meew0.ap.te;
 import java.util.ArrayList;
 import java.util.List;
 
+import meew0.ap.AdvancedPotions;
 import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionEffectContainer;
 import meew0.ap.backend.IPotionItemHandler;
@@ -152,4 +153,15 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 	@Override public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
 		readFromNBT(pkt.func_148857_g());
 	}
+
+    public ItemStack createPotionStack() {
+        if (waterLevel < 1) return new ItemStack(AdvancedPotions.potionBottle);
+        ItemStack stack = new ItemStack(AdvancedPotions.potion);
+
+        NBTTagCompound tag = new NBTTagCompound();
+        writeToNBT(tag);
+        stack.stackTagCompound = tag;
+
+        return stack;
+    }
 }

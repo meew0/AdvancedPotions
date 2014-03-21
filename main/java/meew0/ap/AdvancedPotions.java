@@ -5,8 +5,10 @@ import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.effects.AdvancedPotionsIDHandler;
 import meew0.ap.effects.ItemHandlerSugar;
 import meew0.ap.effects.VanillaIDHandler;
+import meew0.ap.item.ItemAdvancedPotion;
 import meew0.ap.item.ItemPotionAnalyzer;
 import meew0.ap.item.ItemTestItem;
+import meew0.ap.item.ItemPotionBottle;
 import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
@@ -34,6 +36,8 @@ public class AdvancedPotions {
 
     public static Item testItem; // !!!
     public static Item potionAnalyzer;
+    public static Item potionBottle;
+    public static Item potion;
 
     public static void debug(String d) {
         advpLogger.info(d); //TODO this going to debug sometime
@@ -61,7 +65,13 @@ public class AdvancedPotions {
         // !!!
 
         potionAnalyzer = new ItemPotionAnalyzer().setUnlocalizedName("potionAnalyzer").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_analyzer");
+        potionBottle = new ItemPotionBottle().setUnlocalizedName("potionBottle").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_bottle");
+        potion = new ItemAdvancedPotion().setUnlocalizedName("potion").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion");
+
         GameRegistry.registerItem(potionAnalyzer, "potionAnalyzer");
+        GameRegistry.registerItem(potionBottle, "potionBottle");
+        GameRegistry.registerItem(potion, "potion");
+
 
         PotionRegistry.init();
 

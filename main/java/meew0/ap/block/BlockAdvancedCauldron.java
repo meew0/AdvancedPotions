@@ -52,9 +52,10 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 			else {
 //				int i1 = world.getBlockMetadata(x, y, z);
 //				int j1 = func_150027_b(i1);
-				int meta = ((TileEntityAdvancedCauldron) world.getTileEntity(x, y, z)).waterLevel;
-				
-				if (itemstack.getItem() == Items.water_bucket) {
+                TileEntityAdvancedCauldron te = (TileEntityAdvancedCauldron) world.getTileEntity(x, y, z);
+                int meta = te.waterLevel;
+
+                if (itemstack.getItem() == Items.water_bucket) {
 					if (meta < 3) {
 						if (!player.capabilities.isCreativeMode) {
 							player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
@@ -65,12 +66,12 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 					
 					return true;
 				} else {
-					if (itemstack.getItem() == Items.glass_bottle) {
-						if (meta > 0) {
+                    if (itemstack.getItem() == AdvancedPotions.potionBottle) {
+                        if (meta > 0) {
 							if (!player.capabilities.isCreativeMode) {
-								ItemStack itemstack1 = new ItemStack(Items.potionitem, 1, 0);
-								
-								if (!player.inventory.addItemStackToInventory(itemstack1)) {
+                                ItemStack itemstack1 = te.createPotionStack();
+
+                                if (!player.inventory.addItemStackToInventory(itemstack1)) {
 									world.spawnEntityInWorld(new EntityItem(world, (double) x + 0.5D, (double) y + 1.5D, (double) z + 0.5D, itemstack1));
 								} else if (player instanceof EntityPlayerMP) {
 									((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
