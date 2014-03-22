@@ -57,9 +57,8 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 
                 if (itemstack.getItem() == Items.water_bucket) {
 					if (meta < 3) {
-						if (!player.capabilities.isCreativeMode) {
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
-						}
+                        if (!player.capabilities.isCreativeMode)
+                            player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
 						
 						this.func_150024_a(world, x, y, z, 3);
 					}
@@ -71,18 +70,16 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 							if (!player.capabilities.isCreativeMode) {
                                 ItemStack itemstack1 = te.createPotionStack();
 
-                                if (!player.inventory.addItemStackToInventory(itemstack1)) {
-									world.spawnEntityInWorld(new EntityItem(world, (double) x + 0.5D, (double) y + 1.5D, (double) z + 0.5D, itemstack1));
-								} else if (player instanceof EntityPlayerMP) {
-									((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
-								}
-								
+                                if (!player.inventory.addItemStackToInventory(itemstack1))
+                                    world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY + 1.0, player.posZ, itemstack1));
+                                else if (player instanceof EntityPlayerMP)
+                                    ((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
+
 								--itemstack.stackSize;
-								
-								if (itemstack.stackSize <= 0) {
-									player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack) null);
-								}
-							}
+
+                                if (itemstack.stackSize <= 0)
+                                    player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
+                            }
 							
 							this.func_150024_a(world, x, y, z, meta - 1);
 						}

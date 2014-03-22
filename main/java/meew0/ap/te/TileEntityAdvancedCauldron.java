@@ -77,15 +77,20 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         balMod = nbt.getFloat("balmod");
 
         effects = new ArrayList<EffectWrapper>();
+        effects.addAll(getEffectWrappersForTileNBT(nbt));
 
+    }
+
+    public static ArrayList<EffectWrapper> getEffectWrappersForTileNBT(NBTTagCompound nbt) {
+        ArrayList<EffectWrapper> ret = new ArrayList<EffectWrapper>();
         NBTTagList tagList = nbt.getTagList("effects", nbt.getId());
         for (int i = 0; i < tagList.tagCount(); i++) {
             NBTTagCompound c = tagList.getCompoundTagAt(i);
             EffectWrapper ew = new EffectWrapper();
             ew.fromNBT(c);
-            effects.add(ew);
+            ret.add(ew);
         }
-
+        return ret;
     }
 
     public void mixColor(Color newColor) {

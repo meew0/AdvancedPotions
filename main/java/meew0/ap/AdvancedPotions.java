@@ -1,5 +1,8 @@
 package meew0.ap;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.FMLEventChannel;
 import meew0.ap.backend.PotionRegistry;
 import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.effects.AdvancedPotionsIDHandler;
