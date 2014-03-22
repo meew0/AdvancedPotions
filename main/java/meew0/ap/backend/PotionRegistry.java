@@ -1,6 +1,8 @@
 package meew0.ap.backend;
 
+import meew0.ap.AdvancedPotions;
 import meew0.ap.PotionException;
+import meew0.ap.effects.BalanceEffectNull;
 import meew0.ap.effects.EffectNull;
 import meew0.ap.effects.ItemHandlerNull;
 import net.minecraft.item.Item;
@@ -17,6 +19,8 @@ public class PotionRegistry {
     public static ArrayList<Integer> idList;
 
     public static ArrayList<IPotionItemHandler> itemHandlers;
+
+    public static ArrayList<IBalanceEffect> balanceHandlers;
 
     public static void init() {
         handlers = new ArrayList<IPotionIDHandler>();
@@ -38,6 +42,17 @@ public class PotionRegistry {
             if (itemHandler.canHandleItem(item)) return itemHandler;
         }
         return new ItemHandlerNull();
+    }
+
+    public static IBalanceEffect getBalanceEffect(int bal) {
+        if (bal != Math.abs(bal)) {
+            AdvancedPotions.advpLogger.error("Balance must not be negative! Please use Math.abs(balance) in the future.");
+            bal = Math.abs(bal);
+        }
+        for (IBalanceEffect balanceHandler : balanceHandlers) {
+            if (balanceHandler.appliesForAbsoluteBalance(bal)) return balanceHandler;
+        }
+        return new BalanceEffectNull();
     }
 
     public static void registerHandler(IPotionIDHandler handler) {

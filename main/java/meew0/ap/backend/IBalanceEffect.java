@@ -12,5 +12,5 @@ public interface IBalanceEffect {
 
     public void doEffect(ItemStack potionStack, World world, EntityPlayer player);
 
-    public String getEffectName();
+    public String getUnlocalizedEffectMessage();
 }
