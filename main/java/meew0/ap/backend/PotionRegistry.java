@@ -26,6 +26,7 @@ public class PotionRegistry {
         handlers = new ArrayList<IPotionIDHandler>();
         idList = new ArrayList<Integer>();
         itemHandlers = new ArrayList<IPotionItemHandler>();
+        balanceHandlers = new ArrayList<IBalanceEffect>();
     }
 
     public static IPotionEffectContainer getEffect(int id, int duration, int amplifier) {
@@ -44,15 +45,18 @@ public class PotionRegistry {
         return new ItemHandlerNull();
     }
 
-    public static IBalanceEffect getBalanceEffect(int bal) {
+    public static ArrayList<IBalanceEffect> getBalanceEffects(int bal) {
         if (bal != Math.abs(bal)) {
             AdvancedPotions.advpLogger.error("Balance must not be negative! Please use Math.abs(balance) in the future.");
             bal = Math.abs(bal);
         }
+        ArrayList<IBalanceEffect> effects = new ArrayList<IBalanceEffect>();
         for (IBalanceEffect balanceHandler : balanceHandlers) {
-            if (balanceHandler.appliesForAbsoluteBalance(bal)) return balanceHandler;
+            if (balanceHandler.appliesForAbsoluteBalance(bal) && (AdvancedPotions.rng.nextFloat() <
+                    balanceHandler.getProbability(bal))) effects.add(balanceHandler);
         }
-        return new BalanceEffectNull();
+        if (effects.size() < 1) effects.add(new BalanceEffectNull());
+        return effects;
     }
 
     public static void registerHandler(IPotionIDHandler handler) {
@@ -65,6 +69,10 @@ public class PotionRegistry {
 
     public static void registerItemHandler(IPotionItemHandler handler) {
         itemHandlers.add(handler);
+    }
+
+    public static void registerBalanceHandler(IBalanceEffect handler) {
+        balanceHandlers.add(handler);
     }
 
     public static String getRomanNumeral(int num) {
@@ -166,4 +174,5 @@ public class PotionRegistry {
         int sec = tsec % 60;
         return "" + min + ":" + ((sec < 10) ? ("0" + sec) : sec);
     }
+
 }
