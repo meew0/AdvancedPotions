@@ -6,3 +6,5 @@ ap.balanceMessage.slowness.1.name=Slowness
 tile.advancedCauldron.name=Advanced Cauldron
 item.potionAnalyzer.name=Potion Analyzer
 item.potionBottle.name=Empty Bottle
+entity.advancedpotions.hostilePig.name=Hostile Pig
+death.attack.eatenByPig=%1$s was eaten by a pig

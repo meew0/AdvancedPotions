@@ -1,5 +1,6 @@
 package meew0.ap.block;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
@@ -96,9 +97,14 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 			}
 		}
 	}
-	
-	// Make sure to always suppress metadata changes so the metadata always
-	// stays 0 so I can use my custom liquid rendering code
+
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        return super.getDrops(world, x, y, z, metadata, fortune);
+    }
+
+    // Make sure to always suppress metadata changes so the metadata always
+    // stays 0 so I can use my custom liquid rendering code
 	@Override public void func_150024_a(World world, int x, int y, int z, int meta) {
 		// world.setBlockMetadataWithNotify(x, y, z, MathHelper.clamp_int(meta,
 		// 0, 3), 2);
