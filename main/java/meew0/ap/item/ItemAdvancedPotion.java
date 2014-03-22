@@ -26,7 +26,7 @@ public class ItemAdvancedPotion extends Item {
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         if (!player.capabilities.isCreativeMode) --stack.stackSize;
 
-        if (stack.stackTagCompound != null) {
+        if (stack.stackTagCompound != null && !world.isRemote) {
             ArrayList<EffectWrapper> effects = new ArrayList<EffectWrapper>();
             effects.addAll(TileEntityAdvancedCauldron.getEffectWrappersForTileNBT(stack.stackTagCompound));
             for (EffectWrapper effect : effects) {

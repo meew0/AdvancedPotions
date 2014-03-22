@@ -28,6 +28,6 @@ public class BalanceEffectNauseaL1 implements IBalanceEffect {
 
     @Override
     public String getUnlocalizedEffectMessage() {
-        return null;
+        return "ap.balanceMessage.nausea.1.name";
     }
 }

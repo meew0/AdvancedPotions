@@ -28,6 +28,6 @@ public class BalanceEffectSlownessL1 implements IBalanceEffect {
 
     @Override
     public String getUnlocalizedEffectMessage() {
-        return null;
+        return "ap.balanceMessage.slowness.1.name";
     }
 }
