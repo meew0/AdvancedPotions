@@ -24,7 +24,8 @@ public class EffectsVanilla implements IPotionEffectContainer {
 
     @Override
     public void onApply(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(id, duration, amplifier));
+        // the -1 is because vanilla uses 0 as level 1...
+        player.addPotionEffect(new PotionEffect(id, duration, amplifier - 1));
     }
 
     @Override

@@ -67,7 +67,7 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 				} else {
                     if (itemstack.getItem() == AdvancedPotions.potionBottle) {
                         if (meta > 0) {
-							if (!player.capabilities.isCreativeMode) {
+                            if (/*!player.capabilities.isCreativeMode*/ true) {
                                 ItemStack itemstack1 = te.createPotionStack();
 
                                 if (!player.inventory.addItemStackToInventory(itemstack1))

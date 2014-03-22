@@ -167,7 +167,10 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 	}
 
     public ItemStack createPotionStack() {
-        if (waterLevel < 1) return new ItemStack(AdvancedPotions.potionBottle);
+        if (waterLevel < 1) {
+            AdvancedPotions.debug("waterlevel < 1");
+            return new ItemStack(AdvancedPotions.potionBottle);
+        }
         ItemStack stack = new ItemStack(AdvancedPotions.potion);
 
         NBTTagCompound tag = new NBTTagCompound();
