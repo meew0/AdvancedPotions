@@ -1,21 +1,5 @@
 package meew0.ap;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.FMLEventChannel;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import meew0.ap.backend.PotionRegistry;
-import meew0.ap.block.BlockAdvancedCauldron;
-import meew0.ap.effects.*;
-import meew0.ap.entity.EntityHostilePig;
-import meew0.ap.item.*;
-import meew0.ap.render.RenderHostilePig;
-import meew0.ap.render.RenderTEAdvancedCauldron;
-import meew0.ap.te.TileEntityAdvancedCauldron;
-import net.minecraft.block.Block;
-import net.minecraft.client.model.ModelPig;
-import net.minecraft.client.renderer.entity.RenderPig;
-import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
@@ -23,9 +7,23 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import meew0.ap.backend.PotionRegistry;
+import meew0.ap.block.BlockAdvancedCauldron;
+import meew0.ap.effects.*;
+import meew0.ap.entity.EntityHostilePig;
+import meew0.ap.item.ItemAdvancedPotion;
+import meew0.ap.item.ItemHostilePigSpawner;
+import meew0.ap.item.ItemPotionAnalyzer;
+import meew0.ap.item.ItemPotionBottle;
+import meew0.ap.render.RenderHostilePig;
+import meew0.ap.render.RenderTEAdvancedCauldron;
+import meew0.ap.te.TileEntityAdvancedCauldron;
+import net.minecraft.block.Block;
+import net.minecraft.client.model.ModelPig;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.util.DamageSource;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
@@ -40,7 +38,6 @@ public class AdvancedPotions {
 
     public static Block advancedCauldron;
 
-    public static Item testItem; // !!!
     public static Item potionAnalyzer;
     public static Item potionBottle;
     public static Item potion;
@@ -66,13 +63,6 @@ public class AdvancedPotions {
 
         RenderTEAdvancedCauldron.renderId = RenderingRegistry.getNextAvailableRenderId();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
-
-        // !!!
-
-        testItem = new ItemTestItem().setUnlocalizedName("testItem").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabAllSearch).setMaxDamage(601);
-        GameRegistry.registerItem(testItem, "testItem");
-
-        // !!!
 
         potionAnalyzer = new ItemPotionAnalyzer().setUnlocalizedName("potionAnalyzer").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_analyzer");
         potionBottle = new ItemPotionBottle().setUnlocalizedName("potionBottle").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_bottle");

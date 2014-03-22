@@ -1,39 +1,33 @@
 package meew0.ap.te;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import meew0.ap.AdvancedPotions;
 import meew0.ap.backend.EffectWrapper;
-import meew0.ap.backend.IPotionEffectContainer;
 import meew0.ap.backend.IPotionItemHandler;
 import meew0.ap.backend.PotionRegistry;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.MathHelper;
-import org.lwjgl.util.Color;
-
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.util.Color;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityAdvancedCauldron extends TileEntity {
-	public int waterLevel;
+    public int waterLevel;
 
     public float balance, balMod;
     public ArrayList<EffectWrapper> effects;
 
-
-    //public int colorR, colorG, colorB;
     public Color color;
 
     public TileEntityAdvancedCauldron() {
@@ -43,8 +37,9 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         balMod = 1.0f;
     }
 
-    @Override public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
 
         nbt.setInteger("waterLevel", waterLevel);
 
@@ -63,11 +58,11 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         }
         nbt.setTag("effects", tagList);
     }
-	
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		
-		waterLevel = nbt.getInteger("waterLevel");
+
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+
+        waterLevel = nbt.getInteger("waterLevel");
 
         if (color == null) color = new Color();
 
@@ -155,16 +150,18 @@ public class TileEntityAdvancedCauldron extends TileEntity {
             }
         }
     }
-	
-	@Override public Packet getDescriptionPacket() {
-		NBTTagCompound tag = new NBTTagCompound();
-		writeToNBT(tag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
-	}
-	
-	@Override public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		readFromNBT(pkt.func_148857_g());
-	}
+
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound tag = new NBTTagCompound();
+        writeToNBT(tag);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        readFromNBT(pkt.func_148857_g());
+    }
 
     public ItemStack createPotionStack() {
         if (waterLevel < 1) {
