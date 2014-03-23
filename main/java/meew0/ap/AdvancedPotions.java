@@ -51,7 +51,7 @@ import java.util.Random;
 public class AdvancedPotions {
     public static final String MODID = "advancedpotions";
     public static final String NAME = "Advanced Potions";
-    public static final String VERSION = "0.1";
+    public static final String VERSION = "0.11";
 
     public static Logger advpLogger;
 
@@ -164,6 +164,8 @@ public class AdvancedPotions {
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 6), Items.golden_carrot, Blocks.ice, Items.fermented_spider_eye);
         GameRegistry.addShapedRecipe(new ItemStack(ingredient, 1, 7), "ii ", "  i", "iii", 'i', Items.iron_ingot);
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 8), Items.melon, Items.spider_eye, Items.fermented_spider_eye);
+        GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 9, 10), new ItemStack(ingredient, 1, 11));
+        GameRegistry.addShapedRecipe(new ItemStack(ingredient, 9, 11), "iii", "iai", "iii", 'i', Items.iron_ingot, 'a', new ItemStack(ingredient, 1, 9));
 
         GameRegistry.addShapedRecipe(new ItemStack(shield, 1, 0), "i i", "iii", "nin", 'i', Items.iron_ingot, 'n', new ItemStack(ingredient, 1, 10));
         GameRegistry.addShapedRecipe(new ItemStack(shield, 1, 1), "drd", "d d", " d ", 'd', Items.diamond, 'r', Items.redstone);
