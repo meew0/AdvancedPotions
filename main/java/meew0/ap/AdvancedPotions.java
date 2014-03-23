@@ -44,7 +44,7 @@ import java.util.Random;
 public class AdvancedPotions {
     public static final String MODID = "advancedpotions";
     public static final String NAME = "Advanced Potions";
-    public static final String VERSION = "0.13";
+    public static final String VERSION = "0.14";
 
     @SidedProxy(clientSide = "meew0.ap.APClientProxy", serverSide = "meew0.ap.APCommonProxy")
     public static APCommonProxy proxy;

@@ -51,7 +51,7 @@ public class EffectsVanilla implements IPotionEffectContainer {
 
     @Override
     public String effectPrefix() {
-        return getPotion().isBadEffect() ? EnumChatFormatting.RED.toString() : EnumChatFormatting.GREEN.toString();
+        return /*getPotion().isBadEffect()*/ false ? EnumChatFormatting.RED.toString() : EnumChatFormatting.GREEN.toString();
     }
 
     @Override
