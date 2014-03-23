@@ -1,11 +1,11 @@
 package meew0.ap.effects;
 
+import meew0.ap.backend.Color;
 import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionItemHandler;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.util.Color;
 
 /**
  * Created by meew0 on 22.03.14.

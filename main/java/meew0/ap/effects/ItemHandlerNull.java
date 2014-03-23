@@ -1,9 +1,9 @@
 package meew0.ap.effects;
 
+import meew0.ap.backend.Color;
 import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionItemHandler;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.util.Color;
 
 /**
  * Created by meew0 on 21.03.14.

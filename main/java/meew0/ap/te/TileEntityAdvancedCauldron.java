@@ -1,6 +1,7 @@
 package meew0.ap.te;
 
 import meew0.ap.AdvancedPotions;
+import meew0.ap.backend.Color;
 import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionItemHandler;
 import meew0.ap.backend.PotionRegistry;
@@ -17,7 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import org.lwjgl.util.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,28 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 
         balance = 0.0f;
         balMod = 1.0f;
+    }
+
+    public static ArrayList<EffectWrapper> getEffectWrappersForTileNBT(NBTTagCompound nbt) {
+        ArrayList<EffectWrapper> ret = new ArrayList<EffectWrapper>();
+        NBTTagList tagList = nbt.getTagList("effects", nbt.getId());
+        for (int i = 0; i < tagList.tagCount(); i++) {
+            NBTTagCompound c = tagList.getCompoundTagAt(i);
+            EffectWrapper ew = new EffectWrapper();
+            ew.fromNBT(c);
+            ret.add(ew);
+        }
+        return ret;
+    }
+
+    public static Color mixColor(Color oldColor, Color newColor) {
+        // this uses weighted averages to mix RGB colors.
+        // The result is not always intuitive and I don't know of an algorithm that does so realistically.
+        // I don't want to get into very advanced calculations either to avoid tons of lag.
+        // If anyone knows of a realistic and lag-free way to mix RGB colors, please tell me.
+
+        oldColor.set((oldColor.getRed() + newColor.getRed()) / 2, (oldColor.getGreen() + newColor.getGreen()) / 2, (oldColor.getBlue() + newColor.getBlue()) / 2);
+        return oldColor;
     }
 
     @Override
@@ -75,28 +97,6 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         effects = new ArrayList<EffectWrapper>();
         effects.addAll(getEffectWrappersForTileNBT(nbt));
 
-    }
-
-    public static ArrayList<EffectWrapper> getEffectWrappersForTileNBT(NBTTagCompound nbt) {
-        ArrayList<EffectWrapper> ret = new ArrayList<EffectWrapper>();
-        NBTTagList tagList = nbt.getTagList("effects", nbt.getId());
-        for (int i = 0; i < tagList.tagCount(); i++) {
-            NBTTagCompound c = tagList.getCompoundTagAt(i);
-            EffectWrapper ew = new EffectWrapper();
-            ew.fromNBT(c);
-            ret.add(ew);
-        }
-        return ret;
-    }
-
-    public static Color mixColor(Color oldColor, Color newColor) {
-        // this uses weighted averages to mix RGB colors.
-        // The result is not always intuitive and I don't know of an algorithm that does so realistically.
-        // I don't want to get into very advanced calculations either to avoid tons of lag.
-        // If anyone knows of a realistic and lag-free way to mix RGB colors, please tell me.
-
-        oldColor.set((oldColor.getRed() + newColor.getRed()) / 2, (oldColor.getGreen() + newColor.getGreen()) / 2, (oldColor.getBlue() + newColor.getBlue()) / 2);
-        return oldColor;
     }
 
     public void handleAddedItem(ItemStack stack) {

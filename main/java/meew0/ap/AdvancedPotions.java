@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import meew0.ap.backend.Color;
 import meew0.ap.backend.PotionRegistry;
 import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.block.BlockArcaneOre;
@@ -36,7 +37,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.util.Color;
 
 import java.util.Random;
 
@@ -44,7 +44,7 @@ import java.util.Random;
 public class AdvancedPotions {
     public static final String MODID = "advancedpotions";
     public static final String NAME = "Advanced Potions";
-    public static final String VERSION = "0.12";
+    public static final String VERSION = "0.13";
 
     @SidedProxy(clientSide = "meew0.ap.APClientProxy", serverSide = "meew0.ap.APCommonProxy")
     public static APCommonProxy proxy;

@@ -1,5 +1,6 @@
 package meew0.ap.render;
 
+import meew0.ap.backend.Color;
 import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
@@ -9,7 +10,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.Color;
 
 // thanks to whoever made the tile entity rendering tutorial, much appreciated!
 // :P

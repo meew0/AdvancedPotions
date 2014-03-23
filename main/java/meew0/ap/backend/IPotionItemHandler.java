@@ -1,7 +1,6 @@
 package meew0.ap.backend;
 
 import net.minecraft.item.ItemStack;
-import org.lwjgl.util.Color;
 
 /**
  * Created by meew0 on 19.03.14.
