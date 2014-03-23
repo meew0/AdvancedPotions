@@ -48,6 +48,7 @@ public class AdvancedPotions {
     public static Logger advpLogger;
 
     public static Block advancedCauldron;
+    public static Block arcaneOre;
 
     public static Item potionAnalyzer;
     public static Item potionBottle;
@@ -71,7 +72,11 @@ public class AdvancedPotions {
 
 
         advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f).setCreativeTab(CreativeTabs.tabBrewing);
+        arcaneOre = new BlockAdvancedCauldron().setBlockName("arcaneOre").setBlockTextureName("advancedpotions:arcane_ore").setHardness(5.0f).setLightLevel(0.8f).setCreativeTab(CreativeTabs.tabBlock);
+
+        GameRegistry.registerBlock(arcaneOre, "arcaneOre");
         GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
+
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
 
         RenderTEAdvancedCauldron.renderId = RenderingRegistry.getNextAvailableRenderId();
