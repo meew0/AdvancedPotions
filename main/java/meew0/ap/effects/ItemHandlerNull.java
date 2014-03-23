@@ -1,10 +1,8 @@
 package meew0.ap.effects;
 
 import meew0.ap.backend.EffectWrapper;
-import meew0.ap.backend.IPotionEffectContainer;
-import meew0.ap.backend.IPotionIDHandler;
 import meew0.ap.backend.IPotionItemHandler;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import org.lwjgl.util.Color;
 
 /**
@@ -32,7 +30,7 @@ public class ItemHandlerNull implements IPotionItemHandler {
     }
 
     @Override
-    public boolean canHandleItem(Item item) {
+    public boolean canHandleItem(ItemStack item) {
         return true;
     }
 }

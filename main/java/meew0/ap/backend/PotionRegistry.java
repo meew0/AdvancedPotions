@@ -5,11 +5,10 @@ import meew0.ap.PotionException;
 import meew0.ap.effects.BalanceEffectNull;
 import meew0.ap.effects.EffectNull;
 import meew0.ap.effects.ItemHandlerNull;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by meew0 on 19.03.14.
@@ -38,7 +37,7 @@ public class PotionRegistry {
         return new EffectNull();
     }
 
-    public static IPotionItemHandler getItemHandler(Item item) {
+    public static IPotionItemHandler getItemHandler(ItemStack item) {
         for (IPotionItemHandler itemHandler : itemHandlers) {
             if (itemHandler.canHandleItem(item)) return itemHandler;
         }

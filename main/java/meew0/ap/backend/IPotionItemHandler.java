@@ -1,6 +1,6 @@
 package meew0.ap.backend;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import org.lwjgl.util.Color;
 
 /**
@@ -15,5 +15,5 @@ public interface IPotionItemHandler {
 
     public Color getModifiedColor(Color oldColor);
 
-    public boolean canHandleItem(Item item);
+    public boolean canHandleItem(ItemStack item);
 }

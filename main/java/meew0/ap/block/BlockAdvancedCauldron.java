@@ -4,6 +4,7 @@ import meew0.ap.AdvancedPotions;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -11,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -18,6 +20,8 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
     public BlockAdvancedCauldron() {
         super();
     }
+
+    public static IIcon potionIcon, innerIcon;
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
@@ -27,6 +31,14 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
     @Override
     protected String getTextureName() {
         return "AdvancedPotions:advc";
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        super.registerBlockIcons(iconRegister);
+
+        potionIcon = iconRegister.registerIcon("advancedpotions:potion_base");
+        innerIcon = iconRegister.registerIcon("advancedpotions:advc_inner"); // stupid BlockCauldron makes their textures private
     }
 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int m, float dx, float dy, float dz) {
@@ -51,7 +63,7 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
                 } else {
                     if (itemstack.getItem() == AdvancedPotions.potionBottle) {
                         if (meta > 0) {
-                            ItemStack itemstack1 = te.createPotionStack();
+                            ItemStack itemstack1 = te.createPotionStack(itemstack.getItemDamage());
 
                             if (!player.inventory.addItemStackToInventory(itemstack1))
                                 world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY + 1.0, player.posZ, itemstack1));

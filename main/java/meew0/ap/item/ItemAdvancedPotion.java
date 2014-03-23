@@ -6,6 +6,7 @@ import meew0.ap.backend.IBalanceEffect;
 import meew0.ap.backend.IPotionEffectContainer;
 import meew0.ap.backend.PotionRegistry;
 import meew0.ap.te.TileEntityAdvancedCauldron;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -13,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -23,6 +25,24 @@ import java.util.List;
  * Created by meew0 on 21.03.14.
  */
 public class ItemAdvancedPotion extends Item {
+    public static String[] textureNames = new String[]{
+            "potion_water_regular",
+            "potion_water_heart",
+            "potion_water_vial",
+            "potion_water_square",
+            "potion_water_capsule",
+            "potion_water_reinforced"
+    };
+
+    public static IIcon[] textures = new IIcon[6];
+
+    @Override
+    public void registerIcons(IIconRegister par1IconRegister) {
+        for (int i = 0; i < 6; i++) {
+            textures[i] = par1IconRegister.registerIcon("advancedpotions:" + textureNames[i]);
+        }
+    }
+
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         if (!player.capabilities.isCreativeMode) --stack.stackSize;
 

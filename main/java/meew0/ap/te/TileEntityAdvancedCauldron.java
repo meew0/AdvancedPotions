@@ -32,6 +32,7 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 
     public TileEntityAdvancedCauldron() {
         effects = new ArrayList<EffectWrapper>();
+        color = new Color(0, 0, 255);
 
         balance = 0.0f;
         balMod = 1.0f;
@@ -88,16 +89,18 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         return ret;
     }
 
-    public void mixColor(Color newColor) {
+    public static Color mixColor(Color oldColor, Color newColor) {
         // this uses weighted averages to mix RGB colors.
         // The result is not always intuitive and I don't know of an algorithm that does so realistically.
         // I don't want to get into very advanced calculations either to avoid tons of lag.
         // If anyone knows of a realistic and lag-free way to mix RGB colors, please tell me.
-        color.set((color.getRed() + newColor.getRed()) / 2, (color.getGreen() + newColor.getGreen()) / 2, (color.getBlue() + newColor.getBlue()) / 2);
+
+        oldColor.set((oldColor.getRed() + newColor.getRed()) / 2, (oldColor.getGreen() + newColor.getGreen()) / 2, (oldColor.getBlue() + newColor.getBlue()) / 2);
+        return oldColor;
     }
 
     public void handleAddedItem(ItemStack stack) {
-        IPotionItemHandler itemHandler = PotionRegistry.getItemHandler(stack.getItem());
+        IPotionItemHandler itemHandler = PotionRegistry.getItemHandler(stack);
 
         // sneaky way to determine whether an item handler sets the balance or just changes it slightly
         boolean set = (itemHandler.getBalance(balance) == itemHandler.getBalance(itemHandler.getBalance(balance)));
@@ -163,7 +166,7 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         readFromNBT(pkt.func_148857_g());
     }
 
-    public ItemStack createPotionStack() {
+    public ItemStack createPotionStack(int meta) {
         if (waterLevel < 1) {
             AdvancedPotions.debug("waterlevel < 1");
             return new ItemStack(AdvancedPotions.potionBottle);
@@ -173,6 +176,8 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         NBTTagCompound tag = new NBTTagCompound();
         writeToNBT(tag);
         stack.stackTagCompound = tag;
+
+        stack.setItemDamage(meta);
 
         return stack;
     }
