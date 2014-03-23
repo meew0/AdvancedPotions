@@ -1,10 +1,9 @@
 package meew0.ap;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -17,14 +16,9 @@ import meew0.ap.block.BlockArcaneOre;
 import meew0.ap.effects.*;
 import meew0.ap.entity.EntityHostilePig;
 import meew0.ap.item.*;
-import meew0.ap.render.RenderHostilePig;
-import meew0.ap.render.RenderItemPotion;
-import meew0.ap.render.RenderItemShield;
-import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.model.ModelPig;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
@@ -38,7 +32,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -51,7 +44,10 @@ import java.util.Random;
 public class AdvancedPotions {
     public static final String MODID = "advancedpotions";
     public static final String NAME = "Advanced Potions";
-    public static final String VERSION = "0.11";
+    public static final String VERSION = "0.12";
+
+    @SidedProxy(clientSide = "meew0.ap.APClientProxy", serverSide = "meew0.ap.APCommonProxy")
+    public static APCommonProxy proxy;
 
     public static Logger advpLogger;
 
@@ -78,6 +74,7 @@ public class AdvancedPotions {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
         // all the stuff goes here
 
         advpLogger = event.getModLog();
@@ -92,8 +89,6 @@ public class AdvancedPotions {
 
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
 
-        RenderTEAdvancedCauldron.renderId = RenderingRegistry.getNextAvailableRenderId();
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
 
         potionAnalyzer = new ItemPotionAnalyzer().setUnlocalizedName("potionAnalyzer").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_analyzer");
         potionBottle = new ItemPotionBottle().setUnlocalizedName("potionBottle").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_bottle");
@@ -112,10 +107,7 @@ public class AdvancedPotions {
         GameRegistry.registerItem(itemAdvCauldron, "advancedCauldronItem");
 
         EntityRegistry.registerModEntity(EntityHostilePig.class, "hostilePig", EntityRegistry.findGlobalUniqueEntityId(), this, 80, 3, true);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHostilePig.class, new RenderHostilePig(new ModelPig(), new ModelPig(), 0.5f));
 
-        MinecraftForgeClient.registerItemRenderer(potion, new RenderItemPotion());
-        MinecraftForgeClient.registerItemRenderer(shield, new RenderItemShield());
 
         FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
@@ -180,6 +172,7 @@ public class AdvancedPotions {
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 16, 4), "pgp", "g g", "pgp", 'p', Blocks.glass_pane, 'g', Blocks.glass);
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 5), " n ", "a a", " a ", 'n', new ItemStack(ingredient, 1, 10), 'a', new ItemStack(ingredient, 1, 11));
 
+        proxy.registerRenderThings();
     }
 
     @SubscribeEvent
