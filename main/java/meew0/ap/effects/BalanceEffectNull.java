@@ -1,7 +1,7 @@
 package meew0.ap.effects;
 
 import meew0.ap.backend.IBalanceEffect;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -20,7 +20,7 @@ public class BalanceEffectNull implements IBalanceEffect {
     }
 
     @Override
-    public void doEffect(ItemStack potionStack, World world, EntityPlayer player) {
+    public void doEffect(ItemStack potionStack, World world, EntityLivingBase player) {
         // nothing
     }
 

@@ -1,6 +1,6 @@
 package meew0.ap.backend;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 
 /**
  * Created by meew0 on 19.03.14.
@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * This is so I can make potions that set things on fire and stuff.
  */
 public interface IPotionEffectContainer {
-    public void onApply(EntityPlayer player);
+    public void onApply(EntityLivingBase player);
 
     public boolean displayDuration();
 

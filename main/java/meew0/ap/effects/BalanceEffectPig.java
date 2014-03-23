@@ -2,7 +2,7 @@ package meew0.ap.effects;
 
 import meew0.ap.backend.IBalanceEffect;
 import meew0.ap.entity.EntityHostilePig;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -21,7 +21,7 @@ public class BalanceEffectPig implements IBalanceEffect {
     }
 
     @Override
-    public void doEffect(ItemStack potionStack, World world, EntityPlayer player) {
+    public void doEffect(ItemStack potionStack, World world, EntityLivingBase player) {
         if (!world.isRemote) {
             EntityHostilePig entity = new EntityHostilePig(world);
             entity.setPosition(player.posX, player.posY, player.posZ);

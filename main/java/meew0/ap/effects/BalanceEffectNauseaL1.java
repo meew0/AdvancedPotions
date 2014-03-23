@@ -1,7 +1,7 @@
 package meew0.ap.effects;
 
 import meew0.ap.backend.IBalanceEffect;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -22,7 +22,7 @@ public class BalanceEffectNauseaL1 implements IBalanceEffect {
     }
 
     @Override
-    public void doEffect(ItemStack potionStack, World world, EntityPlayer player) {
+    public void doEffect(ItemStack potionStack, World world, EntityLivingBase player) {
         player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
     }
 

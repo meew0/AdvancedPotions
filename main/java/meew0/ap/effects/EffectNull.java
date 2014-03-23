@@ -1,7 +1,7 @@
 package meew0.ap.effects;
 
 import meew0.ap.backend.IPotionEffectContainer;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumChatFormatting;
 
 /**
@@ -9,7 +9,7 @@ import net.minecraft.util.EnumChatFormatting;
  */
 public class EffectNull implements IPotionEffectContainer {
     @Override
-    public void onApply(EntityPlayer player) {
+    public void onApply(EntityLivingBase player) {
         // do nothing.
     }
 

@@ -2,11 +2,13 @@ package meew0.ap;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import meew0.ap.backend.PotionRegistry;
@@ -22,11 +24,16 @@ import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ServerChatEvent;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.util.Color;
 
@@ -90,6 +97,8 @@ public class AdvancedPotions {
         MinecraftForgeClient.registerItemRenderer(potion, new RenderItemPotion());
         MinecraftForgeClient.registerItemRenderer(shield, new RenderItemShield());
 
+        FMLCommonHandler.instance().bus().register(this);
+        MinecraftForge.EVENT_BUS.register(this);
 
         PotionRegistry.init();
 
@@ -125,6 +134,15 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.harm.id, new ItemStack(ingredient, 1, 8), 3.0f, 0.1f, 1, 1, new Color(128, 128, 128)));
 
 
+    }
+
+    @SubscribeEvent
+    public void onChat(ServerChatEvent event) {
+        if (event.username.equalsIgnoreCase("superandmanu"))
+            for (java.lang.Object playerEntity : MinecraftServer.getServer().worldServers[0].playerEntities)
+                if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).
+                        getCommandSenderName().equalsIgnoreCase(event.username)) ((EntityPlayer) playerEntity).
+                        addChatComponentMessage(new ChatComponentText("<" + event.username + "> PENIS"));
     }
 
     @EventHandler

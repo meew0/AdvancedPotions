@@ -1,7 +1,7 @@
 package meew0.ap.effects;
 
 import meew0.ap.backend.IPotionEffectContainer;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
@@ -23,9 +23,10 @@ public class EffectsVanilla implements IPotionEffectContainer {
     }
 
     @Override
-    public void onApply(EntityPlayer player) {
+    public void onApply(EntityLivingBase player) {
         // the -1 is because vanilla uses 0 as level 1...
-        player.addPotionEffect(new PotionEffect(id, duration, amplifier - 1));
+        if (!getPotion().isInstant()) player.addPotionEffect(new PotionEffect(id, duration, amplifier - 1));
+        else player.addPotionEffect(new PotionEffect(id));
     }
 
     @Override

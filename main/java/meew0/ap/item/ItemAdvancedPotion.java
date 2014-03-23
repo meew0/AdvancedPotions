@@ -5,8 +5,10 @@ import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IBalanceEffect;
 import meew0.ap.backend.IPotionEffectContainer;
 import meew0.ap.backend.PotionRegistry;
+import meew0.ap.entity.EntityThrownCapsule;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -43,33 +45,39 @@ public class ItemAdvancedPotion extends Item {
         }
     }
 
+    public static void applyPotion(ItemStack stack, World world, EntityLivingBase entity) {
+        ArrayList<EffectWrapper> effects = new ArrayList<EffectWrapper>();
+        effects.addAll(TileEntityAdvancedCauldron.getEffectWrappersForTileNBT(stack.stackTagCompound));
+        for (EffectWrapper effect : effects) {
+            AdvancedPotions.debug("Effect applied " + effect.id + " " + effect.duration + " " + effect.amplifier);
+            effect.getEffect().onApply(entity);
+        }
+
+        ArrayList<IBalanceEffect> bals = PotionRegistry.getBalanceEffects(Math.abs(
+                stack.stackTagCompound.getInteger("bal")));
+        String potionMessage = " ";
+        if (bals.size() < 2) potionMessage += StatCollector.translateToLocal(bals.get(0).
+                getUnlocalizedEffectMessage());
+        else potionMessage += StatCollector.translateToLocal("ap.balanceMessage.multiple.name");
+        if (entity instanceof EntityPlayer) {
+            ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText("" + EnumChatFormatting.RED +
+                    StatCollector.translateToLocal("ap.balanceMessage.badlyCooked.name") +
+                    EnumChatFormatting.RESET + potionMessage));
+        }
+        for (IBalanceEffect bal : bals) {
+            if (bals.size() > 1 && entity instanceof EntityPlayer) {
+                ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText(" " +
+                        StatCollector.translateToLocal(bal.getUnlocalizedEffectMessage())));
+            }
+            bal.doEffect(stack, world, entity);
+        }
+    }
+
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player) {
         if (!player.capabilities.isCreativeMode) --stack.stackSize;
 
         if (stack.stackTagCompound != null && !world.isRemote) {
-            ArrayList<EffectWrapper> effects = new ArrayList<EffectWrapper>();
-            effects.addAll(TileEntityAdvancedCauldron.getEffectWrappersForTileNBT(stack.stackTagCompound));
-            for (EffectWrapper effect : effects) {
-                AdvancedPotions.debug("Effect applied " + effect.id + " " + effect.duration + " " + effect.amplifier);
-                effect.getEffect().onApply(player);
-            }
-
-            ArrayList<IBalanceEffect> bals = PotionRegistry.getBalanceEffects(Math.abs(
-                    stack.stackTagCompound.getInteger("bal")));
-            String potionMessage = " ";
-            if (bals.size() < 2) potionMessage += StatCollector.translateToLocal(bals.get(0).
-                    getUnlocalizedEffectMessage());
-            else potionMessage += StatCollector.translateToLocal("ap.balanceMessage.multiple.name");
-            player.addChatComponentMessage(new ChatComponentText("" + EnumChatFormatting.RED +
-                    StatCollector.translateToLocal("ap.balanceMessage.badlyCooked.name") +
-                    EnumChatFormatting.RESET + potionMessage));
-            for (IBalanceEffect bal : bals) {
-                if (bals.size() > 1) {
-                    player.addChatComponentMessage(new ChatComponentText(" " +
-                            StatCollector.translateToLocal(bal.getUnlocalizedEffectMessage())));
-                }
-                bal.doEffect(stack, world, player);
-            }
+            applyPotion(stack, world, player);
         }
 
         if (stack.stackSize > 0) return stack;
@@ -78,7 +86,8 @@ public class ItemAdvancedPotion extends Item {
 
     @Override
     public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.drink;
+        if (stack.getItemDamage() != 4) return EnumAction.drink;
+        return EnumAction.none;
     }
 
     @Override
@@ -88,7 +97,15 @@ public class ItemAdvancedPotion extends Item {
     }
 
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        if (stack.getItemDamage() != 4) {
+            player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        } else {
+
+            if (!player.capabilities.isCreativeMode) --stack.stackSize;
+            world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+
+            if (!world.isRemote) world.spawnEntityInWorld(new EntityThrownCapsule(world, stack, player));
+        }
         return stack;
     }
 

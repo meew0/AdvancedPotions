@@ -1,6 +1,6 @@
 package meew0.ap.backend;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -13,7 +13,7 @@ public interface IBalanceEffect {
     // I had a hard time naming this method. Please don't yell at me for the name being totally wrong.
     public float getProbability(int bal);
 
-    public void doEffect(ItemStack potionStack, World world, EntityPlayer player);
+    public void doEffect(ItemStack potionStack, World world, EntityLivingBase entity);
 
     public String getUnlocalizedEffectMessage();
 }
