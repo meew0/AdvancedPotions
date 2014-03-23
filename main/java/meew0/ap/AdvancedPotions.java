@@ -51,7 +51,7 @@ import java.util.Random;
 public class AdvancedPotions {
     public static final String MODID = "advancedpotions";
     public static final String NAME = "Advanced Potions";
-    public static final String VERSION = "0.01";
+    public static final String VERSION = "0.1";
 
     public static Logger advpLogger;
 
