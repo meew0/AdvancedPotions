@@ -1,9 +1,11 @@
 ap.balanceMessage.null.name=Nothing bad has happened.
 ap.balanceMessage.badlyCooked.name=A badly cooked potion!
 ap.balanceMessage.multiple.name=The following things have happened:
-ap.balanceMessage.nausea.1.name=Nausea
-ap.balanceMessage.slowness.1.name=Slowness
+ap.balanceMessage.nausea.1.name=You've become nauseous!
+ap.balanceMessage.slowness.1.name=You've been slowed down!
+ap.balanceMessage.pig.name=You are being eaten by a pig!
 tile.advancedCauldron.name=Advanced Cauldron
+item.advancedCauldronItem.name=Advanced Cauldron
 item.potionAnalyzer.name=Potion Analyzer
 item.potionBottle.0.name=Empty Bottle
 item.potionBottle.1.name=Empty Heart-Shaped Bottle

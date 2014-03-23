@@ -15,7 +15,7 @@ public class ArcaneOreWorldGenerator implements IWorldGenerator {
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
         if (world.provider.dimensionId == 0) {
-            addOreSpawn(AdvancedPotions.arcaneOre, world, random, chunkX * 16, chunkZ * 16, 16, 16, 1, random.nextInt(40), 1, 32);
+            addOreSpawn(AdvancedPotions.arcaneOre, world, random, chunkX * 16, chunkZ * 16, 16, 16, 2, 1400, 1, 32);
         }
     }
 
@@ -26,6 +26,7 @@ public class ArcaneOreWorldGenerator implements IWorldGenerator {
             int posX = blockXPos + random.nextInt(maxX);
             int posY = minY + random.nextInt(diffBtwnMinMaxY);
             int posZ = blockZPos + random.nextInt(maxZ);
+            //AdvancedPotions.debug("Generating ore at " + posX + " " + posY + " " + posZ);
             (new WorldGenMinable(block, maxVeinSize)).generate(world, random, posX, posY, posZ);
         }
     }

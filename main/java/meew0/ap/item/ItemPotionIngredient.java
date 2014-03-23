@@ -24,7 +24,7 @@ public class ItemPotionIngredient extends Item {
             "ingredient_mouldy_melon",
             "arcane_stone",
             "arcane_nugget",
-            "arcane_ingot"
+            "arcane_metal"
     };
 
     public static IIcon[] textures = new IIcon[textureNames.length];

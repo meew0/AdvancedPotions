@@ -13,6 +13,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import meew0.ap.backend.PotionRegistry;
 import meew0.ap.block.BlockAdvancedCauldron;
+import meew0.ap.block.BlockArcaneOre;
 import meew0.ap.effects.*;
 import meew0.ap.entity.EntityHostilePig;
 import meew0.ap.item.*;
@@ -22,11 +23,17 @@ import meew0.ap.render.RenderItemShield;
 import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelPig;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemReed;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
@@ -34,6 +41,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ServerChatEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.util.Color;
 
@@ -50,14 +58,19 @@ public class AdvancedPotions {
     public static Block advancedCauldron;
     public static Block arcaneOre;
 
+    public static Item itemAdvCauldron;
+
     public static Item potionAnalyzer;
     public static Item potionBottle;
     public static Item potion;
+
     public static Item pigSpawner;
     public static Item ingredient;
     public static Item shield;
 
     public static Random rng;
+
+    public static ArcaneOreWorldGenerator worldGen;
 
     public static void debug(String d) {
         advpLogger.info(d); //TODO this going to debug sometime
@@ -71,11 +84,11 @@ public class AdvancedPotions {
         rng = new Random();
 
 
-        advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f).setCreativeTab(CreativeTabs.tabBrewing);
-        arcaneOre = new BlockAdvancedCauldron().setBlockName("arcaneOre").setBlockTextureName("advancedpotions:arcane_ore").setHardness(5.0f).setLightLevel(0.8f).setCreativeTab(CreativeTabs.tabBlock);
+        advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f);
+        arcaneOre = new BlockArcaneOre(Material.rock).setBlockName("arcaneOre").setBlockTextureName("advancedpotions:arcane_ore").setHardness(5.0f).setLightLevel(0.8f).setCreativeTab(CreativeTabs.tabBlock);
 
         GameRegistry.registerBlock(arcaneOre, "arcaneOre");
-        GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
+        GameRegistry.registerBlock(advancedCauldron, ItemBlockAdvancedCauldron.class, "advancedCauldron");
 
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
 
@@ -88,6 +101,7 @@ public class AdvancedPotions {
         pigSpawner = new ItemHostilePigSpawner().setUnlocalizedName("pigSpawner").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabAllSearch).setTextureName("advancedpotions:pig_spawner");
         ingredient = new ItemPotionIngredient().setUnlocalizedName("ingredient").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:ingredient");
         shield = new ItemShield().setUnlocalizedName("shield").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabCombat).setTextureName("advancedpotions:shield");
+        itemAdvCauldron = new ItemReed(advancedCauldron).setUnlocalizedName("advancedCauldronItem").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:advanced_cauldron");
 
         GameRegistry.registerItem(potionAnalyzer, "potionAnalyzer");
         GameRegistry.registerItem(potionBottle, "potionBottle");
@@ -95,6 +109,7 @@ public class AdvancedPotions {
         GameRegistry.registerItem(pigSpawner, "pigSpawner");
         GameRegistry.registerItem(ingredient, "ingredient");
         GameRegistry.registerItem(shield, "shield");
+        GameRegistry.registerItem(itemAdvCauldron, "advancedCauldronItem");
 
         EntityRegistry.registerModEntity(EntityHostilePig.class, "hostilePig", EntityRegistry.findGlobalUniqueEntityId(), this, 80, 3, true);
         RenderingRegistry.registerEntityRenderingHandler(EntityHostilePig.class, new RenderHostilePig(new ModelPig(), new ModelPig(), 0.5f));
@@ -104,6 +119,10 @@ public class AdvancedPotions {
 
         FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
+
+        //worldGen = new ArcaneOreWorldGenerator();
+        //GameRegistry.registerWorldGenerator(worldGen, 0);
+
 
         PotionRegistry.init();
 
@@ -138,6 +157,26 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.jump.id, new ItemStack(ingredient, 1, 7), 3.0f, 0.1f, 2400, 1, new Color(128, 128, 128)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.harm.id, new ItemStack(ingredient, 1, 8), 3.0f, 0.1f, 1, 1, new Color(128, 128, 128)));
 
+        GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 1), Items.golden_pickaxe, Items.fermented_spider_eye, new ItemStack(ingredient, 1, 2));
+        GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 2), Items.sugar, Items.fermented_spider_eye);
+        GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 4), Items.golden_carrot, Items.carrot, Items.fermented_spider_eye, Blocks.ice, new ItemStack(ingredient, 1, 2));
+        GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 5), Items.ghast_tear, Blocks.ice, Items.fermented_spider_eye);
+        GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 6), Items.golden_carrot, Blocks.ice, Items.fermented_spider_eye);
+        GameRegistry.addShapedRecipe(new ItemStack(ingredient, 1, 7), "ii ", "  i", "iii", 'i', Items.iron_ingot);
+        GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 8), Items.melon, Items.spider_eye, Items.fermented_spider_eye);
+
+        GameRegistry.addShapedRecipe(new ItemStack(shield, 1, 0), "i i", "iii", "nin", 'i', Items.iron_ingot, 'n', new ItemStack(ingredient, 1, 10));
+        GameRegistry.addShapedRecipe(new ItemStack(shield, 1, 1), "drd", "d d", " d ", 'd', Items.diamond, 'r', Items.redstone);
+
+        GameRegistry.addShapedRecipe(new ItemStack(potionAnalyzer, 1, 0), " r ", "aab", "aaa", 'a', new ItemStack(ingredient, 1, 11), 'r', Items.redstone, 'b', new ItemStack(potionBottle, 1, 0));
+        GameRegistry.addShapedRecipe(new ItemStack(itemAdvCauldron, 1, 0), "a a", "aca", "aaa", 'a', new ItemStack(ingredient, 1, 11), 'c', Items.cauldron);
+
+        GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 0), " p ", "g g", " g ", 'p', Blocks.glass_pane, 'g', Blocks.glass);
+        GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 1), "gpg", "g g", " g ", 'p', Blocks.glass_pane, 'g', Blocks.glass);
+        GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 2), "p p", "p p", " g ", 'p', Blocks.glass_pane, 'g', Blocks.glass);
+        GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 3), " p ", "g g", "ggg", 'p', Blocks.glass_pane, 'g', Blocks.glass);
+        GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 16, 4), "pgp", "g g", "pgp", 'p', Blocks.glass_pane, 'g', Blocks.glass);
+        GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 5), " n ", "a a", " a ", 'n', new ItemStack(ingredient, 1, 10), 'a', new ItemStack(ingredient, 1, 11));
 
     }
 
@@ -148,6 +187,27 @@ public class AdvancedPotions {
                 if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).
                         getCommandSenderName().equalsIgnoreCase(event.username)) ((EntityPlayer) playerEntity).
                         addChatComponentMessage(new ChatComponentText("<" + event.username + "> PENIS"));
+    }
+
+    @SubscribeEvent
+    public void onLivingDrops(LivingDropsEvent event) {
+        debug("drop");
+        float dropChance = 0.0f;
+        if (event.entityLiving instanceof EntityMob) {
+            debug("drop1");
+            dropChance = 0.2f;
+            if (event.entityLiving instanceof EntityWitch) {
+                debug("drop2");
+                dropChance = 1.0f;
+            }
+        }
+        dropChance *= (event.lootingLevel + 1);
+        if (rng.nextFloat() < dropChance) {
+            debug("dropping");
+            event.entityLiving.worldObj.spawnEntityInWorld(new EntityItem(
+                    event.entityLiving.worldObj, event.entityLiving.posX,
+                    event.entityLiving.posY, event.entityLiving.posZ, new ItemStack(ingredient, 1, 9)));
+        }
     }
 
     @EventHandler
