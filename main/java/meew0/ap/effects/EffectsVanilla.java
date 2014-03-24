@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 
 /**
  * Created by meew0 on 21.03.14.
@@ -27,6 +28,11 @@ public class EffectsVanilla implements IPotionEffectContainer {
         // the -1 is because vanilla uses 0 as level 1...
         if (!getPotion().isInstant()) player.addPotionEffect(new PotionEffect(id, duration, amplifier - 1));
         else player.addPotionEffect(new PotionEffect(id, 1, amplifier));
+    }
+
+    @Override
+    public void onSplash(World world, int x, int y, int z) {
+
     }
 
     @Override

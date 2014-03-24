@@ -6,12 +6,19 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 /**
- * Created by meew0 on 19.03.14.
+ * Created by meew0 on 24.03.14.
  */
-public class EffectNull implements IPotionEffectContainer {
+public class EffectEntityFire implements IPotionEffectContainer {
+
+    int a;
+
+    public EffectEntityFire(int amplifier) {
+        a = amplifier;
+    }
+
     @Override
     public void onApply(EntityLivingBase player) {
-        // do nothing.
+        player.setFire(a * 5);
     }
 
     @Override
@@ -26,7 +33,7 @@ public class EffectNull implements IPotionEffectContainer {
 
     @Override
     public boolean displayAmplifier() {
-        return false;
+        return true;
     }
 
     @Override
@@ -36,16 +43,16 @@ public class EffectNull implements IPotionEffectContainer {
 
     @Override
     public int getAmplifierForDisplay() {
-        return 1;
+        return a;
     }
 
     @Override
     public String effectPrefix() {
-        return EnumChatFormatting.GRAY.toString();
+        return EnumChatFormatting.RED.toString();
     }
 
     @Override
     public String effectName() {
-        return "None";
+        return "ap.effect.entityFire.name";
     }
 }

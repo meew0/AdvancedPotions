@@ -14,6 +14,7 @@ import meew0.ap.backend.Color;
 import meew0.ap.backend.PotionRegistry;
 import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.block.BlockArcaneOre;
+import meew0.ap.block.BlockFireCharge;
 import meew0.ap.effects.*;
 import meew0.ap.entity.EntityHostilePig;
 import meew0.ap.item.*;
@@ -53,6 +54,7 @@ public class AdvancedPotions {
 
     public static Block advancedCauldron;
     public static Block arcaneOre;
+    public static Block fireChargeBlock;
 
     public static Item itemAdvCauldron;
 
@@ -83,9 +85,11 @@ public class AdvancedPotions {
 
         advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f);
         arcaneOre = new BlockArcaneOre(Material.rock).setBlockName("arcaneOre").setBlockTextureName("advancedpotions:arcane_ore").setHardness(5.0f).setLightLevel(0.8f).setCreativeTab(CreativeTabs.tabBlock);
+        fireChargeBlock = new BlockFireCharge(Material.rock).setBlockName("blockFireCharge").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
 
         GameRegistry.registerBlock(arcaneOre, "arcaneOre");
-        GameRegistry.registerBlock(advancedCauldron, ItemBlockAdvancedCauldron.class, "advancedCauldron");
+        GameRegistry.registerBlock(fireChargeBlock, "blockFireCharge");
+        GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
 
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
 
@@ -149,6 +153,13 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.jump.id, new ItemStack(ingredient, 1, 7), 3.0f, 0.1f, 2400, 1, new Color(128, 128, 128)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.harm.id, new ItemStack(ingredient, 1, 8), 3.0f, 0.1f, 1, 1, new Color(128, 128, 128)));
 
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idBlockFire, Items.flint, -3.0f, 0.1f, 1, 1, new Color(50, 50, 60)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityFire, Items.blaze_rod, -3.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idBlockExplosion, new ItemStack(Blocks.tnt, 1, 0), -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityExplosion, Items.tnt_minecart, -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idFieryExplosion, new ItemStack(fireChargeBlock, 1, 0), -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
+
+
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 1), Items.golden_pickaxe, Items.fermented_spider_eye, new ItemStack(ingredient, 1, 2));
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 2), Items.sugar, Items.fermented_spider_eye);
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 4), Items.golden_carrot, Items.carrot, Items.fermented_spider_eye, Blocks.ice, new ItemStack(ingredient, 1, 2));
@@ -171,6 +182,8 @@ public class AdvancedPotions {
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 3), " p ", "g g", "ggg", 'p', Blocks.glass_pane, 'g', Blocks.glass);
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 16, 4), "pgp", "g g", "pgp", 'p', Blocks.glass_pane, 'g', Blocks.glass);
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 5), " n ", "a a", " a ", 'n', new ItemStack(ingredient, 1, 10), 'a', new ItemStack(ingredient, 1, 11));
+
+        GameRegistry.addShapedRecipe(new ItemStack(fireChargeBlock, 1, 0), "fff", "fff", "fff", 'f', Items.fire_charge);
 
         proxy.registerRenderThings();
     }

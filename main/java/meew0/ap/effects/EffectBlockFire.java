@@ -2,21 +2,22 @@ package meew0.ap.effects;
 
 import meew0.ap.backend.IPotionEffectContainer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 /**
- * Created by meew0 on 19.03.14.
+ * Created by meew0 on 24.03.14.
  */
-public class EffectNull implements IPotionEffectContainer {
+public class EffectBlockFire implements IPotionEffectContainer {
+
     @Override
     public void onApply(EntityLivingBase player) {
-        // do nothing.
     }
 
     @Override
     public void onSplash(World world, int x, int y, int z) {
-
+        world.setBlock(x, y, z, Blocks.fire);
     }
 
     @Override
@@ -36,16 +37,16 @@ public class EffectNull implements IPotionEffectContainer {
 
     @Override
     public int getAmplifierForDisplay() {
-        return 1;
+        return 0;
     }
 
     @Override
     public String effectPrefix() {
-        return EnumChatFormatting.GRAY.toString();
+        return EnumChatFormatting.RED.toString();
     }
 
     @Override
     public String effectName() {
-        return "None";
+        return "ap.effect.blockFire.name";
     }
 }

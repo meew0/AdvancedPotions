@@ -6,16 +6,23 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 /**
- * Created by meew0 on 19.03.14.
+ * Created by meew0 on 24.03.14.
  */
-public class EffectNull implements IPotionEffectContainer {
+public class EffectBlockExplosion implements IPotionEffectContainer {
+
+    int a;
+
+    public EffectBlockExplosion(int amplifier) {
+        a = amplifier;
+    }
+
     @Override
     public void onApply(EntityLivingBase player) {
-        // do nothing.
     }
 
     @Override
     public void onSplash(World world, int x, int y, int z) {
+        world.newExplosion(null, x, y, z, a * 2.0f, false, true);
 
     }
 
@@ -26,7 +33,7 @@ public class EffectNull implements IPotionEffectContainer {
 
     @Override
     public boolean displayAmplifier() {
-        return false;
+        return true;
     }
 
     @Override
@@ -36,16 +43,16 @@ public class EffectNull implements IPotionEffectContainer {
 
     @Override
     public int getAmplifierForDisplay() {
-        return 1;
+        return a;
     }
 
     @Override
     public String effectPrefix() {
-        return EnumChatFormatting.GRAY.toString();
+        return EnumChatFormatting.RED.toString();
     }
 
     @Override
     public String effectName() {
-        return "None";
+        return "ap.effect.entityExplosion.name";
     }
 }

@@ -7,8 +7,26 @@ import meew0.ap.backend.IPotionIDHandler;
  * Created by meew0 on 21.03.14.
  */
 public class AdvancedPotionsIDHandler implements IPotionIDHandler {
+    public static final int idEntityExplosion = 40;
+    public static final int idBlockExplosion = 41;
+    public static final int idEntityFire = 42;
+    public static final int idBlockFire = 43;
+    public static final int idFieryExplosion = 44;
+
     @Override
     public IPotionEffectContainer getEffectContainer(int id, int duration, int amplifier) {
+        switch (id) {
+            case idEntityExplosion:
+                return new EffectEntityExplosion(amplifier);
+            case idBlockExplosion:
+                return new EffectBlockExplosion(amplifier);
+            case idEntityFire:
+                return new EffectEntityFire(amplifier);
+            case idBlockFire:
+                return new EffectBlockFire();
+            case idFieryExplosion:
+                return new EffectFieryExplosion(amplifier);
+        }
         return null;
     }
 
