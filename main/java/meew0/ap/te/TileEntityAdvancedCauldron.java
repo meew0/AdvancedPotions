@@ -175,6 +175,7 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 
         NBTTagCompound tag = new NBTTagCompound();
         writeToNBT(tag);
+        tag.removeTag("waterLevel"); // so potions are stackable properly
         stack.stackTagCompound = tag;
 
         stack.setItemDamage(meta);
