@@ -17,7 +17,7 @@ public class EffectBlockFire implements IPotionEffectContainer {
 
     @Override
     public void onSplash(World world, int x, int y, int z) {
-        world.setBlock(x, y, z, Blocks.fire);
+        world.setBlock(x, y + 1, z, Blocks.fire);
     }
 
     @Override
