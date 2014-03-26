@@ -12,6 +12,7 @@ public class AdvancedPotionsIDHandler implements IPotionIDHandler {
     public static final int idEntityFire = 42;
     public static final int idBlockFire = 43;
     public static final int idFieryExplosion = 44;
+    public static final int idMining = 45;
 
     @Override
     public IPotionEffectContainer getEffectContainer(int id, int duration, int amplifier) {
@@ -26,6 +27,8 @@ public class AdvancedPotionsIDHandler implements IPotionIDHandler {
                 return new EffectBlockFire();
             case idFieryExplosion:
                 return new EffectFieryExplosion(amplifier);
+            case idMining:
+                return new EffectMining(amplifier);
         }
         return null;
     }

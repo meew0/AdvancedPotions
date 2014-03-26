@@ -45,7 +45,7 @@ import java.util.Random;
 public class AdvancedPotions {
     public static final String MODID = "advancedpotions";
     public static final String NAME = "Advanced Potions";
-    public static final String VERSION = "0.14";
+    public static final String VERSION = "0.2";
 
     @SidedProxy(clientSide = "meew0.ap.APClientProxy", serverSide = "meew0.ap.APCommonProxy")
     public static APCommonProxy proxy;
@@ -158,6 +158,7 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idBlockExplosion, new ItemStack(Blocks.tnt, 1, 0), -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityExplosion, Items.tnt_minecart, -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idFieryExplosion, new ItemStack(fireChargeBlock, 1, 0), -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idMining, Items.stone_pickaxe, 10.0f, 0.2f, 1, 1, new Color(200, 200, 200)));
 
 
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 1), Items.golden_pickaxe, Items.fermented_spider_eye, new ItemStack(ingredient, 1, 2));
