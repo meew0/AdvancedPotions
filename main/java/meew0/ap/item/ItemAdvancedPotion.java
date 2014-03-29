@@ -28,6 +28,15 @@ import java.util.List;
  */
 public class ItemAdvancedPotion extends Item {
     public static String[] textureNames = new String[]{
+            "potion_regular",
+            "potion_heart",
+            "potion_vial",
+            "potion_square",
+            "potion_capsule",
+            "potion_reinforced"
+    };
+
+    public static String[] textureNamesWater = new String[]{
             "potion_water_regular",
             "potion_water_heart",
             "potion_water_vial",
@@ -37,13 +46,7 @@ public class ItemAdvancedPotion extends Item {
     };
 
     public static IIcon[] textures = new IIcon[6];
-
-    @Override
-    public void registerIcons(IIconRegister par1IconRegister) {
-        for (int i = 0; i < 6; i++) {
-            textures[i] = par1IconRegister.registerIcon("advancedpotions:" + textureNames[i]);
-        }
-    }
+    public static IIcon[] texturesWater = new IIcon[6];
 
     public static void applyPotion(ItemStack stack, World world, EntityLivingBase entity) {
         ArrayList<EffectWrapper> effects = new ArrayList<EffectWrapper>();
@@ -70,6 +73,14 @@ public class ItemAdvancedPotion extends Item {
                         StatCollector.translateToLocal(bal.getUnlocalizedEffectMessage())));
             }
             bal.doEffect(stack, world, entity);
+        }
+    }
+
+    @Override
+    public void registerIcons(IIconRegister par1IconRegister) {
+        for (int i = 0; i < 6; i++) {
+            textures[i] = par1IconRegister.registerIcon("advancedpotions:" + textureNames[i]);
+            texturesWater[i] = par1IconRegister.registerIcon("advancedpotions:" + textureNamesWater[i]);
         }
     }
 
@@ -107,6 +118,11 @@ public class ItemAdvancedPotion extends Item {
             if (!world.isRemote) world.spawnEntityInWorld(new EntityThrownCapsule(world, stack, player));
         }
         return stack;
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int meta) {
+        return textures[meta];
     }
 
     @Override
