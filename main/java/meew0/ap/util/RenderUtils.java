@@ -1,4 +1,4 @@
-package meew0.ap.render;
+package meew0.ap.util;
 
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;

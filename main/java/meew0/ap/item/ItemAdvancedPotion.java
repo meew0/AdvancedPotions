@@ -147,4 +147,8 @@ public class ItemAdvancedPotion extends Item {
             }
         }
     }
+
+    public boolean isCapsule(ItemStack stack) {
+        return stack.getItemDamage() == 4;
+    }
 }

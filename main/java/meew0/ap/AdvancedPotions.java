@@ -20,6 +20,7 @@ import meew0.ap.entity.EntityHostilePig;
 import meew0.ap.item.*;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
@@ -162,7 +163,6 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idAnimalBreed, new ItemStack(Blocks.hay_block, 1, 0), 10.0f, 0.2f, 1, 1, new Color(200, 130, 10)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityTeleport, Items.ender_pearl, -1.0f, 0.2f, 1, 1, new Color(10, 60, 210)));
 
-
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 1), Items.golden_pickaxe, Items.fermented_spider_eye, new ItemStack(ingredient, 1, 2));
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 2), Items.sugar, Items.fermented_spider_eye);
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 4), Items.golden_carrot, Items.carrot, Items.fermented_spider_eye, Blocks.ice, new ItemStack(ingredient, 1, 2));
@@ -187,6 +187,8 @@ public class AdvancedPotions {
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 5), " n ", "a a", " a ", 'n', new ItemStack(ingredient, 1, 10), 'a', new ItemStack(ingredient, 1, 11));
 
         GameRegistry.addShapedRecipe(new ItemStack(fireChargeBlock, 1, 0), "fff", "fff", "fff", 'f', Items.fire_charge);
+
+        BlockDispenser.dispenseBehaviorRegistry.putObject(potion, new BehaviorCapsuleDispense());
 
         proxy.registerRenderThings();
     }

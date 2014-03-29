@@ -3,6 +3,7 @@ package meew0.ap.render;
 import meew0.ap.AdvancedPotions;
 import meew0.ap.item.ItemAdvancedPotion;
 import meew0.ap.item.ItemPotionBottle;
+import meew0.ap.util.RenderUtils;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
