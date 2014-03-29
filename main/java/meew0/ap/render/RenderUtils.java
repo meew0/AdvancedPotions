@@ -142,13 +142,13 @@ public class RenderUtils {
         float f4 = 0.0F;
         float f5 = 0.3F;
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glTranslatef(-f4, -f5, 0.0F);
+//        GL11.glTranslatef(-f4, -f5, 0.0F);
         float f6 = 1.5F;
-        GL11.glScalef(f6, f6, f6);
-        GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
-//        GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
-        GL11.glTranslatef(-0.6375f, -0.0625F, 0.0F);
+//        GL11.glScalef(f6, f6, f6);
+//        GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
+//        GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
+////        GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
+//        GL11.glTranslatef(-0.6375f, -0.0625F, 0.0F);
         //renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
         renderIconIn2DWithColor(tessellator, icon, 0.0625f, false, r, g, b, a);
 
