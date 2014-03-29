@@ -141,7 +141,7 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.weakness.id, Items.fermented_spider_eye, -4.0f, 0.1f, 2400, 1, new Color(200, 0, 100)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.digSpeed.id, Items.iron_pickaxe, 5.0f, 0.3f, 2400, 1, new Color(200, 200, 200)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.digSpeed.id, Items.golden_pickaxe, 6.0f, 0.2f, 4800, 2, new Color(200, 180, 0)));
-        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.digSpeed.id, Items.golden_pickaxe, 6.0f, 0.2f, 4800, 2, new Color(200, 180, 0)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.hunger.id, Items.rotten_flesh, -5.0f, 0.2f, 1200, 1, new Color(200, 10, 0)));
 
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.resistance.id, new ItemStack(ingredient, 1, 0), 2.0f, 2.0f, 900, 1, new Color(128, 128, 200)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.digSlowdown.id, new ItemStack(ingredient, 1, 1), -3.0f, 0.1f, 2400, 1, new Color(0, 30, 180)));
@@ -159,6 +159,8 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityExplosion, Items.tnt_minecart, -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idFieryExplosion, new ItemStack(fireChargeBlock, 1, 0), -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idMining, Items.stone_pickaxe, 10.0f, 0.2f, 1, 1, new Color(200, 200, 200)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idAnimalBreed, new ItemStack(Blocks.hay_block, 1, 0), 10.0f, 0.2f, 1, 1, new Color(200, 130, 10)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityTeleport, Items.ender_pearl, -1.0f, 0.2f, 1, 1, new Color(10, 60, 210)));
 
 
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 1), Items.golden_pickaxe, Items.fermented_spider_eye, new ItemStack(ingredient, 1, 2));
