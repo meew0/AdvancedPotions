@@ -1,5 +1,6 @@
 package meew0.ap.render;
 
+import meew0.ap.AdvancedPotions;
 import meew0.ap.item.ItemAdvancedPotion;
 import meew0.ap.item.ItemPotionBottle;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -28,6 +29,9 @@ public class RenderItemPotion implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         IIcon water = ItemAdvancedPotion.texturesWater[item.getItemDamage()];
+
+        if (water == null) AdvancedPotions.debug("NULL!!!");
+
 
         int minX = 0, minZ = 0;
         int maxX = 1, maxZ = 1;
@@ -61,7 +65,7 @@ public class RenderItemPotion implements IItemRenderer {
             minX = minZ = 0;
             maxX = maxZ = 16;
             RenderUtils.renderIconWithColor(minX, minZ, bottle, maxX, maxZ, 0, 255, 255, 255, 255, type != ItemRenderType.INVENTORY);
-            RenderUtils.renderIconWithColor(minX, minZ, bottle, maxX, maxZ, 0, 255, 255, 255, 255, type != ItemRenderType.INVENTORY);
+            RenderUtils.renderIconWithColor(minX, minZ, water, maxX, maxZ, 0, r, g, b, a, type != ItemRenderType.INVENTORY);
         }
     }
 }
