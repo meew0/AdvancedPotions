@@ -2,6 +2,7 @@ package meew0.ap.util;
 
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -119,6 +120,26 @@ public class RenderUtils {
         }
 
         par0Tessellator.draw();
+    }
+
+    // From RenderSnowball
+    public static void renderIconTowardsPlayer(Tessellator tessellator, IIcon icon, RenderManager manager) {
+        float f = icon.getMinU();
+        float f1 = icon.getMaxU();
+        float f2 = icon.getMinV();
+        float f3 = icon.getMaxV();
+        float f4 = 1.0F;
+        float f5 = 0.5F;
+        float f6 = 0.25F;
+        GL11.glRotatef(180.0F - manager.playerViewY, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(-manager.playerViewX, 1.0F, 0.0F, 0.0F);
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.0F, 1.0F, 0.0F);
+        tessellator.addVertexWithUV((double) (0.0F - f5), (double) (0.0F - f6), 0.0D, (double) f, (double) f3);
+        tessellator.addVertexWithUV((double) (f4 - f5), (double) (0.0F - f6), 0.0D, (double) f1, (double) f3);
+        tessellator.addVertexWithUV((double) (f4 - f5), (double) (f4 - f6), 0.0D, (double) f1, (double) f2);
+        tessellator.addVertexWithUV((double) (0.0F - f5), (double) (f4 - f6), 0.0D, (double) f, (double) f2);
+        tessellator.draw();
     }
 
     public static void renderIconInPlayerHandWithColor(IIcon icon, int itemSpriteNumber, int r, int g, int b, int a, boolean glint) {

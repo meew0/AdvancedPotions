@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by meew0 on 23.03.14.
  */
 public class EntityThrownCapsule extends EntitySnowball {
-    ItemStack potionStack;
+    public ItemStack potionStack;
 
     public EntityThrownCapsule(World world, ItemStack potion) {
         super(world);
