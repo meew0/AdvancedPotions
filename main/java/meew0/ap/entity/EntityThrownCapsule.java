@@ -1,5 +1,8 @@
 package meew0.ap.entity;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import io.netty.buffer.ByteBuf;
 import meew0.ap.backend.EffectWrapper;
 import meew0.ap.item.ItemAdvancedPotion;
 import meew0.ap.te.TileEntityAdvancedCauldron;
@@ -16,8 +19,12 @@ import java.util.ArrayList;
 /**
  * Created by meew0 on 23.03.14.
  */
-public class EntityThrownCapsule extends EntityThrowable {
+public class EntityThrownCapsule extends EntityThrowable implements IEntityAdditionalSpawnData {
     public ItemStack potionStack;
+
+    public EntityThrownCapsule(World world) {
+        super(world);
+    }
 
     public EntityThrownCapsule(World world, ItemStack potion) {
         super(world);
@@ -31,6 +38,7 @@ public class EntityThrownCapsule extends EntityThrowable {
 
     @Override
     protected void onImpact(MovingObjectPosition pos) {
+        if (potionStack == null) return;
         ArrayList<EffectWrapper> effects = new ArrayList<EffectWrapper>();
         effects.addAll(TileEntityAdvancedCauldron.getEffectWrappersForTileNBT(potionStack.stackTagCompound));
         for (EffectWrapper effect : effects) {
@@ -45,5 +53,15 @@ public class EntityThrownCapsule extends EntityThrowable {
                 ItemAdvancedPotion.applyPotion(potionStack, worldObj, (EntityLivingBase) entity);
             }
         }
+    }
+
+    @Override
+    public void writeSpawnData(ByteBuf buffer) {
+        ByteBufUtils.writeItemStack(buffer, potionStack);
+    }
+
+    @Override
+    public void readSpawnData(ByteBuf additionalData) {
+        potionStack = ByteBufUtils.readItemStack(additionalData);
     }
 }

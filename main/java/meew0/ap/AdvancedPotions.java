@@ -27,17 +27,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemReed;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import org.apache.logging.log4j.Logger;
 
@@ -67,6 +63,8 @@ public class AdvancedPotions {
     public static Item pigSpawner;
     public static Item ingredient;
     public static Item shield;
+
+    public static int entityIDCounter = 0;
 
     public static Random rng;
 
@@ -112,8 +110,8 @@ public class AdvancedPotions {
         GameRegistry.registerItem(shield, "shield");
         GameRegistry.registerItem(itemAdvCauldron, "advancedCauldronItem");
 
-        EntityRegistry.registerModEntity(EntityHostilePig.class, "hostilePig", EntityRegistry.findGlobalUniqueEntityId(), this, 80, 3, true);
-        EntityRegistry.registerModEntity(EntityThrownCapsule.class, "thrownCapsule", EntityRegistry.findGlobalUniqueEntityId(), this, 80, 3, true);
+        EntityRegistry.registerModEntity(EntityHostilePig.class, "hostilePig", entityIDCounter++, this, 80, 3, true);
+        EntityRegistry.registerModEntity(EntityThrownCapsule.class, "thrownCapsule", entityIDCounter++, this, 80, 3, true);
 
 
         FMLCommonHandler.instance().bus().register(this);
@@ -193,15 +191,6 @@ public class AdvancedPotions {
         BlockDispenser.dispenseBehaviorRegistry.putObject(potion, new BehaviorCapsuleDispense());
 
         proxy.registerRenderThings();
-    }
-
-    @SubscribeEvent
-    public void onChat(ServerChatEvent event) {
-        if (event.username.equalsIgnoreCase("superandmanu"))
-            for (java.lang.Object playerEntity : MinecraftServer.getServer().worldServers[0].playerEntities)
-                if (playerEntity instanceof EntityPlayer && !((EntityPlayer) playerEntity).
-                        getCommandSenderName().equalsIgnoreCase(event.username)) ((EntityPlayer) playerEntity).
-                        addChatComponentMessage(new ChatComponentText("<" + event.username + "> PENIS"));
     }
 
     @SubscribeEvent

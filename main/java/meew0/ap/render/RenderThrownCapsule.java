@@ -29,6 +29,8 @@ public class RenderThrownCapsule extends Render {
             EntityThrownCapsule capsule = (EntityThrownCapsule) par1Entity;
             ItemStack stack = capsule.potionStack;
 
+            if (stack == null) return;
+
             //IIcon iicon = this.item.getIconFromDamage(this.field_94150_f);
 
             IIcon bottleIcon = ItemPotionBottle.textures[stack.getItemDamage()], waterIcon = ItemAdvancedPotion.texturesWater[stack.getItemDamage()];
