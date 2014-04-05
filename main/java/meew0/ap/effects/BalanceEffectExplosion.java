@@ -6,26 +6,27 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 /**
- * Created by meew0 on 22.03.14.
+ * Created by meew0 on 05.04.14.
  */
-public class BalanceEffectNull implements IBalanceEffect {
+public class BalanceEffectExplosion implements IBalanceEffect {
+
     @Override
     public boolean appliesForBalance(int bal) {
-        return true;
+        return bal > 50;
     }
 
     @Override
     public float getProbability(int bal) {
-        return 0f;
+        return 0;
     }
 
     @Override
-    public void doEffect(ItemStack potionStack, World world, EntityLivingBase player) {
-        // nothing
+    public void doEffect(ItemStack potionStack, World world, EntityLivingBase entity) {
+
     }
 
     @Override
     public String getUnlocalizedEffectMessage() {
-        return "ap.balanceMessage.null.name";
+        return null;
     }
 }

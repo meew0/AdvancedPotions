@@ -12,7 +12,7 @@ import net.minecraft.world.World;
  */
 public class BalanceEffectSlownessL1 implements IBalanceEffect {
     @Override
-    public boolean appliesForAbsoluteBalance(int bal) {
+    public boolean appliesForBalance(int bal) {
         return bal > 7;
     }
 

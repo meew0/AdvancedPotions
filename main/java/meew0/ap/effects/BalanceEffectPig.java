@@ -11,7 +11,7 @@ import net.minecraft.world.World;
  */
 public class BalanceEffectPig implements IBalanceEffect {
     @Override
-    public boolean appliesForAbsoluteBalance(int bal) {
+    public boolean appliesForBalance(int bal) {
         return bal > 100;
     }
 

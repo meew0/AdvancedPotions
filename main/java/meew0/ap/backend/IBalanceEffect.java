@@ -8,7 +8,7 @@ import net.minecraft.world.World;
  * Created by meew0 on 22.03.14.
  */
 public interface IBalanceEffect {
-    public boolean appliesForAbsoluteBalance(int bal);
+    public boolean appliesForBalance(int bal);
 
     // I had a hard time naming this method. Please don't yell at me for the name being totally wrong.
     public float getProbability(int bal);

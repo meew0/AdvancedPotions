@@ -19,7 +19,7 @@ public class EffectEntityTeleport implements IPotionEffectContainer {
 
     // from EntityEnderPearl.onImpact
     public void teleportParticles(EntityLivingBase player) {
-        for (int i = 0; i < 32; ++i) {
+        for (int i = 0; i < 100; ++i) {
             player.worldObj.spawnParticle("portal", player.posX, player.posY + AdvancedPotions.rng.nextDouble() * 2.0D,
                     player.posZ, AdvancedPotions.rng.nextGaussian(), 0.0D, AdvancedPotions.rng.nextGaussian());
         }
