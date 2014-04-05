@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
  */
 public class RenderHostilePig extends RenderPig {
 
-    public static ResourceLocation texture = new ResourceLocation("advancedpotions:textures/entities/hostilepig");
+    public static ResourceLocation texture = new ResourceLocation("advancedpotions:textures/entities/hostilepig.png");
 
     public RenderHostilePig(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3) {
         super(par1ModelBase, par2ModelBase, par3);

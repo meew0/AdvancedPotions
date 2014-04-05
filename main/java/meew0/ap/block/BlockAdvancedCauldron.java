@@ -16,12 +16,15 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityProvider {
+    public static IIcon potionIcon, innerIcon;
+
     public BlockAdvancedCauldron() {
         super();
     }
-
-    public static IIcon potionIcon, innerIcon;
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
@@ -89,6 +92,11 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
                 }
             }
         }
+    }
+
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        return new ArrayList<ItemStack>(Arrays.asList(new ItemStack(AdvancedPotions.itemAdvCauldron)));
     }
 
     // Make sure to always suppress metadata changes so the metadata always
