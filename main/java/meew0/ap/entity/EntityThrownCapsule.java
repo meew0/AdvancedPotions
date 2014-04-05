@@ -5,7 +5,7 @@ import meew0.ap.item.ItemAdvancedPotion;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntitySnowball;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by meew0 on 23.03.14.
  */
-public class EntityThrownCapsule extends EntitySnowball {
+public class EntityThrownCapsule extends EntityThrowable {
     public ItemStack potionStack;
 
     public EntityThrownCapsule(World world, ItemStack potion) {

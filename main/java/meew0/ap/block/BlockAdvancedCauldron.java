@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -42,6 +43,12 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 
         potionIcon = iconRegister.registerIcon("advancedpotions:potion_base");
         innerIcon = iconRegister.registerIcon("advancedpotions:advc_inner"); // stupid BlockCauldron makes their textures private
+    }
+
+
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_) {
+        super.setBlockBoundsBasedOnState(p_149719_1_, p_149719_2_, p_149719_3_, p_149719_4_);
     }
 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int m, float dx, float dy, float dz) {

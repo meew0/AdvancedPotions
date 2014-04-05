@@ -1,34 +1,31 @@
 package meew0.ap.render;
 
+import meew0.ap.AdvancedPotions;
 import meew0.ap.entity.EntityThrownCapsule;
 import meew0.ap.item.ItemAdvancedPotion;
 import meew0.ap.item.ItemPotionBottle;
 import meew0.ap.util.RenderUtils;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 /**
  * Created by meew0 on 05.04.14.
  */
-public class RenderThrownCapsule extends RenderSnowball {
-    ItemAdvancedPotion potion;
-    ItemPotionBottle bottle;
-
-    public RenderThrownCapsule(ItemAdvancedPotion par1Item, ItemPotionBottle par2Item) {
-        super(par1Item);
-        potion = par1Item;
-        bottle = par2Item;
-    }
+public class RenderThrownCapsule extends Render {
 
     @Override
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
+        AdvancedPotions.debug("dfgdfg");
         if (par1Entity instanceof EntityThrownCapsule) {
+            AdvancedPotions.debug("etc");
             EntityThrownCapsule capsule = (EntityThrownCapsule) par1Entity;
             ItemStack stack = capsule.potionStack;
 
@@ -37,6 +34,7 @@ public class RenderThrownCapsule extends RenderSnowball {
             IIcon bottleIcon = ItemPotionBottle.textures[stack.getItemDamage()], waterIcon = ItemAdvancedPotion.texturesWater[stack.getItemDamage()];
 
             if (bottleIcon != null && waterIcon != null) {
+                AdvancedPotions.debug("rendering");
                 GL11.glPushMatrix();
                 GL11.glTranslatef((float) par2, (float) par4, (float) par6);
                 GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -70,5 +68,10 @@ public class RenderThrownCapsule extends RenderSnowball {
                 GL11.glPopMatrix();
             }
         }
+    }
+
+    @Override
+    protected ResourceLocation getEntityTexture(Entity var1) {
+        return TextureMap.locationItemsTexture;
     }
 }
