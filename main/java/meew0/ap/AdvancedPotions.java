@@ -17,6 +17,7 @@ import meew0.ap.block.BlockArcaneOre;
 import meew0.ap.block.BlockFireCharge;
 import meew0.ap.effects.*;
 import meew0.ap.entity.EntityHostilePig;
+import meew0.ap.entity.EntityThrownCapsule;
 import meew0.ap.item.*;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
@@ -112,6 +113,7 @@ public class AdvancedPotions {
         GameRegistry.registerItem(itemAdvCauldron, "advancedCauldronItem");
 
         EntityRegistry.registerModEntity(EntityHostilePig.class, "hostilePig", EntityRegistry.findGlobalUniqueEntityId(), this, 80, 3, true);
+        EntityRegistry.registerModEntity(EntityThrownCapsule.class, "thrownCapsule", EntityRegistry.findGlobalUniqueEntityId(), this, 80, 3, true);
 
 
         FMLCommonHandler.instance().bus().register(this);
