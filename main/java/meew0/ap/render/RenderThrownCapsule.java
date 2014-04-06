@@ -58,13 +58,13 @@ public class RenderThrownCapsule extends Render {
                     b = nbt.getInteger("blue");
                 }
 
-                GL11.glColor3f(r, g, b);
                 GL11.glPushMatrix();
-                RenderUtils.renderIconTowardsPlayer(tessellator, waterIcon, renderManager);
+                RenderUtils.renderIconTowardsPlayerWithColor(tessellator, waterIcon, renderManager, r, g, b, 128);
                 GL11.glPopMatrix();
-                GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
+                GL11.glPushMatrix();
                 RenderUtils.renderIconTowardsPlayer(tessellator, bottleIcon, renderManager);
+                GL11.glPopMatrix();
 
                 GL11.glDisable(GL12.GL_RESCALE_NORMAL);
                 GL11.glPopMatrix();

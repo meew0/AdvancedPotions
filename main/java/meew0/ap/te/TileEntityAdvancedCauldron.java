@@ -23,19 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TileEntityAdvancedCauldron extends TileEntity {
-    public int waterLevel;
-
     public float balance, balMod;
     public ArrayList<EffectWrapper> effects;
-
     public Color color;
+    private int waterLevel;
 
     public TileEntityAdvancedCauldron() {
-        effects = new ArrayList<EffectWrapper>();
-        color = new Color(0, 0, 255);
-
-        balance = 0.0f;
-        balMod = 1.0f;
+        reinit();
     }
 
     public static ArrayList<EffectWrapper> getEffectWrappersForTileNBT(NBTTagCompound nbt) {
@@ -58,6 +52,14 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 
         oldColor.set((oldColor.getRed() + newColor.getRed()) / 2, (oldColor.getGreen() + newColor.getGreen()) / 2, (oldColor.getBlue() + newColor.getBlue()) / 2);
         return oldColor;
+    }
+
+    private void reinit() {
+        effects = new ArrayList<EffectWrapper>();
+        color = new Color(0, 0, 255);
+
+        balance = 0.0f;
+        balMod = 1.0f;
     }
 
     @Override
@@ -181,5 +183,17 @@ public class TileEntityAdvancedCauldron extends TileEntity {
         stack.setItemDamage(meta);
 
         return stack;
+    }
+
+    public void fillWithWater() {
+        setWaterLevel(3);
+    }
+
+    public int getWaterLevel() {
+        return waterLevel;
+    }
+
+    public void setWaterLevel(int waterLevel) {
+        this.waterLevel = MathHelper.clamp_int(waterLevel, 0, 3);
     }
 }

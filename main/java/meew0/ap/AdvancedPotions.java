@@ -35,6 +35,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
@@ -191,6 +192,11 @@ public class AdvancedPotions {
         BlockDispenser.dispenseBehaviorRegistry.putObject(potion, new BehaviorCapsuleDispense());
 
         proxy.registerRenderThings();
+    }
+
+    @SubscribeEvent
+    public void onInitMapGen(InitMapGenEvent event) {
+        // TODO
     }
 
     @SubscribeEvent

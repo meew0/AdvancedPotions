@@ -13,7 +13,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -52,18 +51,20 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
     }
 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int m, float dx, float dy, float dz) {
-        if (world.isRemote) return true;
+        if (world.isRemote) return true; // do nothing for client worlds
         else {
             ItemStack itemstack = player.inventory.getCurrentItem();
 
-            if (itemstack == null) return true;
+            if (itemstack == null) return true; // do nothing if the player's hand is empty
             else {
+                // There's something in the player's hand
                 TileEntityAdvancedCauldron te = (TileEntityAdvancedCauldron) world.getTileEntity(x, y, z);
-                int meta = te.waterLevel;
+                int meta = te.getWaterLevel();
 
                 if (itemstack.getItem() == Items.water_bucket) {
+                    // It's a water bucket, so fill with water
                     if (meta < 3) {
-                        if (!player.capabilities.isCreativeMode)
+                        if (!player.capabilities.isCreativeMode) // don't consume the bucket in creative
                             player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(Items.bucket));
 
                         this.func_150024_a(world, x, y, z, 3);
@@ -72,23 +73,29 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
                     return true;
                 } else {
                     if (itemstack.getItem() == AdvancedPotions.potionBottle) {
+                        // It's a potion bottle
                         if (meta > 0) {
+                            // There's something in the cauldron, so make a potion
                             ItemStack itemstack1 = te.createPotionStack(itemstack.getItemDamage());
 
                             if (!player.inventory.addItemStackToInventory(itemstack1))
+                                // if the player's inventory is full, throw the item on the ground
                                 world.spawnEntityInWorld(new EntityItem(world, player.posX, player.posY + 1.0, player.posZ, itemstack1));
-                            else if (player instanceof EntityPlayerMP)
+                            else if (player instanceof EntityPlayerMP) // update the inventory
                                 ((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
 
-                            --itemstack.stackSize;
+                            if (!player.capabilities.isCreativeMode) // don't consume the bottle in creative
+                                --itemstack.stackSize;
 
-                            if (itemstack.stackSize <= 0)
+                            if (itemstack.stackSize <= 0) // if the bottle stack is empty, delete the stack
                                 player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 
+                            // update the TE
                             this.func_150024_a(world, x, y, z, meta - 1);
                         }
                     } else if (meta > 0 && itemstack.getItem() instanceof ItemArmor
                             && ((ItemArmor) itemstack.getItem()).getArmorMaterial() == ItemArmor.ArmorMaterial.CLOTH) {
+                        // It's a piece of leather armor, so undye it
                         ItemArmor itemarmor = (ItemArmor) itemstack.getItem();
                         itemarmor.removeColor(itemstack);
                         this.func_150024_a(world, x, y, z, meta - 1);
@@ -111,10 +118,9 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
     @Override
     public void func_150024_a(World world, int x, int y, int z, int meta) {
         TileEntityAdvancedCauldron te = (TileEntityAdvancedCauldron) world.getTileEntity(x, y, z);
-        te.waterLevel = MathHelper.clamp_int(meta, 0, 3);
+        te.setWaterLevel(meta);
 
         world.markBlockForUpdate(x, y, z);
-
         world.func_147453_f(x, y, z, this);
     }
 }

@@ -10,24 +10,24 @@ import net.minecraft.world.World;
 /**
  * Created by meew0 on 22.03.14.
  */
-public class BalanceEffectNauseaL1 implements IBalanceEffect {
+public class BalanceEffectNauseaL3 implements IBalanceEffect {
     @Override
     public boolean appliesForBalance(int bal) {
-        return bal > 3;
+        return bal > 25;
     }
 
     @Override
     public float getProbability(int bal) {
-        return .2f; //TODO
+        return .15f;
     }
 
     @Override
     public void doEffect(ItemStack potionStack, World world, EntityLivingBase player) {
-        player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
+        player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 650, 1));
     }
 
     @Override
     public String getUnlocalizedEffectMessage() {
-        return "ap.balanceMessage.nausea.1.name";
+        return "ap.balanceMessage.nausea.3.name";
     }
 }

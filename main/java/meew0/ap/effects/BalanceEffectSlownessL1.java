@@ -18,7 +18,7 @@ public class BalanceEffectSlownessL1 implements IBalanceEffect {
 
     @Override
     public float getProbability(int bal) {
-        return 1f; //TODO
+        return .1f; //TODO
     }
 
     @Override

@@ -8,26 +8,26 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 /**
- * Created by meew0 on 22.03.14.
+ * Created by meew0 on 06.04.14.
  */
-public class BalanceEffectNauseaL1 implements IBalanceEffect {
+public class BalanceEffectOverdoseL2 implements IBalanceEffect {
     @Override
     public boolean appliesForBalance(int bal) {
-        return bal > 3;
+        return bal > 15;
     }
 
     @Override
     public float getProbability(int bal) {
-        return .2f; //TODO
+        return 0.3f;
     }
 
     @Override
-    public void doEffect(ItemStack potionStack, World world, EntityLivingBase player) {
-        player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
+    public void doEffect(ItemStack potionStack, World world, EntityLivingBase entity) {
+        entity.addPotionEffect(new PotionEffect(Potion.poison.getId(), 300, 1));
     }
 
     @Override
     public String getUnlocalizedEffectMessage() {
-        return "ap.balanceMessage.nausea.1.name";
+        return "ap.balanceMessage.overdose.2.name";
     }
 }
