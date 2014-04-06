@@ -45,10 +45,6 @@ public class PotionRegistry {
     }
 
     public static ArrayList<IBalanceEffect> getBalanceEffects(int bal) {
-//        if (bal != Math.abs(bal)) {
-//            AdvancedPotions.advpLogger.error("Balance must not be negative! Please use Math.abs(balance) in the future.");
-//            bal = Math.abs(bal);
-//        }
         ArrayList<IBalanceEffect> effects = new ArrayList<IBalanceEffect>();
         for (IBalanceEffect balanceHandler : balanceHandlers) {
             if (balanceHandler.appliesForBalance(bal) && (AdvancedPotions.rng.nextFloat() <
