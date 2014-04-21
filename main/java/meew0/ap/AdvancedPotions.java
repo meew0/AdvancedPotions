@@ -1,5 +1,6 @@
 package meew0.ap;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -12,13 +13,12 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import meew0.ap.backend.Color;
 import meew0.ap.backend.PotionRegistry;
-import meew0.ap.block.BlockAdvancedCauldron;
-import meew0.ap.block.BlockArcaneOre;
-import meew0.ap.block.BlockFireCharge;
+import meew0.ap.block.*;
 import meew0.ap.effects.*;
 import meew0.ap.entity.EntityHostilePig;
 import meew0.ap.entity.EntityThrownCapsule;
 import meew0.ap.item.*;
+import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -55,6 +55,9 @@ public class AdvancedPotions {
     public static Block arcaneOre;
     public static Block fireChargeBlock;
 
+    public static Block invisibilityCarrotBlock;
+    public static Block frozenCarrotBlock;
+
     public static Item itemAdvCauldron;
 
     public static Item potionAnalyzer;
@@ -87,13 +90,19 @@ public class AdvancedPotions {
         advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f);
         arcaneOre = new BlockArcaneOre(Material.rock).setBlockName("arcaneOre").setBlockTextureName("advancedpotions:arcane_ore").setHardness(5.0f).setLightLevel(0.8f).setCreativeTab(CreativeTabs.tabBlock);
         fireChargeBlock = new BlockFireCharge(Material.rock).setBlockName("blockFireCharge").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
+        invisibilityCarrotBlock = new BlockInvisibilityCarrot().setBlockName("invisibilityCarrots").setBlockTextureName("advancedpotions:invisibility_carrots");
+        frozenCarrotBlock = new BlockFrozenCarrot().setBlockName("frozenCarrots").setBlockTextureName("advancedpotions:frozen_carrots");
 
         GameRegistry.registerBlock(arcaneOre, "arcaneOre");
         GameRegistry.registerBlock(fireChargeBlock, "blockFireCharge");
         GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
+        GameRegistry.registerBlock(invisibilityCarrotBlock, "invisibilityCarrots");
+        GameRegistry.registerBlock(frozenCarrotBlock, "frozenCarrots");
 
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
 
+        //TODO: move to CP again
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
 
         potionAnalyzer = new ItemPotionAnalyzer().setUnlocalizedName("potionAnalyzer").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_analyzer");
         potionBottle = new ItemPotionBottle().setUnlocalizedName("potionBottle").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_bottle");

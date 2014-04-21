@@ -49,7 +49,7 @@ public class RenderTEAdvancedCauldron extends TileEntitySpecialRenderer {
 
         //bindTexture(new ResourceLocation("advancedpotions:textures/blocks/potion_base.png"));
 
-        double dy = BlockAdvancedCauldron.getRenderLiquidLevel(te.waterLevel);
+        double dy = BlockAdvancedCauldron.getRenderLiquidLevel(te.getWaterLevel());
         Color c = te.color;
 
 //        tess.startDrawingQuads();
