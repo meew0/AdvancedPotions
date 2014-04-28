@@ -4,7 +4,7 @@ import meew0.ap.backend.Color;
 import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -16,6 +16,8 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderTEAdvancedCauldron extends TileEntitySpecialRenderer {
     public static int renderId;
+
+    public static RenderBlocks rb;
 
     public RenderTEAdvancedCauldron() {
     }
@@ -69,17 +71,26 @@ public class RenderTEAdvancedCauldron extends TileEntitySpecialRenderer {
 //        RenderBlocks rb = new RenderBlocks(Minecraft.getMinecraft().theWorld);
 //
 //        rb.renderFaceYPos(block, (double) x, (double) ((float) y - 1.0F + dy), (double) z, par3Icon);
-        Tessellator tessellator = Tessellator.instance;
+
+        rb.renderFaceYPos(block, (double) x, (double) ((float) y - 1.0f + dy), (double) z, par3Icon);
+
+
+/*        Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.setColorRGBA(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
         tessellator.addVertexWithUV(0.0, par5, (double) zLevel, (double) par3Icon.getMinU(), (double) par3Icon.getMaxV());
         tessellator.addVertexWithUV(1.0, par5, (double) zLevel, (double) par3Icon.getMaxU(), (double) par3Icon.getMaxV());
         tessellator.addVertexWithUV(1.0, par5, (double) zLevel - 1.0, (double) par3Icon.getMaxU(), (double) par3Icon.getMinV());
         tessellator.addVertexWithUV(0.0, par5, (double) zLevel - 1.0, (double) par3Icon.getMinU(), (double) par3Icon.getMinV());
-        tessellator.draw();
+        tessellator.draw();*/
+
 
 
         GL11.glPopMatrix();
     }
 
+    @Override
+    public void func_147496_a(World world) {
+        rb = new RenderBlocks(world);
+    }
 }
