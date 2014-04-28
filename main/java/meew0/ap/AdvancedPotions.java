@@ -137,6 +137,7 @@ public class AdvancedPotions {
         PotionRegistry.registerHandler(new VanillaIDHandler());
 
         PotionRegistry.registerBalanceHandler(new BalanceEffectNull());
+
         PotionRegistry.registerBalanceHandler(new BalanceEffectNauseaL1());
         PotionRegistry.registerBalanceHandler(new BalanceEffectNauseaL2());
         PotionRegistry.registerBalanceHandler(new BalanceEffectNauseaL3());
@@ -151,6 +152,14 @@ public class AdvancedPotions {
         PotionRegistry.registerBalanceHandler(new BalanceEffectOverdoseL3());
         PotionRegistry.registerBalanceHandler(new BalanceEffectOverdoseL4());
         PotionRegistry.registerBalanceHandler(new BalanceEffectPig());
+
+        PotionRegistry.registerBalanceHandler(new BalanceEffectHealingL1());
+        PotionRegistry.registerBalanceHandler(new BalanceEffectHealingL2());
+        PotionRegistry.registerBalanceHandler(new BalanceEffectRegenL1());
+        PotionRegistry.registerBalanceHandler(new BalanceEffectRegenL2());
+        PotionRegistry.registerBalanceHandler(new BalanceEffectRegenL3());
+        PotionRegistry.registerBalanceHandler(new BalanceEffectStrengthL1());
+        PotionRegistry.registerBalanceHandler(new BalanceEffectStrengthL2());
 
         PotionRegistry.registerItemHandler(new ItemHandlerSugar());
 
