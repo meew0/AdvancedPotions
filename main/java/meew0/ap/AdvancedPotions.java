@@ -17,6 +17,7 @@ import meew0.ap.effects.*;
 import meew0.ap.entity.EntityHostilePig;
 import meew0.ap.entity.EntityThrownCapsule;
 import meew0.ap.item.*;
+import meew0.ap.te.TileEntityAdvancedBeacon;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -44,6 +45,9 @@ public class AdvancedPotions {
     public static final String NAME = "Advanced Potions";
     public static final String VERSION = "0.2";
 
+    @Mod.Instance("advancedpotions")
+    public static AdvancedPotions instance;
+
     @SidedProxy(clientSide = "meew0.ap.APClientProxy", serverSide = "meew0.ap.APCommonProxy")
     public static APCommonProxy proxy;
 
@@ -55,6 +59,8 @@ public class AdvancedPotions {
 
     public static Block invisibilityCarrotBlock;
     public static Block frozenCarrotBlock;
+
+    public static Block advancedBeacon;
 
     public static Item itemAdvCauldron;
 
@@ -90,14 +96,17 @@ public class AdvancedPotions {
         fireChargeBlock = new BlockFireCharge(Material.rock).setBlockName("blockFireCharge").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
         invisibilityCarrotBlock = new BlockInvisibilityCarrot().setBlockName("invisibilityCarrots").setBlockTextureName("advancedpotions:invisibility_carrots");
         frozenCarrotBlock = new BlockFrozenCarrot().setBlockName("frozenCarrots").setBlockTextureName("advancedpotions:frozen_carrots");
+        advancedBeacon = new BlockAdvancedBeacon().setBlockName("advancedBeacon").setCreativeTab(CreativeTabs.tabBlock);
 
         GameRegistry.registerBlock(arcaneOre, "arcaneOre");
         GameRegistry.registerBlock(fireChargeBlock, "blockFireCharge");
         GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
         GameRegistry.registerBlock(invisibilityCarrotBlock, "invisibilityCarrots");
         GameRegistry.registerBlock(frozenCarrotBlock, "frozenCarrots");
+        GameRegistry.registerBlock(advancedBeacon, "advancedBeacon");
 
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
+        GameRegistry.registerTileEntity(TileEntityAdvancedBeacon.class, "advancedBeacon");
 
         //TODO: move to CP again
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
