@@ -160,12 +160,19 @@ public class TileEntityAdvancedCauldron extends TileEntity {
     public Packet getDescriptionPacket() {
         NBTTagCompound tag = new NBTTagCompound();
         writeToNBT(tag);
+        AdvancedPotions.debug("Sending TE update");
         return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        AdvancedPotions.debug("TE update received");
         readFromNBT(pkt.func_148857_g());
+
+        if (worldObj.isRemote) {
+            // rerender the block please
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        }
     }
 
     public ItemStack createPotionStack(int meta) {
