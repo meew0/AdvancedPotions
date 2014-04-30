@@ -41,7 +41,7 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
     public void registerBlockIcons(IIconRegister iconRegister) {
         super.registerBlockIcons(iconRegister);
 
-        potionIcon = iconRegister.registerIcon("advancedpotions:potion_base");
+        potionIcon = iconRegister.registerIcon("advancedpotions:potion_base_2");
         innerIcon = iconRegister.registerIcon("advancedpotions:advc_inner"); // stupid BlockCauldron makes their textures private
     }
 

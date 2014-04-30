@@ -2,10 +2,10 @@ package meew0.ap.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import meew0.ap.AdvancedPotions;
+import meew0.ap.backend.Color;
 import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -152,7 +152,9 @@ public class RenderTEAdvancedCauldron implements ISimpleBlockRenderingHandler {
                 TileEntityAdvancedCauldron te2 = (TileEntityAdvancedCauldron) te;
                 int i1 = te2.getWaterLevel();
                 if (i1 > 0) {
-                    IIcon iicon = BlockLiquid.getLiquidIcon("water_still");
+                    IIcon iicon = /*BlockLiquid.getLiquidIcon("water_still")*/ BlockAdvancedCauldron.potionIcon;
+                    Color c = te2.color;
+                    tessellator.setColorOpaque(c.getRed(), c.getGreen(), c.getBlue());
                     renderer.renderFaceYPos(cauldron, (double) x, (double) ((float) y - 1.0F + BlockAdvancedCauldron.getRenderLiquidLevel(i1)), (double) z, iicon);
                 }
             }
