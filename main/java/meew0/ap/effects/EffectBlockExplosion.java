@@ -22,8 +22,9 @@ public class EffectBlockExplosion implements IPotionEffectContainer {
 
     @Override
     public void onSplash(World world, int x, int y, int z) {
-        world.newExplosion(null, x, y, z, a * 2.0f, false, true);
-
+        if (!world.isRemote) {
+            world.newExplosion(null, x, y, z, a * 2.0f, false, true);
+        }
     }
 
     @Override

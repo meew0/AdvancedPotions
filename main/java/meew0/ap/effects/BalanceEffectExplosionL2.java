@@ -22,7 +22,9 @@ public class BalanceEffectExplosionL2 implements IBalanceEffect {
 
     @Override
     public void doEffect(ItemStack potionStack, World world, EntityLivingBase entity) {
-        world.createExplosion(entity, entity.posX, entity.posY, entity.posZ, 4.0f, true);
+        if (!world.isRemote) {
+            world.createExplosion(entity, entity.posX, entity.posY, entity.posZ, 4.0f, true);
+        }
     }
 
     @Override

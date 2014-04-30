@@ -18,7 +18,9 @@ public class EffectEntityExplosion implements IPotionEffectContainer {
 
     @Override
     public void onApply(EntityLivingBase player) {
-        player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, a * 2.0f, false, true);
+        if (!player.worldObj.isRemote) {
+            player.worldObj.newExplosion(player, player.posX, player.posY, player.posZ, a * 2.0f, false, true);
+        }
     }
 
     @Override
