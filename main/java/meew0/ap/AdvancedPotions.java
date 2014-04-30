@@ -1,6 +1,5 @@
 package meew0.ap;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -18,7 +17,6 @@ import meew0.ap.effects.*;
 import meew0.ap.entity.EntityHostilePig;
 import meew0.ap.entity.EntityThrownCapsule;
 import meew0.ap.item.*;
-import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -102,7 +100,7 @@ public class AdvancedPotions {
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
 
         //TODO: move to CP again
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
+        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
 
         potionAnalyzer = new ItemPotionAnalyzer().setUnlocalizedName("potionAnalyzer").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_analyzer");
         potionBottle = new ItemPotionBottle().setUnlocalizedName("potionBottle").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_bottle");

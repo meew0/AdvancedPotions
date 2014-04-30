@@ -14,6 +14,7 @@ public class APClientProxy extends APCommonProxy {
     @Override
     public void registerRenderThings() {
         RenderTEAdvancedCauldron.renderId = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new RenderTEAdvancedCauldron());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHostilePig.class, new RenderHostilePig(new ModelPig(), new ModelPig(), 0.5f));
         RenderingRegistry.registerEntityRenderingHandler(EntityThrownCapsule.class, new RenderThrownCapsule());

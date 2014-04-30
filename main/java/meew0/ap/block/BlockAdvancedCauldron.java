@@ -1,6 +1,7 @@
 package meew0.ap.block;
 
 import meew0.ap.AdvancedPotions;
+import meew0.ap.render.RenderTEAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.ITileEntityProvider;
@@ -122,5 +123,10 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 
         world.markBlockForUpdate(x, y, z);
         world.func_147453_f(x, y, z, this);
+    }
+
+    @Override
+    public int getRenderType() {
+        return RenderTEAdvancedCauldron.renderId;
     }
 }
