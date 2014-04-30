@@ -131,28 +131,33 @@ public class TileEntityAdvancedCauldron extends TileEntity {
             }
             if (addEffect) effects.add(newEffect);
         }
+
+        color = itemHandler.getModifiedColor(color);
     }
 
     @Override
     public void updateEntity() {
         List entities = worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 1, zCoord + 1));
-        for (Object obj : entities) {
-            if (obj instanceof Entity) {
-                if (obj instanceof EntityLivingBase)
-                    ((EntityLivingBase) obj).attackEntityFrom(DamageSource.inFire, 0.5f);
-                else if (obj instanceof EntityItem) {
-                    EntityItem item = ((EntityItem) obj);
-                    ItemStack stack = item.getEntityItem();
+        if (entities.size() > 0) {
+            for (Object obj : entities) {
+                if (obj instanceof Entity) {
+                    if (obj instanceof EntityLivingBase)
+                        ((EntityLivingBase) obj).attackEntityFrom(DamageSource.inFire, 0.5f);
+                    else if (obj instanceof EntityItem) {
+                        EntityItem item = ((EntityItem) obj);
+                        ItemStack stack = item.getEntityItem();
 
-                    ItemStack handledStack = stack.copy();
-                    handledStack.stackSize = 1;
-                    for (int i = 0; i < stack.stackSize; i++) {
-                        handleAddedItem(handledStack);
+                        ItemStack handledStack = stack.copy();
+                        handledStack.stackSize = 1;
+                        for (int i = 0; i < stack.stackSize; i++) {
+                            handleAddedItem(handledStack);
+                        }
+
+                        item.setDead();
                     }
-
-                    item.setDead();
                 }
             }
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
     }
 
