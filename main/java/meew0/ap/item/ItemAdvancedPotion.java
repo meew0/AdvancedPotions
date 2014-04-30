@@ -56,8 +56,8 @@ public class ItemAdvancedPotion extends Item {
             effect.getEffect().onApply(entity);
         }
 
-        ArrayList<IBalanceEffect> bals = PotionRegistry.getBalanceEffects(Math.abs(
-                stack.stackTagCompound.getInteger("bal")));
+        ArrayList<IBalanceEffect> bals = PotionRegistry.getBalanceEffects(
+                stack.stackTagCompound.getInteger("bal"));
         String potionMessage = " ";
         if (bals.size() < 2) potionMessage += StatCollector.translateToLocal(bals.get(0).
                 getUnlocalizedEffectMessage());
