@@ -121,6 +121,7 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
         TileEntityAdvancedCauldron te = (TileEntityAdvancedCauldron) world.getTileEntity(x, y, z);
         te.setWaterLevel(meta);
 
+        AdvancedPotions.debug("Updating AC");
         world.markBlockForUpdate(x, y, z);
         world.func_147453_f(x, y, z, this);
     }

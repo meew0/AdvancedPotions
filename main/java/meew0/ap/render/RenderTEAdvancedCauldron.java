@@ -1,6 +1,7 @@
 package meew0.ap.render;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import meew0.ap.AdvancedPotions;
 import meew0.ap.block.BlockAdvancedCauldron;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.block.Block;
@@ -112,6 +113,8 @@ public class RenderTEAdvancedCauldron implements ISimpleBlockRenderingHandler {
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
         // mostly copied from RenderBlocks.renderCauldron
 
+        AdvancedPotions.debug("Rendering AC...");
+
         if (block instanceof BlockAdvancedCauldron) {
             BlockAdvancedCauldron cauldron = (BlockAdvancedCauldron) block;
 
@@ -153,7 +156,7 @@ public class RenderTEAdvancedCauldron implements ISimpleBlockRenderingHandler {
                     renderer.renderFaceYPos(cauldron, (double) x, (double) ((float) y - 1.0F + BlockAdvancedCauldron.getRenderLiquidLevel(i1)), (double) z, iicon);
                 }
             }
-
+            AdvancedPotions.debug("Rendering finished");
             return true;
         }
 
