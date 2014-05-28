@@ -46,6 +46,7 @@ public class PotionRegistry {
 
     public static ArrayList<IBalanceEffect> getBalanceEffects(int bal) {
         ArrayList<IBalanceEffect> effects = new ArrayList<IBalanceEffect>();
+        if (bal < 3) return effects;
         for (IBalanceEffect balanceHandler : balanceHandlers) {
             if (balanceHandler.appliesForBalance(bal) && (AdvancedPotions.rng.nextFloat() <
                     balanceHandler.getProbability(bal))) effects.add(balanceHandler);

@@ -56,19 +56,19 @@ public class ItemAdvancedPotion extends Item {
             effect.getEffect().onApply(entity);
         }
 
-        ArrayList<IBalanceEffect> bals = PotionRegistry.getBalanceEffects(
-                stack.stackTagCompound.getInteger("bal"));
+        int balance = stack.stackTagCompound.getInteger("bal");
+        ArrayList<IBalanceEffect> bals = PotionRegistry.getBalanceEffects(balance);
         String potionMessage = " ";
         if (bals.size() < 2) potionMessage += StatCollector.translateToLocal(bals.get(0).
                 getUnlocalizedEffectMessage());
         else potionMessage += StatCollector.translateToLocal("ap.balanceMessage.multiple.name");
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer && balance > 2) {
             ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText("" + EnumChatFormatting.RED +
                     StatCollector.translateToLocal("ap.balanceMessage.badlyCooked.name") +
                     EnumChatFormatting.RESET + potionMessage));
         }
         for (IBalanceEffect bal : bals) {
-            if (bals.size() > 1 && entity instanceof EntityPlayer) {
+            if (bals.size() > 1 && entity instanceof EntityPlayer && balance > 2) {
                 ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText(" " +
                         StatCollector.translateToLocal(bal.getUnlocalizedEffectMessage())));
             }
@@ -126,6 +126,7 @@ public class ItemAdvancedPotion extends Item {
     }
 
     @Override
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean flag) {
         if (stack.stackTagCompound != null) {
 
@@ -143,12 +144,20 @@ public class ItemAdvancedPotion extends Item {
                         StatCollector.translateToLocal(e.effectName()) + ((e.displayAmplifier()) ?
                         (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") + " (" +
                         ((e.displayDuration()) ? ("" + PotionRegistry.getReadableDuration(e.getDurationForDisplay()))
-                                : "") + ")");
+                                : "") + ")"); // yay for epicly long line
+            }
+
+            if (isArcane(stack)) {
+                list.add(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.AQUA.toString() + "Arcane");
             }
         }
     }
 
     public boolean isCapsule(ItemStack stack) {
         return stack.getItemDamage() == 4;
+    }
+
+    public boolean isArcane(ItemStack stack) {
+        return (stack.stackTagCompound != null) && (stack.stackTagCompound.getInteger("bal") == 0);
     }
 }

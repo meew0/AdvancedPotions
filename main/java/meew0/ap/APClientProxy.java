@@ -1,7 +1,6 @@
 package meew0.ap;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import meew0.ap.entity.EntityHostilePig;
 import meew0.ap.entity.EntityThrownCapsule;
 import meew0.ap.render.*;
@@ -15,14 +14,15 @@ public class APClientProxy extends APCommonProxy {
     @Override
     public void registerRenderThings() {
         RenderTEAdvancedCauldron.renderId = RenderingRegistry.getNextAvailableRenderId();
+        RenderAdvancedBeacon.renderId = RenderingRegistry.getNextAvailableRenderId();
+
         RenderingRegistry.registerBlockHandler(new RenderTEAdvancedCauldron());
+        RenderingRegistry.registerBlockHandler(new RenderAdvancedBeacon());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityHostilePig.class, new RenderHostilePig(new ModelPig(), new ModelPig(), 0.5f));
         RenderingRegistry.registerEntityRenderingHandler(EntityThrownCapsule.class, new RenderThrownCapsule());
 
         MinecraftForgeClient.registerItemRenderer(AdvancedPotions.potion, new RenderItemPotion());
         MinecraftForgeClient.registerItemRenderer(AdvancedPotions.shield, new RenderItemShield());
-
-        NetworkRegistry.INSTANCE.registerGuiHandler(AdvancedPotions.instance, new APGuiHandler());
     }
 }

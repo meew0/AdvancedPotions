@@ -55,7 +55,7 @@ public class AdvancedPotions {
 
     public static Block advancedCauldron;
     public static Block arcaneOre;
-    public static Block fireChargeBlock;
+    public static Block resource;
 
     public static Block invisibilityCarrotBlock;
     public static Block frozenCarrotBlock;
@@ -93,13 +93,13 @@ public class AdvancedPotions {
 
         advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f);
         arcaneOre = new BlockArcaneOre(Material.rock).setBlockName("arcaneOre").setBlockTextureName("advancedpotions:arcane_ore").setHardness(5.0f).setLightLevel(0.8f).setCreativeTab(CreativeTabs.tabBlock);
-        fireChargeBlock = new BlockFireCharge(Material.rock).setBlockName("blockFireCharge").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
+        resource = new BlockResource(Material.rock).setBlockName("blockFireCharge").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
         invisibilityCarrotBlock = new BlockInvisibilityCarrot().setBlockName("invisibilityCarrots").setBlockTextureName("advancedpotions:invisibility_carrots");
         frozenCarrotBlock = new BlockFrozenCarrot().setBlockName("frozenCarrots").setBlockTextureName("advancedpotions:frozen_carrots");
         advancedBeacon = new BlockAdvancedBeacon().setBlockName("advancedBeacon").setCreativeTab(CreativeTabs.tabBlock);
 
         GameRegistry.registerBlock(arcaneOre, "arcaneOre");
-        GameRegistry.registerBlock(fireChargeBlock, "blockFireCharge");
+        GameRegistry.registerBlock(resource, "resource");
         GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
         GameRegistry.registerBlock(invisibilityCarrotBlock, "invisibilityCarrots");
         GameRegistry.registerBlock(frozenCarrotBlock, "frozenCarrots");
@@ -195,7 +195,7 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityFire, Items.blaze_rod, -3.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idBlockExplosion, new ItemStack(Blocks.tnt, 1, 0), -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityExplosion, Items.tnt_minecart, -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
-        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idFieryExplosion, new ItemStack(fireChargeBlock, 1, 0), -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idFieryExplosion, new ItemStack(resource, 1, 0), -4.0f, 0.2f, 1, 1, new Color(255, 50, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idMining, Items.stone_pickaxe, 10.0f, 0.2f, 1, 1, new Color(200, 200, 200)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idAnimalBreed, new ItemStack(Blocks.hay_block, 1, 0), 10.0f, 0.2f, 1, 1, new Color(200, 130, 10)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityTeleport, Items.ender_pearl, -1.0f, 0.2f, 1, 1, new Color(10, 60, 210)));
@@ -223,7 +223,9 @@ public class AdvancedPotions {
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 16, 4), "pgp", "g g", "pgp", 'p', Blocks.glass_pane, 'g', Blocks.glass);
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 5), " n ", "a a", " a ", 'n', new ItemStack(ingredient, 1, 10), 'a', new ItemStack(ingredient, 1, 11));
 
-        GameRegistry.addShapedRecipe(new ItemStack(fireChargeBlock, 1, 0), "fff", "fff", "fff", 'f', Items.fire_charge);
+        GameRegistry.addShapedRecipe(new ItemStack(resource, 1, 0), "fff", "fff", "fff", 'f', Items.fire_charge);
+        GameRegistry.addShapedRecipe(new ItemStack(resource, 1, 1), "fff", "fff", "fff", 'f', new ItemStack(ingredient, 1, 11));
+        GameRegistry.addShapedRecipe(new ItemStack(resource, 8, 2), "fff", "fnf", "fff", 'n', new ItemStack(ingredient, 1, 10), 'f', Blocks.glass);
 
         BlockDispenser.dispenseBehaviorRegistry.putObject(potion, new BehaviorCapsuleDispense());
 
