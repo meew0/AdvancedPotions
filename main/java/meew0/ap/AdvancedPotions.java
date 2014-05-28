@@ -171,6 +171,7 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerSugar());
 
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.heal.id, Items.speckled_melon, 5.0f, 0.2f, 1, 1, new Color(240, 208, 58)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.heal.id, Items.cake, -1.0f, -0.1f, 1, 2, new Color(240, 208, 58)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.fireResistance.id, Items.magma_cream, 2.0f, 0.2f, 4800, 1, new Color(171, 36, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.regeneration.id, Items.ghast_tear, 6.0f, 0.3f, 1200, 1, new Color(190, 221, 197)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.damageBoost.id, Items.blaze_powder, 7.0f, 0.2f, 2400, 1, new Color(112, 0, 0)));
@@ -199,6 +200,19 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idMining, Items.stone_pickaxe, 10.0f, 0.2f, 1, 1, new Color(200, 200, 200)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idAnimalBreed, new ItemStack(Blocks.hay_block, 1, 0), 10.0f, 0.2f, 1, 1, new Color(200, 130, 10)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(AdvancedPotionsIDHandler.idEntityTeleport, Items.ender_pearl, -1.0f, 0.2f, 1, 1, new Color(10, 60, 210)));
+
+        PotionRegistry.registerItemHandler(new ItemHandlerNetherStar());
+        PotionRegistry.registerItemHandler(new ItemHandlerDye());
+
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.diamond, -2.0f, -0.3f, new Color(50, 125, 255)));
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.coal, 1.5f, -0.2f, new Color(3, 3, 3)));
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.cookie, -0.1f, -0.1f, new Color(50, 125, 255)));
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.emerald, -2.5f, -0.2f, new Color(0, 255, 0)));
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.enchanted_book, -3.0f, -0.3f, new Color(255, 0, 200)));
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.gold_ingot, -1.0f, -0.3f, new Color(255, 200, 0)));
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.iron_ingot, -0.5f, -0.1f, new Color(127, 127, 127)));
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.quartz, -0.3f, -0.2f, new Color(200, 200, 200)));
+        PotionRegistry.registerItemHandler(new ItemHandlerBalance(Items.redstone, -0.1f, 0.3f, new Color(150, 0, 0)));
 
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 1), Items.golden_pickaxe, Items.fermented_spider_eye, new ItemStack(ingredient, 1, 2));
         GameRegistry.addShapelessRecipe(new ItemStack(ingredient, 1, 2), Items.sugar, Items.fermented_spider_eye);

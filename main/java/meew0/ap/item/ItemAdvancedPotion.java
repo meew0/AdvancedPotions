@@ -5,6 +5,7 @@ import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IBalanceEffect;
 import meew0.ap.backend.IPotionEffectContainer;
 import meew0.ap.backend.PotionRegistry;
+import meew0.ap.effects.ItemHandlerNull;
 import meew0.ap.entity.EntityThrownCapsule;
 import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -62,13 +63,14 @@ public class ItemAdvancedPotion extends Item {
         if (bals.size() < 2) potionMessage += StatCollector.translateToLocal(bals.get(0).
                 getUnlocalizedEffectMessage());
         else potionMessage += StatCollector.translateToLocal("ap.balanceMessage.multiple.name");
-        if (entity instanceof EntityPlayer && balance > 2) {
+        if (entity instanceof EntityPlayer && balance > 2 && !(bals.get(0) instanceof ItemHandlerNull)) {
             ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText("" + EnumChatFormatting.RED +
                     StatCollector.translateToLocal("ap.balanceMessage.badlyCooked.name") +
                     EnumChatFormatting.RESET + potionMessage));
         }
         for (IBalanceEffect bal : bals) {
-            if (bals.size() > 1 && entity instanceof EntityPlayer && balance > 2) {
+            if (bals.size() > 1 && entity instanceof EntityPlayer && balance > 2 &&
+                    !(bals.get(0) instanceof ItemHandlerNull)) {
                 ((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText(" " +
                         StatCollector.translateToLocal(bal.getUnlocalizedEffectMessage())));
             }

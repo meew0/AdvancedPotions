@@ -25,7 +25,7 @@ public class ItemHandlerNull implements IPotionItemHandler {
     }
 
     @Override
-    public Color getModifiedColor(Color oldColor) {
+    public Color getModifiedColor(Color oldColor, ItemStack item) {
         return oldColor;
     }
 

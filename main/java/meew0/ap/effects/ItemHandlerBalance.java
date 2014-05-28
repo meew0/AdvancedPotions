@@ -8,26 +8,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
- * Created by meew0 on 22.03.14.
+ * Created by meew0 on 28.05.14.
  */
-public class ItemHandlerVanilla implements IPotionItemHandler {
+public class ItemHandlerBalance implements IPotionItemHandler {
     private float balC, bmC;
-    private int id, duration, amplifier;
     private Color color;
     private ItemStack item;
 
-    public ItemHandlerVanilla(int id, ItemStack item, float balC, float bmC, int duration, int amplifier, Color color) {
+    public ItemHandlerBalance(ItemStack item, float balC, float bmC, Color color) {
         this.balC = balC;
         this.bmC = bmC;
-        this.id = id;
-        this.duration = duration;
-        this.amplifier = amplifier;
         this.color = color;
         this.item = item;
     }
 
-    public ItemHandlerVanilla(int id, Item item, float balC, float bmC, int duration, int amplifier, Color color) {
-        this(id, new ItemStack(item, 0, 0), balC, bmC, duration, amplifier, color);
+    public ItemHandlerBalance(Item item, float balC, float bmC, Color color) {
+        this(new ItemStack(item, 0, 0), balC, bmC, color);
     }
 
     @Override
@@ -42,7 +38,7 @@ public class ItemHandlerVanilla implements IPotionItemHandler {
 
     @Override
     public EffectWrapper[] getNewEffects() {
-        return new EffectWrapper[]{new EffectWrapper(id, duration, amplifier)};
+        return new EffectWrapper[0];
     }
 
     @Override

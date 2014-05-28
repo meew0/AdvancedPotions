@@ -12,7 +12,7 @@ public interface IPotionItemHandler {
 
     public EffectWrapper[] getNewEffects();
 
-    public Color getModifiedColor(Color oldColor);
+    public Color getModifiedColor(Color oldColor, ItemStack item);
 
     public boolean canHandleItem(ItemStack item);
 }

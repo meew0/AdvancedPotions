@@ -132,7 +132,7 @@ public class TileEntityAdvancedCauldron extends TileEntity {
             if (addEffect) effects.add(newEffect);
         }
 
-        color = itemHandler.getModifiedColor(color);
+        color = itemHandler.getModifiedColor(color, stack);
     }
 
     @Override

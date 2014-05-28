@@ -7,31 +7,31 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 /**
- * Created by meew0 on 21.03.14.
+ * Created by meew0 on 28.05.14.
  */
-public class ItemHandlerSugar implements IPotionItemHandler {
+public class ItemHandlerNetherStar implements IPotionItemHandler {
     @Override
     public float getBalance(float oldBalance) {
-        return oldBalance + 1;
+        return 0;
     }
 
     @Override
     public float getBalMod(float oldBalMod) {
-        return oldBalMod;
+        return 0;
     }
 
     @Override
     public EffectWrapper[] getNewEffects() {
-        return new EffectWrapper[]{new EffectWrapper(1, 9600, 1)};
+        return new EffectWrapper[0];
     }
 
     @Override
     public Color getModifiedColor(Color oldColor, ItemStack item) {
-        return oldColor;
+        return new Color(255, 255, 255);
     }
 
     @Override
     public boolean canHandleItem(ItemStack item) {
-        return item.getItem() == Items.sugar;
+        return item.getItem() == Items.nether_star;
     }
 }

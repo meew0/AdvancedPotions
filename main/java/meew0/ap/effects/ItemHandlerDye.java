@@ -4,15 +4,16 @@ import meew0.ap.backend.Color;
 import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionItemHandler;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 
 /**
- * Created by meew0 on 21.03.14.
+ * Created by meew0 on 28.05.14.
  */
-public class ItemHandlerSugar implements IPotionItemHandler {
+public class ItemHandlerDye implements IPotionItemHandler {
     @Override
     public float getBalance(float oldBalance) {
-        return oldBalance + 1;
+        return oldBalance;
     }
 
     @Override
@@ -22,16 +23,18 @@ public class ItemHandlerSugar implements IPotionItemHandler {
 
     @Override
     public EffectWrapper[] getNewEffects() {
-        return new EffectWrapper[]{new EffectWrapper(1, 9600, 1)};
+        return new EffectWrapper[0];
     }
 
     @Override
     public Color getModifiedColor(Color oldColor, ItemStack item) {
-        return oldColor;
+        int rgb = ItemDye.field_150922_c[item.getItemDamage()];
+        java.awt.Color c = new java.awt.Color(rgb);
+        return new Color(c.getRed(), c.getGreen(), c.getBlue());
     }
 
     @Override
     public boolean canHandleItem(ItemStack item) {
-        return item.getItem() == Items.sugar;
+        return item.getItem() == Items.dye;
     }
 }
