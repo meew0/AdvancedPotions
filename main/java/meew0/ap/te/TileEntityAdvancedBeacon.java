@@ -1,5 +1,7 @@
 package meew0.ap.te;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import meew0.ap.item.ItemAdvancedPotion;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,8 +23,41 @@ public class TileEntityAdvancedBeacon extends TileEntity implements IInventory {
     public int levels;
     public boolean active = false;
 
+    @SideOnly(Side.CLIENT)
+    private long randomThing1;
+    @SideOnly(Side.CLIENT)
+    private float randomThing2;
+
     public TileEntityAdvancedBeacon() {
         potionStack = null;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public float getRandomThing() // I have absolutely no idea what this method returns exactly, but the beacon beam
+    // renderer needs it so it's in here anyway.
+    {
+        if (!active) {
+            return 0.f;
+        } else {
+            int i = (int) (this.worldObj.getTotalWorldTime() - this.randomThing1);
+            this.randomThing1 = this.worldObj.getTotalWorldTime();
+
+            if (i > 1) {
+                this.randomThing2 -= (float) i / 40.0F;
+
+                if (this.randomThing2 < 0.0F) {
+                    this.randomThing2 = 0.0F;
+                }
+            }
+
+            this.randomThing2 += 0.025F;
+
+            if (this.randomThing2 > 1.0F) {
+                this.randomThing2 = 1.0F;
+            }
+
+            return this.randomThing2;
+        }
     }
 
     @Override
@@ -213,5 +248,15 @@ public class TileEntityAdvancedBeacon extends TileEntity implements IInventory {
             // rerender the block please
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }*/
+    }
+
+    @Override
+    public double getMaxRenderDistanceSquared() {
+        return 65536.d;
+    }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        return TileEntity.INFINITE_EXTENT_AABB;
     }
 }

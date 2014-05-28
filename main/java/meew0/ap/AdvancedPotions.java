@@ -96,7 +96,7 @@ public class AdvancedPotions {
         resource = new BlockResource(Material.rock).setBlockName("blockFireCharge").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
         invisibilityCarrotBlock = new BlockInvisibilityCarrot().setBlockName("invisibilityCarrots").setBlockTextureName("advancedpotions:invisibility_carrots");
         frozenCarrotBlock = new BlockFrozenCarrot().setBlockName("frozenCarrots").setBlockTextureName("advancedpotions:frozen_carrots");
-        advancedBeacon = new BlockAdvancedBeacon().setBlockName("advancedBeacon").setCreativeTab(CreativeTabs.tabBlock);
+        advancedBeacon = new BlockAdvancedBeacon().setBlockName("advancedBeacon").setBlockTextureName("minecraft:beacon").setCreativeTab(CreativeTabs.tabBlock);
 
         GameRegistry.registerBlock(arcaneOre, "arcaneOre");
         GameRegistry.registerBlock(resource, "resource");

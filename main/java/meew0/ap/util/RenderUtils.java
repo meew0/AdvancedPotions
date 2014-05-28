@@ -1,11 +1,14 @@
 package meew0.ap.util;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -188,8 +191,8 @@ public class RenderUtils {
 //        GL11.glScalef(f6, f6, f6);
 //        GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
 //        GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F);
-////        GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
-//        GL11.glTranslatef(-0.6375f, -0.0625F, 0.0F);
+        ////        GL11.glTranslatef(-0.9375F, -0.0625F, 0.0F);
+        //        GL11.glTranslatef(-0.6375f, -0.0625F, 0.0F);
         //renderItemIn2D(tessellator, f1, f2, f, f3, iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
         renderIconIn2DWithColor(tessellator, icon, 0.0625f, false, r, g, b, a);
 
@@ -209,7 +212,7 @@ public class RenderUtils {
             GL11.glTranslatef(f9, 0.0F, 0.0F);
             GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
             renderIconIn2DWithColor(tessellator, 0.0f, 0.0f, 1.0f, 1.0f, 256, 256, 0.0625f, r, g, b, a);
-//            renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+            //            renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
             GL11.glPopMatrix();
             GL11.glPushMatrix();
             GL11.glScalef(f8, f8, f8);
@@ -217,7 +220,7 @@ public class RenderUtils {
             GL11.glTranslatef(-f9, 0.0F, 0.0F);
             GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
             renderIconIn2DWithColor(tessellator, 0.0f, 0.0f, 1.0f, 1.0f, 256, 256, 0.0625f, r, g, b, a);
-//            renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
+            //            renderItemIn2D(tessellator, 0.0F, 0.0F, 1.0F, 1.0F, 256, 256, 0.0625F);
             GL11.glPopMatrix();
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
             GL11.glDisable(GL11.GL_BLEND);
@@ -232,4 +235,60 @@ public class RenderUtils {
 
         GL11.glPopMatrix();
     }
+
+    public static void renderStandardInventoryBlock(Block block, IIcon icon, RenderBlocks renderer) {
+        Tessellator tessellator = Tessellator.instance;
+
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.f, 1.f, 0.f);
+        renderer.renderFaceYPos(block, -.5d, -.5d, -.5d, icon);
+        tessellator.draw();
+
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.f, -1.f, 0.f);
+        renderer.renderFaceYNeg(block, -.5d, -.5d, -.5d, icon);
+        tessellator.draw();
+
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(1.f, 0.f, 0.f);
+        renderer.renderFaceXPos(block, -.5d, -.5d, -.5d, icon);
+        tessellator.draw();
+
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(-1.f, 0.f, 0.f);
+        renderer.renderFaceXNeg(block, -.5d, -.5d, -.5d, icon);
+        tessellator.draw();
+
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.f, 0.f, 1.f);
+        renderer.renderFaceZPos(block, -.5d, -.5d, -.5d, icon);
+        tessellator.draw();
+
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.f, 0.f, -1.f);
+        renderer.renderFaceZNeg(block, -.5d, -.5d, -.5d, icon);
+        tessellator.draw();
+    }
+
+    public static void renderWorldDependentBlock(IBlockAccess world, Block block, int x, int y, int z, IIcon icon, RenderBlocks renderer) {
+        if (world == null) {
+            renderStandardInventoryBlock(block, icon, renderer);
+        } else {
+            renderer.setOverrideBlockTexture(icon);
+            renderer.renderStandardBlock(block, x, y, z);
+            renderer.clearOverrideBlockTexture();
+        }
+    }
+
+    public static void renderWorldDependentBlockWithColor(IBlockAccess world, Block block, int x, int y, int z, IIcon icon, RenderBlocks renderer, int red, int green, int blue) {
+        if (world == null) {
+            renderStandardInventoryBlock(block, icon, renderer);
+        } else {
+            renderer.setOverrideBlockTexture(icon);
+            renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, red, green, blue);
+            renderer.clearOverrideBlockTexture();
+        }
+
+    }
+
 }
