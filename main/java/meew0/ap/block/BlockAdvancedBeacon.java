@@ -17,13 +17,14 @@ public class BlockAdvancedBeacon extends BlockBeacon {
 
     private void spawnBlockParticles(String type, World world, int x, int y, int z) {
         for (int i = 0; i < 100; i++) {
-            world.spawnParticle(type,
-                    x + AdvancedPotions.rng.nextDouble(),
-                    y + AdvancedPotions.rng.nextDouble(),
-                    z + AdvancedPotions.rng.nextDouble(),
-                    AdvancedPotions.rng.nextGaussian(),
-                    AdvancedPotions.rng.nextGaussian() * 2.d,
-                    AdvancedPotions.rng.nextGaussian());
+            double x_ = x + AdvancedPotions.rng.nextDouble();
+            double y_ = y + AdvancedPotions.rng.nextDouble();
+            double z_ = z + AdvancedPotions.rng.nextDouble();
+            double vx = AdvancedPotions.rng.nextGaussian();
+            double vy = AdvancedPotions.rng.nextGaussian();
+            double vz = AdvancedPotions.rng.nextGaussian();
+            AdvancedPotions.debug("Spawning particle at " + x_ + " " + y_ + " " + z_ + " with velocity " + vx + " " + vy + " " + vz);
+            world.spawnParticle(type, x_, y_, z_, vx, vy, vz);
         }
     }
 
