@@ -1,18 +1,73 @@
-ap.balanceMessage.null.name=Nothing bad has happened.
+
+# Balance messages
+
 ap.balanceMessage.badlyCooked.name=A badly cooked potion!
 ap.balanceMessage.multiple.name=The following things have happened:
-ap.balanceMessage.nausea.1.name=You've become nauseous!
+ap.balanceMessage.null.name=Nothing bad has happened.
+
+ap.balanceMessage.nausea.1.name=You've become slightly nauseous!
+ap.balanceMessage.nausea.2.name=You've become nauseous!
+ap.balanceMessage.nausea.3.name=You've become very nauseous!
+
 ap.balanceMessage.slowness.1.name=You've been slowed down!
+ap.balanceMessage.slowness.2.name=You've been slowed down a lot!
+ap.balanceMessage.slowness.2.name=You've been rooted!
+
+ap.balanceMessage.overdose.1.name=You're experiencing effects of overdose!
+ap.balanceMessage.overdose.2.name=You're experiencing strong effects of overdose!
+ap.balanceMessage.overdose.3.name=You're experiencing very strong effects of overdose!
+ap.balanceMessage.overdose.4.name=You're experiencing effects of extreme overdose!
+
 ap.balanceMessage.pig.name=You are being eaten by a pig!
+
+ap.balanceMessage.explosion.1.name=You're being blown up!
+ap.balanceMessage.explosion.2.name=You're being blown up badly!
+
+ap.balanceMessage.healing.1.name=You're being healed!
+ap.balanceMessage.healing.2.name=You're being healed!
+
+ap.balanceMessage.regen.1.name=You're regenerating health!
+ap.balanceMessage.regen.2.name=You're regenerating health quickly!
+ap.balanceMessage.regen.3.name=You're regenerating health very quickly!
+
+ap.balanceMessage.strength.1.name=You're feeling stronger!
+ap.balanceMessage.strength.2.name=You're feeling much stronger!
+ap.balanceMessage.strength.3.name=You're feeling unbeatable!
+
+ap.balanceMessage.teleport.1.name=You're being teleported around!
+ap.balanceMessage.teleport.2.name=You're being teleported around!
+
+# Effects
+
+ap.effect.animalBreed.name=Breeding
+ap.effect.blockExplosion.name=Explosion
+ap.effect.entityExplosion.name=Entity Explosion
+ap.effect.entityFire.name=Fiery Breath
+ap.effect.entityTeleport.name=Teleport
+ap.effect.fieryExplosion.name=Fiery Explosion
+ap.effect.blockFire.name=Block Fire
+
+# Blocks
+
+tile.advancedBeacon.name=Advanced Beacon
 tile.advancedCauldron.name=Advanced Cauldron
+tile.blockFireCharge.name=Fire Charge Block
+tile.blockArcaneMetal.name=Arcane Metal Block
+tile.arcaneGlass.name=Arcane Glass
+
+# Items
+
 item.advancedCauldronItem.name=Advanced Cauldron
+
 item.potionAnalyzer.name=Potion Analyzer
+
 item.potionBottle.0.name=Empty Bottle
 item.potionBottle.1.name=Empty Heart-Shaped Bottle
 item.potionBottle.2.name=Empty Vial
 item.potionBottle.3.name=Empty Square Bottle
 item.potionBottle.4.name=Empty Capsule
 item.potionBottle.5.name=Empty Reinforced Bottle
+
 item.ingredient.0.name=
 item.ingredient.1.name=Frozen Pickaxe
 item.ingredient.2.name=Corrupted Sugar
@@ -25,7 +80,15 @@ item.ingredient.8.name=Mouldy Melon
 item.ingredient.9.name=Arcane Stone
 item.ingredient.10.name=Arcane Nugget
 item.ingredient.11.name=Arcane Metal
+
 item.shield.0.name=Arcane Shield
 item.shield.1.name=Force Field
+
+# Entities
+
 entity.advancedpotions.hostilePig.name=Hostile Pig
+entity.advancedpotions.thrownCapsule.name=Thrown Capsule
+
+# Misc
+
 death.attack.eatenByPig=%1$s was eaten by a pig

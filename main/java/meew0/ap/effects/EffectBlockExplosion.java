@@ -54,6 +54,6 @@ public class EffectBlockExplosion implements IPotionEffectContainer {
 
     @Override
     public String effectName() {
-        return "ap.effect.entityExplosion.name";
+        return "ap.effect.blockExplosion.name";
     }
 }

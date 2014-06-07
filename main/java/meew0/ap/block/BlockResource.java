@@ -3,7 +3,12 @@ package meew0.ap.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
+import java.util.List;
 
 /**
  * Created by meew0 on 24.03.14.
@@ -32,4 +37,13 @@ public class BlockResource extends Block {
     public IIcon getIcon(int side, int meta) {
         return textures[meta];
     }
+
+    @Override
+    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+        for (int i = 0; i < textures.length; i++) {
+            list.add(new ItemStack(item, 1, i));
+        }
+    }
+
+
 }

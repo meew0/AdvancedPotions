@@ -8,4 +8,9 @@ public class BalanceEffectTeleportL2 extends BalanceEffectTeleportL1 {
     protected int getLevel() {
         return 16;
     }
+
+    @Override
+    public String getUnlocalizedEffectMessage() {
+        return "ap.balanceMessage.teleport.2.name";
+    }
 }

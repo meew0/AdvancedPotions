@@ -36,6 +36,6 @@ public class BalanceEffectTeleportL1 implements IBalanceEffect {
 
     @Override
     public String getUnlocalizedEffectMessage() {
-        return null;
+        return "ap.balanceMessage.teleport.1.name";
     }
 }

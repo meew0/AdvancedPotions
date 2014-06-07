@@ -93,13 +93,13 @@ public class AdvancedPotions {
 
         advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f);
         arcaneOre = new BlockArcaneOre(Material.rock).setBlockName("arcaneOre").setBlockTextureName("advancedpotions:arcane_ore").setHardness(5.0f).setLightLevel(0.8f).setCreativeTab(CreativeTabs.tabBlock);
-        resource = new BlockResource(Material.rock).setBlockName("blockFireCharge").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
+        resource = new BlockResource(Material.rock).setBlockName("resource").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
         invisibilityCarrotBlock = new BlockInvisibilityCarrot().setBlockName("invisibilityCarrots").setBlockTextureName("advancedpotions:invisibility_carrots");
         frozenCarrotBlock = new BlockFrozenCarrot().setBlockName("frozenCarrots").setBlockTextureName("advancedpotions:frozen_carrots");
         advancedBeacon = new BlockAdvancedBeacon().setBlockName("advancedBeacon").setBlockTextureName("minecraft:beacon").setCreativeTab(CreativeTabs.tabBlock);
 
         GameRegistry.registerBlock(arcaneOre, "arcaneOre");
-        GameRegistry.registerBlock(resource, "resource");
+        GameRegistry.registerBlock(resource, ItemBlockResource.class, "resource");
         GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
         GameRegistry.registerBlock(invisibilityCarrotBlock, "invisibilityCarrots");
         GameRegistry.registerBlock(frozenCarrotBlock, "frozenCarrots");
@@ -229,6 +229,7 @@ public class AdvancedPotions {
 
         GameRegistry.addShapedRecipe(new ItemStack(potionAnalyzer, 1, 0), " r ", "aab", "aaa", 'a', new ItemStack(ingredient, 1, 11), 'r', Items.redstone, 'b', new ItemStack(potionBottle, 1, 0));
         GameRegistry.addShapedRecipe(new ItemStack(itemAdvCauldron, 1, 0), "a a", "aca", "aaa", 'a', new ItemStack(ingredient, 1, 11), 'c', Items.cauldron);
+        GameRegistry.addShapedRecipe(new ItemStack(advancedBeacon, 1, 0), "ggg", "gng", "mmm", 'g', Blocks.glass, 'n', Items.nether_star, 'm', new ItemStack(resource, 1, 1));
 
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 0), " p ", "g g", " g ", 'p', Blocks.glass_pane, 'g', Blocks.glass);
         GameRegistry.addShapedRecipe(new ItemStack(potionBottle, 8, 1), "gpg", "g g", " g ", 'p', Blocks.glass_pane, 'g', Blocks.glass);
