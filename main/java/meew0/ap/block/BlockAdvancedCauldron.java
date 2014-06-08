@@ -53,7 +53,7 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
 
         if (eventId == 1) {
             if (world.isRemote) { // bubbles
-                for (int i = 0; i < 40 - eventParam; i++) {
+                for (int i = 0; i < AdvancedPotions.cauldronParticleAmount - eventParam; i++) {
                     world.spawnParticle("splash", d0, d1, d2, 0.d, .1d, 0.d);
                 }
                 for (int i = 0; i < eventParam; i++) {

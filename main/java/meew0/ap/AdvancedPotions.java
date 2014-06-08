@@ -33,6 +33,7 @@ import net.minecraft.item.ItemReed;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import org.apache.logging.log4j.Logger;
 
@@ -49,6 +50,12 @@ public class AdvancedPotions {
 
     @SidedProxy(clientSide = "meew0.ap.APClientProxy", serverSide = "meew0.ap.APCommonProxy")
     public static APCommonProxy proxy;
+
+    public static Configuration config;
+
+    public static boolean debugMode;
+    public static boolean imcDebug;
+    public static int cauldronParticleAmount;
 
     public static Logger advpLogger;
 
@@ -82,6 +89,15 @@ public class AdvancedPotions {
     public void preInit(FMLPreInitializationEvent event) {
 
         // all the stuff goes here
+
+        config = new Configuration(event.getSuggestedConfigurationFile());
+        config.load();
+
+        cauldronParticleAmount = config.get("general", "cauldronParticleAmount", 40, "The amount of particles an advanced cauldron generates when an item is thrown in").getInt();
+        debugMode = config.get("general", "debugMode", false, "Enables debug messages, spams your console").getBoolean(false);
+        imcDebug = config.get("general", "imcDebug", false, "Causes AP to send an version update IMC message to itself, for debug purposes only").getBoolean(false);
+
+        config.save();
 
         advpLogger = event.getModLog();
         rng = new Random();

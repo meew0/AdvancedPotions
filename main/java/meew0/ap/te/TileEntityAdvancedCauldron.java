@@ -155,7 +155,7 @@ public class TileEntityAdvancedCauldron extends TileEntity {
                             }
 
                             worldObj.addBlockEvent(xCoord, yCoord, zCoord, AdvancedPotions.advancedCauldron, 1,
-                                    (int) Math.min(40, Math.abs(balance)));
+                                    (int) Math.min(AdvancedPotions.cauldronParticleAmount, Math.abs(balance)));
 
                             item.setDead();
                         }
