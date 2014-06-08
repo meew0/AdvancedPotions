@@ -122,9 +122,11 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
                         }
                     } else if (meta > 0 && itemstack.getItem() instanceof ItemArmor
                             && ((ItemArmor) itemstack.getItem()).getArmorMaterial() == ItemArmor.ArmorMaterial.CLOTH) {
-                        // It's a piece of leather armor, so undye it
-                        ItemArmor itemarmor = (ItemArmor) itemstack.getItem();
-                        itemarmor.removeColor(itemstack);
+                        // It's a piece of leather armor, so DYE it - yay for reverse
+
+                        ItemArmor itemArmor = (ItemArmor) itemstack.getItem();
+                        itemArmor.func_82813_b(itemstack, te.color.get());
+
                         this.func_150024_a(world, x, y, z, meta - 1);
                         return true;
                     }

@@ -49,5 +49,9 @@ public class Color {
         set(red, green, blue);
         this.alpha = alpha;
     }
+
+    public int get() {
+        return (red << 16) + (green << 8) + (blue);
+    }
 }
 
