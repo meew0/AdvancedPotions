@@ -212,5 +212,6 @@ public class TileEntityAdvancedCauldron extends TileEntity {
 
     public void setWaterLevel(int waterLevel) {
         this.waterLevel = MathHelper.clamp_int(waterLevel, 0, 3);
+        if (waterLevel == 0) reinit();
     }
 }
