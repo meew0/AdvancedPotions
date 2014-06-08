@@ -23,15 +23,11 @@ public class RenderThrownCapsule extends Render {
 
     @Override
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
-        AdvancedPotions.debug("dfgdfg");
         if (par1Entity instanceof EntityThrownCapsule) {
-            AdvancedPotions.debug("etc");
             EntityThrownCapsule capsule = (EntityThrownCapsule) par1Entity;
             ItemStack stack = capsule.potionStack;
 
             if (stack == null) return;
-
-            //IIcon iicon = this.item.getIconFromDamage(this.field_94150_f);
 
             IIcon bottleIcon = ItemPotionBottle.textures[stack.getItemDamage()], waterIcon = ItemAdvancedPotion.texturesWater[stack.getItemDamage()];
 
@@ -44,10 +40,6 @@ public class RenderThrownCapsule extends Render {
                 this.bindEntityTexture(par1Entity);
                 Tessellator tessellator = Tessellator.instance;
 
-//                int i = PotionHelper.func_77915_a(((EntityPotion) par1Entity).getPotionDamage(), false);
-//                float f2 = (float) (i >> 16 & 255) / 255.0F;
-//                float f3 = (float) (i >> 8 & 255) / 255.0F;
-//                float f4 = (float) (i & 255) / 255.0F;
                 int r, g, b;
                 r = g = b = 0;
 

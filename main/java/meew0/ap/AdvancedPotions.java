@@ -34,7 +34,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
@@ -54,7 +53,6 @@ public class AdvancedPotions {
     public static Logger advpLogger;
 
     public static Block advancedCauldron;
-    public static Block arcaneOre;
     public static Block resource;
     public static Block arcaneGlass;
 
@@ -69,15 +67,12 @@ public class AdvancedPotions {
     public static Item potionBottle;
     public static Item potion;
 
-    public static Item pigSpawner;
     public static Item ingredient;
     public static Item shield;
 
     public static int entityIDCounter = 0;
 
     public static Random rng;
-
-    public static ArcaneOreWorldGenerator worldGen;
 
     public static void debug(String d) {
         advpLogger.info(d); //TODO this going to debug sometime
@@ -93,14 +88,12 @@ public class AdvancedPotions {
 
 
         advancedCauldron = new BlockAdvancedCauldron().setBlockName("advancedCauldron").setHardness(5.0f);
-        arcaneOre = new BlockArcaneOre(Material.rock).setBlockName("arcaneOre").setBlockTextureName("advancedpotions:arcane_ore").setHardness(5.0f).setLightLevel(0.8f).setCreativeTab(CreativeTabs.tabBlock);
         resource = new BlockResource(Material.rock).setBlockName("resource").setBlockTextureName("advancedpotions:fire_charge_block").setHardness(5.0f).setLightLevel(1.0f).setCreativeTab(CreativeTabs.tabBlock);
         invisibilityCarrotBlock = new BlockInvisibilityCarrot().setBlockName("invisibilityCarrots").setBlockTextureName("advancedpotions:invisibility_carrots");
         frozenCarrotBlock = new BlockFrozenCarrot().setBlockName("frozenCarrots").setBlockTextureName("advancedpotions:frozen_carrots");
         advancedBeacon = new BlockAdvancedBeacon().setBlockName("advancedBeacon").setBlockTextureName("minecraft:beacon").setCreativeTab(CreativeTabs.tabBlock);
         arcaneGlass = new BlockArcaneGlass().setBlockName("arcaneGlass");
 
-        GameRegistry.registerBlock(arcaneOre, "arcaneOre");
         GameRegistry.registerBlock(resource, ItemBlockResource.class, "resource");
         GameRegistry.registerBlock(advancedCauldron, "advancedCauldron");
         GameRegistry.registerBlock(invisibilityCarrotBlock, "invisibilityCarrots");
@@ -111,13 +104,9 @@ public class AdvancedPotions {
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
         GameRegistry.registerTileEntity(TileEntityAdvancedBeacon.class, "advancedBeacon");
 
-        //TODO: move to CP again
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedCauldron.class, new RenderTEAdvancedCauldron());
-
         potionAnalyzer = new ItemPotionAnalyzer().setUnlocalizedName("potionAnalyzer").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_analyzer");
         potionBottle = new ItemPotionBottle().setUnlocalizedName("potionBottle").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion_bottle");
         potion = new ItemAdvancedPotion().setUnlocalizedName("potion").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:potion");
-        pigSpawner = new ItemHostilePigSpawner().setUnlocalizedName("pigSpawner").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabAllSearch).setTextureName("advancedpotions:pig_spawner");
         ingredient = new ItemPotionIngredient().setUnlocalizedName("ingredient").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:ingredient");
         shield = new ItemShield().setUnlocalizedName("shield").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabCombat).setTextureName("advancedpotions:shield");
         itemAdvCauldron = new ItemReed(advancedCauldron).setUnlocalizedName("advancedCauldronItem").setMaxStackSize(64).setCreativeTab(CreativeTabs.tabBrewing).setTextureName("advancedpotions:advanced_cauldron");
@@ -125,7 +114,6 @@ public class AdvancedPotions {
         GameRegistry.registerItem(potionAnalyzer, "potionAnalyzer");
         GameRegistry.registerItem(potionBottle, "potionBottle");
         GameRegistry.registerItem(potion, "potion");
-        GameRegistry.registerItem(pigSpawner, "pigSpawner");
         GameRegistry.registerItem(ingredient, "ingredient");
         GameRegistry.registerItem(shield, "shield");
         GameRegistry.registerItem(itemAdvCauldron, "advancedCauldronItem");
@@ -136,9 +124,6 @@ public class AdvancedPotions {
 
         FMLCommonHandler.instance().bus().register(this);
         MinecraftForge.EVENT_BUS.register(this);
-
-        //worldGen = new ArcaneOreWorldGenerator();
-        //GameRegistry.registerWorldGenerator(worldGen, 0);
 
 
         PotionRegistry.init();
@@ -249,11 +234,6 @@ public class AdvancedPotions {
         BlockDispenser.dispenseBehaviorRegistry.putObject(potion, new BehaviorCapsuleDispense());
 
         proxy.registerRenderThings();
-    }
-
-    @SubscribeEvent
-    public void onInitMapGen(InitMapGenEvent event) {
-        // TODO
     }
 
     @SubscribeEvent

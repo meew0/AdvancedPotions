@@ -26,7 +26,6 @@ public class RenderItemPotion implements IItemRenderer {
     }
 
 
-
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         IIcon water = ItemAdvancedPotion.texturesWater[item.getItemDamage()];
@@ -37,7 +36,6 @@ public class RenderItemPotion implements IItemRenderer {
         int minX = 0, minZ = 0;
         int maxX = 1, maxZ = 1;
         int r = 255, g = 255, b = 255, a = 127;
-        //int normalZ = 1;
 
         if (item.stackTagCompound != null) {
             r = item.stackTagCompound.getInteger("red");
@@ -46,18 +44,6 @@ public class RenderItemPotion implements IItemRenderer {
             a = 127;
         }
         IIcon bottle = ItemPotionBottle.textures[item.getItemDamage()];
-
-        //Tessellator.instance.setNormal(0, 0, normalZ);
-        //
-
-
-        //Tessellator.instance.setNormal(0, 0, normalZ);
-        //
-
-//        if (type == ItemRenderType.INVENTORY) {
-//            minX = minZ = 0;
-//            maxX = maxZ = 16;
-//        }
 
         if (type != ItemRenderType.INVENTORY) {
             RenderUtils.renderIconInPlayerHandWithColor(bottle, item.getItemSpriteNumber(), 255, 255, 255, 255, item.hasEffect(0));
