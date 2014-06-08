@@ -56,6 +56,7 @@ public class AdvancedPotions {
     public static Block advancedCauldron;
     public static Block arcaneOre;
     public static Block resource;
+    public static Block arcaneGlass;
 
     public static Block invisibilityCarrotBlock;
     public static Block frozenCarrotBlock;
@@ -97,6 +98,7 @@ public class AdvancedPotions {
         invisibilityCarrotBlock = new BlockInvisibilityCarrot().setBlockName("invisibilityCarrots").setBlockTextureName("advancedpotions:invisibility_carrots");
         frozenCarrotBlock = new BlockFrozenCarrot().setBlockName("frozenCarrots").setBlockTextureName("advancedpotions:frozen_carrots");
         advancedBeacon = new BlockAdvancedBeacon().setBlockName("advancedBeacon").setBlockTextureName("minecraft:beacon").setCreativeTab(CreativeTabs.tabBlock);
+        arcaneGlass = new BlockArcaneGlass().setBlockName("arcaneGlass");
 
         GameRegistry.registerBlock(arcaneOre, "arcaneOre");
         GameRegistry.registerBlock(resource, ItemBlockResource.class, "resource");
@@ -104,6 +106,7 @@ public class AdvancedPotions {
         GameRegistry.registerBlock(invisibilityCarrotBlock, "invisibilityCarrots");
         GameRegistry.registerBlock(frozenCarrotBlock, "frozenCarrots");
         GameRegistry.registerBlock(advancedBeacon, "advancedBeacon");
+        GameRegistry.registerBlock(arcaneGlass, "arcaneGlass");
 
         GameRegistry.registerTileEntity(TileEntityAdvancedCauldron.class, "advancedCauldron");
         GameRegistry.registerTileEntity(TileEntityAdvancedBeacon.class, "advancedBeacon");
@@ -240,7 +243,8 @@ public class AdvancedPotions {
 
         GameRegistry.addShapedRecipe(new ItemStack(resource, 1, 0), "fff", "fff", "fff", 'f', Items.fire_charge);
         GameRegistry.addShapedRecipe(new ItemStack(resource, 1, 1), "fff", "fff", "fff", 'f', new ItemStack(ingredient, 1, 11));
-        GameRegistry.addShapedRecipe(new ItemStack(resource, 8, 2), "fff", "fnf", "fff", 'n', new ItemStack(ingredient, 1, 10), 'f', Blocks.glass);
+
+        GameRegistry.addShapedRecipe(new ItemStack(arcaneGlass, 8, 0), "fff", "fnf", "fff", 'n', new ItemStack(ingredient, 1, 10), 'f', Blocks.glass);
 
         BlockDispenser.dispenseBehaviorRegistry.putObject(potion, new BehaviorCapsuleDispense());
 

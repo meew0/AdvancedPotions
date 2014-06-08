@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 public class ItemBlockResource extends ItemBlock {
 
     public static final String[] names = {
-            "blockFireCharge", "blockArcaneMetal", "arcaneGlass"
+            "blockFireCharge", "blockArcaneMetal"
     };
 
     public ItemBlockResource(Block block) {

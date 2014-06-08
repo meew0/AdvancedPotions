@@ -40,10 +40,8 @@ public class BlockResource extends Block {
 
     @Override
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-        for (int i = 0; i < textures.length; i++) {
+        for (int i = 0; i < 2 /* arcane_glass doesn't need to be added to subtype list */; i++) {
             list.add(new ItemStack(item, 1, i));
         }
     }
-
-
 }
