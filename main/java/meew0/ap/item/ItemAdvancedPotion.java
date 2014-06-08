@@ -136,17 +136,21 @@ public class ItemAdvancedPotion extends Item {
                     stack.stackTagCompound.getInteger("bal"));
             list.add(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.GRAY.toString() + "Balance modifier: " +
                     stack.stackTagCompound.getInteger("balmod"));
-            list.add(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.GRAY.toString() + "Effects: ");
-
             ArrayList<EffectWrapper> effects = new ArrayList<EffectWrapper>();
             effects.addAll(TileEntityAdvancedCauldron.getEffectWrappersForTileNBT(stack.stackTagCompound));
+
+            if (effects.size() > 0) {
+                list.add(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.GRAY.toString() + "Effects: ");
+            }
+
             for (EffectWrapper effect : effects) {
                 IPotionEffectContainer e = effect.getEffect();
                 list.add(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.BLUE + e.effectPrefix() +
                         StatCollector.translateToLocal(e.effectName()) + ((e.displayAmplifier()) ?
-                        (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") + " (" +
-                        ((e.displayDuration()) ? ("" + PotionRegistry.getReadableDuration(e.getDurationForDisplay()))
-                                : "") + ")"); // yay for epicly long line
+                        (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") +
+                        ((e.displayDuration()) ?
+                                (" (" + PotionRegistry.getReadableDuration(e.getDurationForDisplay()) + ")")
+                                : "")); // yay for epicly long line
             }
 
             if (isArcane(stack)) {

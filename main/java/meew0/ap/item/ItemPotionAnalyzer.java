@@ -23,14 +23,21 @@ public class ItemPotionAnalyzer extends Item {
         TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof TileEntityAdvancedCauldron) {
             TileEntityAdvancedCauldron te2 = (TileEntityAdvancedCauldron) te;
-            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.GRAY.toString() + "Balance: " + te2.balance));
-            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.GRAY.toString() + "Balance modifier: " + te2.balMod));
-            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.GRAY.toString() + "Effects: "));
+            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() +
+                    EnumChatFormatting.GRAY.toString() + "Balance: " + te2.balance));
+            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() +
+                    EnumChatFormatting.GRAY.toString() + "Balance modifier: " + te2.balMod));
+            player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() +
+                    EnumChatFormatting.GRAY.toString() + "Effects: "));
             for (EffectWrapper effect : te2.effects) {
                 IPotionEffectContainer e = effect.getEffect();
-                player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.BLUE + e.effectPrefix() + StatCollector.translateToLocal(e.effectName()) +
-                        ((e.displayAmplifier()) ? (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") + " (" +
-                        ((e.displayDuration()) ? ("" + PotionRegistry.getReadableDuration(e.getDurationForDisplay())) : "") + ")"));
+                player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() +
+                        EnumChatFormatting.BLUE + e.effectPrefix() + StatCollector.translateToLocal(e.effectName()) +
+                        ((e.displayAmplifier()) ?
+                                (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") +
+                        ((e.displayDuration()) ?
+                                (" (" + "" + PotionRegistry.getReadableDuration(e.getDurationForDisplay()) + ")")
+                                : "")));
             }
             if (te2.balance == 0) {
                 player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() +
