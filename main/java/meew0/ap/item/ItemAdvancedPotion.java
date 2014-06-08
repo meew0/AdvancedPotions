@@ -150,7 +150,7 @@ public class ItemAdvancedPotion extends Item {
             }
 
             if (isArcane(stack)) {
-                list.add(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.AQUA.toString() + "Arcane");
+                list.add(EnumChatFormatting.ITALIC.toString() + EnumChatFormatting.AQUA.toString() + StatCollector.translateToLocal("ap.message.potionArcane.name"));
             }
         }
     }

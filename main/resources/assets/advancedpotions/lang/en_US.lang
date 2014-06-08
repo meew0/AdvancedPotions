@@ -37,6 +37,10 @@ ap.balanceMessage.strength.3.name=You're feeling unbeatable!
 ap.balanceMessage.teleport.1.name=You're being teleported around!
 ap.balanceMessage.teleport.2.name=You're being teleported around!
 
+# Other messages
+
+ap.message.potionArcane.name=Arcane
+
 # Effects
 
 ap.effect.animalBreed.name=Breeding

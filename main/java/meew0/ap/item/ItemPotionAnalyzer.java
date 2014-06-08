@@ -32,6 +32,11 @@ public class ItemPotionAnalyzer extends Item {
                         ((e.displayAmplifier()) ? (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") + " (" +
                         ((e.displayDuration()) ? ("" + PotionRegistry.getReadableDuration(e.getDurationForDisplay())) : "") + ")"));
             }
+            if (te2.balance == 0) {
+                player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.ITALIC.toString() +
+                        EnumChatFormatting.AQUA.toString() +
+                        StatCollector.translateToLocal("ap.message.potionArcane.name")));
+            }
             world.addBlockEvent(x, y, z, AdvancedPotions.advancedCauldron, 2, 0); // red dust event
             return true;
         }
