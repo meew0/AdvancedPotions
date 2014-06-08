@@ -7,7 +7,6 @@ import meew0.ap.te.TileEntityAdvancedCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
@@ -32,6 +31,7 @@ public class ItemPotionAnalyzer extends Item {
                         ((e.displayAmplifier()) ? (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") + " (" +
                         ((e.displayDuration()) ? ("" + PotionRegistry.getReadableDuration(e.getDurationForDisplay())) : "") + ")"));
             }
+            world.spawnParticle("reddust", x, y, z, 0.d, 0.d, 0.d);
             return true;
         }
         return false;
