@@ -5,6 +5,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -31,6 +32,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemReed;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -275,9 +277,42 @@ public class AdvancedPotions {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        if (imcDebug) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setString("payload", "3.14;6.28;http://google.com/;false;THIS#IS#ONLY#A#DEBUG#UPDATE#DON'T#ACTUALLY#DOWNLOAD#THIS;ap-6.28-IMCDEBUG.jar");
+            FMLInterModComms.sendMessage("advancedpotions", "EyeNotification", nbt);
+        }
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+    }
+
+    @EventHandler
+    public void processIMC(FMLInterModComms.IMCEvent event) {
+        for (FMLInterModComms.IMCMessage message : event.getMessages()) {
+            if (message.key.equals("EyeNotification")) { // OpenEye IMC Payload
+                NBTTagCompound eyeTag = message.getNBTValue(),
+                        nbt = new NBTTagCompound();
+
+                String[] eyeMsg = eyeTag.getString("payload").replace("#", " ").split(";");
+                if (eyeMsg.length != 6) {
+                    advpLogger.error("Mod received malformed EyeNotification! This is most likely a bug on my side, don't worry about this");
+                }
+
+                nbt.setString("modDisplayName", "Advanced Potions");
+                nbt.setString("oldVersion", eyeMsg[0]);
+                nbt.setString("newVersion", eyeMsg[1]);
+                nbt.setString("updateUrl", eyeMsg[2]);
+                nbt.setBoolean("isDirectLink", Boolean.parseBoolean(eyeMsg[3]));
+                nbt.setString("changeLog", eyeMsg[4]);
+                nbt.setString("newFileName", eyeMsg[5]);
+
+                FMLInterModComms.sendMessage("VersionChecker", "addUpdate", nbt); // Send update notification to Dynious' Version Checker if present
+
+
+            }
+
+        }
     }
 }
