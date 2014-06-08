@@ -15,19 +15,20 @@ import net.minecraft.world.World;
  */
 public class BlockAdvancedBeacon extends BlockBeacon {
 
-    public static void spawnBlockParticles(String type, World world, int x, int y, int z) {
+    public static void spawnBlockParticles(String type, World world, int x, int y, int z, double vy) {
         for (int i = 0; i < 100; i++) {
             double d0 = (double) ((float) x + 0.4F + AdvancedPotions.rng.nextFloat() * 0.2F);
             double d1 = (double) ((float) y + 0.7F + AdvancedPotions.rng.nextFloat() * 0.3F);
             double d2 = (double) ((float) z + 0.4F + AdvancedPotions.rng.nextFloat() * 0.2F);
-            if (world.isRemote) world.spawnParticle(type, d0, d1, d2, 0.d, .2d, 0.d);
+            if (world.isRemote) world.spawnParticle(type, d0, d1, d2, 0.d, vy, 0.d);
         }
     }
 
     @Override
     public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam) {
         if (eventId == 1) {
-            spawnBlockParticles((eventParam == 2) ? "smoke" : "happyVillager", world, x, y, z);
+            spawnBlockParticles((eventParam == 2) ? "smoke" : "happyVillager", world, x, y, z,
+                    (eventParam == 2) ? .05d : 1.d);
             return true;
         }
 
