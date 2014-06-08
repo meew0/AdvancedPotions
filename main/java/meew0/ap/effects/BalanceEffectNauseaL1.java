@@ -18,7 +18,7 @@ public class BalanceEffectNauseaL1 implements IBalanceEffect {
 
     @Override
     public float getProbability(int bal) {
-        return .2f; //TODO
+        return .2f;
     }
 
     @Override
