@@ -15,22 +15,23 @@ import net.minecraft.world.World;
  */
 public class BlockAdvancedBeacon extends BlockBeacon {
 
-    private void spawnBlockParticles(String type, World world, int x, int y, int z) {
+    public static void spawnBlockParticles(String type, World world, int x, int y, int z) {
         for (int i = 0; i < 100; i++) {
-
             double d0 = (double) ((float) x + 0.4F + AdvancedPotions.rng.nextFloat() * 0.2F);
             double d1 = (double) ((float) y + 0.7F + AdvancedPotions.rng.nextFloat() * 0.3F);
             double d2 = (double) ((float) z + 0.4F + AdvancedPotions.rng.nextFloat() * 0.2F);
-            world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
-            /*double x_ = x + AdvancedPotions.rng.nextDouble();
-            double y_ = y + AdvancedPotions.rng.nextDouble();
-            double z_ = z + AdvancedPotions.rng.nextDouble();
-            double vx = AdvancedPotions.rng.nextGaussian() * 0.01f;
-            double vy = AdvancedPotions.rng.nextGaussian() * 0.1f;
-            double vz = AdvancedPotions.rng.nextGaussian() * 0.01f;
-            AdvancedPotions.debug("Spawning particle at " + x_ + " " + y_ + " " + z_ + " with velocity " + vx + " " + vy + " " + vz);
-            //world.spawnParticle(type, x_, y_, z_, /*vx, vy, vz 0, 0, 0);*/
+            if (world.isRemote) world.spawnParticle(type, d0, d1, d2, 0.d, .2d, 0.d);
         }
+    }
+
+    @Override
+    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam) {
+        if (eventId == 1) {
+            spawnBlockParticles((eventParam == 2) ? "smoke" : "happyVillager", world, x, y, z);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -48,9 +49,9 @@ public class BlockAdvancedBeacon extends BlockBeacon {
                     te.potionStack = stack;
                     te.update();
                     world.markBlockForUpdate(x, y, z);
-                    spawnBlockParticles("happyVillager", world, x, y + 1, z);
+                    world.addBlockEvent(x, y, z, this, 1, 1); // spawn happyVillager particle
                 } else {
-                    spawnBlockParticles("smoke", world, x, y + 1, z);
+                    world.addBlockEvent(x, y, z, this, 1, 2); // spawn smoke particle
                 }
             }
         }

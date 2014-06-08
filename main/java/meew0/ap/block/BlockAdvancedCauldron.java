@@ -45,6 +45,32 @@ public class BlockAdvancedCauldron extends BlockCauldron implements ITileEntityP
         innerIcon = iconRegister.registerIcon("advancedpotions:advc_inner"); // stupid BlockCauldron makes their textures private
     }
 
+    @Override
+    public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam) {
+        double d0 = (double) ((float) x + 0.4F + AdvancedPotions.rng.nextFloat() * 0.2F);
+        double d1 = (double) ((float) y + 0.7F + AdvancedPotions.rng.nextFloat() * 0.3F);
+        double d2 = (double) ((float) z + 0.4F + AdvancedPotions.rng.nextFloat() * 0.2F);
+
+        if (eventId == 1) {
+            if (world.isRemote) { // bubbles
+                for (int i = 0; i < 40 - eventParam; i++) {
+                    world.spawnParticle("splash", d0, d1, d2, 0.d, .1d, 0.d);
+                }
+                for (int i = 0; i < eventParam; i++) {
+                    world.spawnParticle("lava", d0, d1, d2, AdvancedPotions.rng.nextGaussian() * .01d * eventParam,
+                            AdvancedPotions.rng.nextGaussian() * .01d * eventParam,
+                            AdvancedPotions.rng.nextGaussian() * .01d * eventParam);
+                }
+                return true;
+            }
+        }
+
+        if (eventId == 2) { // potion analyzer
+            if (world.isRemote) world.spawnParticle("reddust", d0, d1, d2, 0.d, .1d, 0.d);
+        }
+
+        return false;
+    }
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_) {

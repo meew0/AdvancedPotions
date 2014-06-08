@@ -1,5 +1,6 @@
 package meew0.ap.item;
 
+import meew0.ap.AdvancedPotions;
 import meew0.ap.backend.EffectWrapper;
 import meew0.ap.backend.IPotionEffectContainer;
 import meew0.ap.backend.PotionRegistry;
@@ -31,7 +32,7 @@ public class ItemPotionAnalyzer extends Item {
                         ((e.displayAmplifier()) ? (" " + PotionRegistry.getRomanNumeral(e.getAmplifierForDisplay())) : "") + " (" +
                         ((e.displayDuration()) ? ("" + PotionRegistry.getReadableDuration(e.getDurationForDisplay())) : "") + ")"));
             }
-            world.spawnParticle("reddust", x, y, z, 0.d, 0.d, 0.d);
+            world.addBlockEvent(x, y, z, AdvancedPotions.advancedCauldron, 2, 0); // red dust event
             return true;
         }
         return false;

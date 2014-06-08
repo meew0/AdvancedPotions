@@ -153,9 +153,8 @@ public class TileEntityAdvancedCauldron extends TileEntity {
                             handleAddedItem(handledStack);
                         }
 
-                        for (int i = 0; i < 40; i++) {
-                            worldObj.spawnParticle("bubble", xCoord, yCoord, zCoord, 0.d, .1d, 0.d);
-                        }
+                        worldObj.addBlockEvent(xCoord, yCoord, zCoord, AdvancedPotions.advancedCauldron, 1,
+                                (int) Math.min(40, Math.abs(balance)));
 
                         item.setDead();
                     }
