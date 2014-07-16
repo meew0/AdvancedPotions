@@ -206,7 +206,7 @@ public class TileEntityAdvancedBeacon extends TileEntity implements IInventory {
             // trigger beacon achievement
 
             for (Object player : worldObj.getEntitiesWithinAABB(EntityPlayer.class,
-                    AxisAlignedBB.getAABBPool().getAABB((double) this.xCoord, (double) this.yCoord,
+                    AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord,
                             (double) this.zCoord, (double) this.xCoord, (double) (this.yCoord - 4),
                             (double) this.zCoord).expand(10.0D, 5.0D, 10.0D)
             )) {
@@ -220,7 +220,7 @@ public class TileEntityAdvancedBeacon extends TileEntity implements IInventory {
         if (this.active && this.levels > 0 && !this.worldObj.isRemote && potionStack != null) {
             double range = (double) (this.levels * 10 + 10);
 
-            AxisAlignedBB axisalignedbb = AxisAlignedBB.getAABBPool().getAABB((double) this.xCoord, (double) this.yCoord,
+            AxisAlignedBB axisalignedbb = AxisAlignedBB.getBoundingBox((double) this.xCoord, (double) this.yCoord,
                     (double) this.zCoord, (double) (this.xCoord + 1), (double) (this.yCoord + 1),
                     (double) (this.zCoord + 1)).expand(range, range, range);
 

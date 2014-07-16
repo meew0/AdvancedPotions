@@ -177,7 +177,7 @@ public class RenderUtils {
 
         getMinecraft().getTextureManager().bindTexture(getMinecraft().getTextureManager().
                 getResourceLocation(itemSpriteNumber));
-        TextureUtil.func_147950_a(false, false);
+        TextureUtil.func_152777_a(false, false, 1.f);
         Tessellator tessellator = Tessellator.instance;
         float f4 = 0.0F;
         float f5 = 0.3F;
