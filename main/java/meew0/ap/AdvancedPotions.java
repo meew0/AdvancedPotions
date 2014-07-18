@@ -188,10 +188,10 @@ public class AdvancedPotions {
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.digSpeed.id, Items.golden_pickaxe, 6.0f, 0.2f, 4800, 2, new Color(200, 180, 0)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.hunger.id, Items.rotten_flesh, -5.0f, 0.2f, 1200, 1, new Color(200, 10, 0)));
 
-        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.resistance.id, new ItemStack(ingredient, 1, 0), 2.0f, 2.0f, 900, 1, new Color(128, 128, 200)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.resistance.id, new ItemStack(shield, 1, 0), 2.0f, 2.0f, 900, 1, new Color(128, 128, 200)));
+        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.resistance.id, new ItemStack(shield, 1, 1), 4.0f, 3.0f, 2400, 2, new Color(30, 80, 255)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.digSlowdown.id, new ItemStack(ingredient, 1, 1), -3.0f, 0.1f, 2400, 1, new Color(0, 30, 180)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.moveSlowdown.id, new ItemStack(ingredient, 1, 2), -1.0f, 0.0f, 4800, 1, new Color(0, 0, 0)));
-        PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.resistance.id, new ItemStack(ingredient, 1, 3), 4.0f, 3.0f, 2400, 2, new Color(30, 80, 255)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.blindness.id, new ItemStack(ingredient, 1, 4), -4.0f, 0.2f, 600, 1, new Color(10, 40, 200)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.poison.id, new ItemStack(ingredient, 1, 5), 2.0f, 2.0f, 1200, 2, new Color(0, 30, 200)));
         PotionRegistry.registerItemHandler(new ItemHandlerVanilla(Potion.invisibility.id, new ItemStack(ingredient, 1, 6), 2.0f, 0.1f, 9600, 1, new Color(255, 255, 255)));
